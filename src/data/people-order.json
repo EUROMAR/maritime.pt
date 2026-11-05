@@ -1,1 +1,15 @@
-{ "people": [] }
+{
+  "people": [
+    "src/content/board/nils-aden.md",
+    "src/content/board/laura-langh-lagerlof.md",
+    "src/content/board/duarte-vaz-pinto.md",
+    "src/content/board/rene-menzel.md",
+    "src/content/board/pedro-rebelo-de-sousa.md",
+    "src/content/board/prabhat-kumar-jha.md",
+    "src/content/board/pedro-calado.md",
+    "src/content/board/nektaria-retsou.md",
+    "src/content/board/peter-lehmann.md",
+    "src/content/board/carla-olival.md",
+    "src/content/board/robert-lorenz-meyer.md"
+  ]
+}

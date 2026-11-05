@@ -20,7 +20,7 @@ const event = d.event ? await getEntry('events', d.event) : undefined;
   </PageHero>
   <section>
     <div class="wrap narrow">
-      {d.image && <img src={d.image} alt="" style="border-radius:14px;margin-bottom:28px" />}
+      {d.image && <img src={d.image} alt={d.imageAlt ?? ''} style="border-radius:14px;margin-bottom:28px" />}
       {d.summary && <p class="lead" style="margin-bottom:24px">{d.summary}</p>}
       <div class="prose"><Content /></div>
       {d.documents.length > 0 && (<><h3 style="margin:36px 0 14px">Documents</h3><FileList files={d.documents} /></>)}

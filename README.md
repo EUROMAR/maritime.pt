@@ -25,5 +25,8 @@ npm run build    # output in /dist
 | News, events, board, text pages | `src/content/` |
 | Design | `src/styles/global.css` |
 | Redirects | `public/_redirects` |
+| Content check before each build | `scripts/check-content.mjs` |
+| Photo resizing during the build | `integrations/optimize-images.mjs` |
+| People order (Governance, home) | `src/data/people-order.json` |
 | CMS forms | `.pages.yml` |
 | Build and publish | `.github/workflows/deploy.yml` |
