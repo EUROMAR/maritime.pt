@@ -18,6 +18,79 @@ media:
     output: /members/files
 
 content:
+  # ------------------------------------------------------------- HOME PAGE
+  - name: home
+    label: Home page
+    type: file
+    path: src/data/home.json
+    format: json
+    fields:
+      - name: hero
+        label: Top banner
+        type: object
+        fields:
+          - { name: eyebrow, label: Small text above title, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: text, label: Intro text, type: text }
+          - name: primaryButton
+            label: Red button
+            type: object
+            fields:
+              - { name: label, label: Text, type: string }
+              - { name: link, label: Link (e.g. /membership/), type: string }
+          - name: secondaryButton
+            label: Outline button
+            type: object
+            fields:
+              - { name: label, label: Text, type: string }
+              - { name: link, label: Link (e.g. /about/), type: string }
+      - name: about
+        label: Who we are
+        type: object
+        fields:
+          - { name: eyebrow, label: Small text above title, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: text, label: Text, type: text }
+          - name: objectives
+            label: Objective boxes
+            type: object
+            list: true
+            fields:
+              - { name: title, label: Title, type: string }
+              - { name: text, label: Text, type: text }
+      - name: events
+        label: Events section
+        type: object
+        fields:
+          - { name: eyebrow, label: Small text above title, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: text, label: Text, type: text }
+      - name: news
+        label: News section
+        type: object
+        fields:
+          - { name: eyebrow, label: Small text above title, type: string }
+          - { name: title, label: Title, type: string }
+      - name: board
+        label: Board section
+        type: object
+        fields:
+          - { name: eyebrow, label: Small text above title, type: string }
+          - { name: title, label: Title, type: string }
+      - name: members
+        label: Members section
+        type: object
+        fields:
+          - { name: eyebrow, label: Small text above title, type: string }
+          - { name: title, label: Title, type: string }
+      - name: cta
+        label: Membership banner
+        type: object
+        fields:
+          - { name: eyebrow, label: Small text above title, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: text, label: Text, type: text }
+
   # ------------------------------------------------------------------ NEWS
   - name: news
     label: News & press
