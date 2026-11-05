@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import { dateRange } from '../../lib';
+const { s } = Astro.props;
+
+const all = (await getCollection('events', (e) => !e.data.draft)).sort((a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf());
+// "featured" holds the CMS reference (e.g. src/content/events/mmw-2025.md); empty = most recent event.
+const featuredId = String(s.featured ?? '').split('/').pop()?.replace(/\.md$/, '');
+const latest = (featuredId && all.find((e) => e.id === featuredId)) || all[0];
+const pastCount = Number(s.pastCount) || 0;
+const others = all.filter((e) => e !== latest);
+const past = pastCount > 0 ? others.slice(0, pastCount) : others;
+const isUpcoming = latest && latest.data.startDate > new Date();
+const label = (v: unknown, d: string) => (typeof v === 'string' && v.trim() ? v : d);
+---
+{latest && (
+  <section class={Astro.props.alt ? 'section-alt' : undefined}>
+    <div class="wrap">
+      {s.eyebrow && <span class="eyebrow">{s.eyebrow}</span>}
+      {s.title && <h2>{s.title}</h2>}
+      {s.text && <p class="lead" style="margin-bottom:32px">{s.text}</p>}
+      <div class="event">
+        <div class="event-img" style={latest.data.heroImage ? `background-image:linear-gradient(180deg,rgba(8,57,29,.1),rgba(8,57,29,.75)),url(${latest.data.heroImage})` : undefined}>
+          <div class="badge">{latest.data.shortTitle}</div>
+          <div>{dateRange(latest.data.startDate, latest.data.endDate)} · {latest.data.location}</div>
+        </div>
+        <div class="event-body">
+          <span class="eyebrow">{isUpcoming ? label(s.upcomingLabel, 'Next event') : label(s.latestLabel, 'Latest edition')}</span>
+          <h3 style="font-size:1.5rem;margin-top:6px">{latest.data.title}</h3>
+          <p class="muted" style="margin-top:10px">{latest.data.summary}</p>
+          <ul class="bullets">
+            {latest.data.conference.length > 0 && <li>{label(s.programmeLabel, 'Conference programme')}{latest.data.speakers.length ? ` & ${latest.data.speakers.length} ${label(s.speakersLabel, 'speakers')}` : ''}</li>}
+            {latest.data.presentations.length > 0 && <li>{label(s.presentationsLabel, 'Presentations available for download')}</li>}
+            {label(s.galleryLabel, '') && <li>{s.galleryLabel}</li>}
+          </ul>
+          <a href={`/events/${latest.id}/`} class="btn btn-green">{label(s.buttonLabel, 'Explore')} {latest.data.shortTitle}</a>
+          {past.length > 0 && (
+            <div class="chips" style="margin-top:28px">
+              {past.map((e) => <a class="chip" href={`/events/${e.id}/`}>{e.data.shortTitle} · {e.data.location}</a>)}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+)}

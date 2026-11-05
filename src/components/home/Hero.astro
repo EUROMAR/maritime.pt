@@ -1,0 +1,18 @@
+---
+import Buttons from './Buttons.astro';
+const { s } = Astro.props;
+const stats = (s.stats ?? []).filter((x: any) => x?.value || x?.label);
+---
+<section class="hero">
+  <div class="wrap">
+    {s.eyebrow && <span class="eyebrow">{s.eyebrow}</span>}
+    {s.title && <h1>{s.title}</h1>}
+    {s.text && <p>{s.text}</p>}
+    <Buttons buttons={s.buttons} />
+    {stats.length > 0 && (
+      <div class="stats">
+        {stats.map((x: any) => <div class="stat"><b>{x.value}</b><span>{x.label}</span></div>)}
+      </div>
+    )}
+  </div>
+</section>

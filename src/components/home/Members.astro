@@ -1,0 +1,22 @@
+---
+import site from '../../data/site.json';
+const { s } = Astro.props;
+const logos = (site.memberLogos ?? []) as { name: string; logo: string }[];
+const prefix = typeof s.affiliationPrefix === 'string' ? s.affiliationPrefix.trim() : 'Member of';
+---
+<section class={Astro.props.alt ? 'section-alt' : undefined}>
+  <div class="wrap">
+    {s.eyebrow && <span class="eyebrow">{s.eyebrow}</span>}
+    {s.title && <h2>{s.title}</h2>}
+    {s.showLogos !== false && (logos.length > 0 ? (
+      <div class="logos">{logos.map((m) => <div class="logo-box"><img src={m.logo} alt={m.name} loading="lazy" /></div>)}</div>
+    ) : (
+      <div class="logos">{Array.from({ length: 6 }).map(() => <div class="logo-box">Member logo</div>)}</div>
+    ))}
+    {s.showAffiliations !== false && site.affiliations.length > 0 && (
+      <div class="affil">
+        {site.affiliations.map((a) => <div><b>{prefix ? `${prefix} ${a.name}` : a.name}</b><span>{a.description}</span></div>)}
+      </div>
+    )}
+  </div>
+</section>

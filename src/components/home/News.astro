@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content';
+import NewsCard from '../NewsCard.astro';
+import Buttons from './Buttons.astro';
+const { s } = Astro.props;
+const count = Number(s.count) > 0 ? Number(s.count) : 3;
+const news = (await getCollection('news', (n) => !n.data.draft))
+  .sort((a, b) => Number(b.data.featured) - Number(a.data.featured) || b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, count);
+---
+{news.length > 0 && (
+  <section class={Astro.props.alt ? 'section-alt' : undefined}>
+    <div class="wrap">
+      <div class="head-row">
+        <div>{s.eyebrow && <span class="eyebrow">{s.eyebrow}</span>}{s.title && <h2 style="margin-bottom:0">{s.title}</h2>}</div>
+        <Buttons buttons={s.button ? [s.button] : []} light as="fragment" />
+      </div>
+      <div class="grid-3">{news.map((n) => <NewsCard item={n} />)}</div>
+    </div>
+  </section>
+)}

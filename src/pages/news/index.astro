@@ -3,13 +3,15 @@ import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import NewsCard from '../../components/NewsCard.astro';
 import { getCollection } from 'astro:content';
+import headers from '../../data/headers.json';
+const h = headers.news;
 
 const items = (await getCollection('news', (n) => !n.data.draft)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const years = [...new Set(items.map((n) => n.data.date.getUTCFullYear()))];
 const types = [...new Set(items.map((n) => n.data.type))];
 ---
-<Base title="News & press" description="Press releases, media coverage and opinion from EISAP – the Shipping Association of Portugal.">
-  <PageHero eyebrow="News & press" title="News, press releases and media coverage" intro="EISAP's press releases and how the media has covered the Portuguese flag and MAR since 2016." />
+<Base title={h.seoTitle} description={h.seoDescription || undefined}>
+  <PageHero eyebrow={h.eyebrow} title={h.title} intro={h.intro} />
   <section>
     <div class="wrap">
       <div class="chips" id="filters" style="margin-bottom:12px">
