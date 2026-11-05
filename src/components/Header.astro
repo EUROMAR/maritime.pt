@@ -28,8 +28,17 @@ const button = nav.header?.button;
 <script>
   const b = document.getElementById('burger');
   const m = document.getElementById('menu');
-  b?.addEventListener('click', () => {
-    const open = m?.classList.toggle('open');
-    b.setAttribute('aria-expanded', String(!!open));
-  });
+  const setOpen = (open: boolean) => {
+    m?.classList.toggle('open', open);
+    document.body.classList.toggle('menu-open', open);
+    b?.setAttribute('aria-expanded', String(open));
+    b?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  b?.addEventListener('click', () => setOpen(!m?.classList.contains('open')));
+  // Close after choosing a link (also for links to a section on the same page)
+  m?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && m?.classList.contains('open')) { setOpen(false); b?.focus(); } });
+  document.addEventListener('click', (e) => { if (m?.classList.contains('open') && !m.contains(e.target as Node) && !b?.contains(e.target as Node)) setOpen(false); });
+  // Rotating a tablet to landscape shows the full menu again
+  matchMedia('(min-width: 961px)').addEventListener('change', (e) => e.matches && setOpen(false));
 </script>
