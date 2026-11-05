@@ -18,16 +18,16 @@
   ],
   "contacts": [
     {
-      "name": "Pedro Calado",
-      "role": "Secretary General",
-      "location": "Madeira, Portugal",
-      "email": "pedro.calado@portugal-shipowners.com"
-    },
-    {
       "name": "Duarte Vaz Pinto",
       "role": "Advisor to the Board of Directors",
       "location": "Lisbon, Portugal",
       "email": "duarte.vazpinto@portugal-shipowners.com"
+    },
+    {
+      "name": "Pedro Calado",
+      "role": "Secretary General",
+      "location": "Madeira, Portugal",
+      "email": "pedro.calado@portugal-shipowners.com"
     }
   ],
   "stats": [
