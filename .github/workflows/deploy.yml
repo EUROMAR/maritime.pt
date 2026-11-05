@@ -27,3 +27,22 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+  # If the build or deploy fails, the previous site stays online and an issue is opened
+  # (GitHub emails it to repository admins/watchers). Repeated failures add a comment instead.
+  notify-failure:
+    needs: [build, deploy]
+    if: failure()
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          COMMIT: ${{ github.event.head_commit.message }}
+        run: |
+          TITLE="Website build failed – the site was not updated"
+          BODY=$(printf 'The last change was **not published**. The previous version of the site is still online.\n\n**Change:** %s\n\n**Details:** %s\n\nOpen the link, click the red step and read the message at the bottom (content problems are listed in plain English). Fix the content in Pages CMS and save again. Close this issue once the site builds green.' "$(echo "$COMMIT" | head -1)" "$RUN_URL")
+          NUM=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number')
+          if [ -n "$NUM" ]; then gh issue comment "$NUM" --body "$BODY"; else gh issue create --title "$TITLE" --body "$BODY"; fi

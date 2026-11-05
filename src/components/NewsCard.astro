@@ -6,7 +6,7 @@ const { item } = Astro.props;
 const d = item.data;
 ---
 <a class="card" href={`/news/${item.id}/`}>
-  {d.image && <div class="thumb"><img src={d.image} alt="" loading="lazy" /></div>}
+  {d.image && <div class="thumb"><img src={d.image} alt={d.imageAlt ?? ''} loading="lazy" /></div>}
   <div class="body">
     <div class="meta"><span class="tag">{d.type}</span><span>{fmtDate(d.date)}</span>{d.source && d.type !== 'Press release' && <span>{d.source}</span>}{d.language === 'PT' && <span>PT</span>}</div>
     <h3>{d.title}</h3>

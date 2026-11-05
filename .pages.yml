@@ -74,518 +74,588 @@ components:
       - { name: title, label: Title, type: string }
 
 content:
-  # ------------------------------------------------------------- HOME PAGE
-  - name: home
-    label: Home page
-    description: The home page is built from the sections below, top to bottom. Drag to reorder, untick "Show" to hide one, or add a new section.
-    type: file
-    path: src/data/home.json
-    format: json
-    fields:
-      - name: sections
-        label: Sections
-        type: block
-        blockKey: section
-        list:
-          collapsible: { collapsed: true, summary: "{section} · {title}" }
-        blocks:
-          - name: top-banner
-            label: Top banner
-            fields:
-              - { name: show, label: Show this section, type: boolean, default: true }
-              - { name: eyebrow, label: Small text above the title, type: string }
-              - { name: title, label: Title, type: string, description: "The big headline. Keep it under about 60 characters." }
-              - { name: text, label: Intro text, type: text, description: "2–3 sentences." }
-              - name: buttons
-                label: Buttons
-                component: button
-                list: { max: 3, collapsible: { collapsed: true, summary: "{label}" } }
-              - name: stats
-                label: Figures
-                type: object
-                description: The big numbers under the buttons, e.g. "1,000+" / "Ships registered".
-                list: { max: 6, collapsible: { collapsed: true, summary: "{value} {label}" } }
+  # ======================================================================
+  - name: website
+    label: Home page & menus
+    type: group
+    items:
+      # ------------------------------------------------------------- HOME PAGE
+      - name: home
+        label: Home page
+        description: The home page is built from the sections below, top to bottom. Drag to reorder, untick "Show" to hide one, or add a new section.
+        type: file
+        path: src/data/home.json
+        format: json
+        fields:
+          - name: sections
+            label: Sections
+            type: block
+            blockKey: section
+            list:
+              collapsible: { collapsed: true, summary: "{section} · {title}" }
+            blocks:
+              - name: top-banner
+                label: Top banner
                 fields:
-                  - { name: value, label: Number, type: string }
-                  - { name: label, label: Label, type: string }
-          - name: who-we-are
-            label: Who we are
-            fields:
-              - { name: show, label: Show this section, type: boolean, default: true }
-              - { name: eyebrow, label: Small text above the title, type: string }
-              - { name: title, label: Title, type: string }
-              - { name: text, label: Text, type: text }
-              - name: buttons
-                label: Buttons
-                component: button
-                list: { max: 3, collapsible: { collapsed: true, summary: "{label}" } }
-              - name: objectives
-                label: Objective boxes
-                type: object
-                description: Numbered automatically (01, 02 …) in the order shown here.
-                list: { max: 6, collapsible: { collapsed: true, summary: "{title}" } }
+                  - { name: show, label: Show this section, type: boolean, default: true }
+                  - { name: eyebrow, label: Small text above the title, type: string }
+                  - { name: title, label: Title, type: string, description: "The big headline. Keep it under about 60 characters." }
+                  - { name: text, label: Intro text, type: text, description: "2–3 sentences." }
+                  - name: buttons
+                    label: Buttons
+                    component: button
+                    list: { max: 3, collapsible: { collapsed: true, summary: "{label}" } }
+                  - name: stats
+                    label: Figures
+                    type: object
+                    description: The big numbers under the buttons, e.g. "1,000+" / "Ships registered".
+                    list: { max: 6, collapsible: { collapsed: true, summary: "{value} {label}" } }
+                    fields:
+                      - { name: value, label: Number, type: string }
+                      - { name: label, label: Label, type: string }
+              - name: who-we-are
+                label: Who we are
                 fields:
+                  - { name: show, label: Show this section, type: boolean, default: true }
+                  - { name: eyebrow, label: Small text above the title, type: string }
                   - { name: title, label: Title, type: string }
                   - { name: text, label: Text, type: text }
-          - name: events
-            label: Events
-            fields:
-              - { name: show, label: Show this section, type: boolean, default: true }
-              - { name: eyebrow, label: Small text above the title, type: string }
-              - { name: title, label: Title, type: string }
-              - { name: text, label: Text, type: text }
-              - name: featured
-                label: Featured event
-                type: reference
-                description: Leave empty to always feature the most recent event.
-                options: { collection: events, label: "{shortTitle} – {location}", search: "shortTitle,title" }
-              - { name: pastCount, label: How many other events to list, type: number, default: 0, description: "0 = all of them." }
-              - { name: upcomingLabel, label: Label when the event is in the future, type: string, default: Next event }
-              - { name: latestLabel, label: Label when the event is over, type: string, default: Latest edition }
-              - { name: buttonLabel, label: Button text (the event name is added after it), type: string, default: Explore }
-              - { name: programmeLabel, label: "Bullet: conference programme", type: string, description: "Shown only if the event has a conference agenda." }
-              - { name: speakersLabel, label: "Bullet: word after the number of speakers", type: string }
-              - { name: presentationsLabel, label: "Bullet: presentations", type: string, description: "Shown only if the event has presentations." }
-              - { name: galleryLabel, label: "Bullet: photos and video", type: string, description: "Leave empty to hide this bullet." }
-          - name: news
-            label: News
-            fields:
-              - { name: show, label: Show this section, type: boolean, default: true }
-              - { name: eyebrow, label: Small text above the title, type: string }
-              - { name: title, label: Title, type: string }
-              - { name: count, label: How many news items, type: number, default: 3, description: "Items marked \"Feature on home page\" come first, then the newest." }
-              - { name: button, label: Button, component: button }
-          - name: people
-            label: People
-            fields:
-              - { name: show, label: Show this section, type: boolean, default: true }
-              - { name: eyebrow, label: Small text above the title, type: string }
-              - { name: title, label: Title, type: string }
-              - name: group
-                label: Which group
-                type: select
-                default: Board of Directors
-                options: { values: [Board of Directors, General Assembly, Fiscal Council, Honorary] }
-              - { name: count, label: How many people, type: number, default: 0, description: "0 = everyone in the group." }
-              - { name: button, label: Button, component: button }
-          - name: members
-            label: Members
-            fields:
-              - { name: show, label: Show this section, type: boolean, default: true }
-              - { name: eyebrow, label: Small text above the title, type: string }
-              - { name: title, label: Title, type: string }
-              - { name: showLogos, label: Show member logos, type: boolean, default: true, description: "Logos are managed in Site settings → Member logos." }
-              - { name: showAffiliations, label: Show affiliations, type: boolean, default: true, description: "Affiliations are managed in Site settings → Affiliations." }
-              - { name: affiliationPrefix, label: Text before each affiliation name, type: string, default: Member of }
-          - name: membership-banner
-            label: Membership banner
-            fields:
-              - { name: show, label: Show this section, type: boolean, default: true }
-              - { name: eyebrow, label: Small text above the title, type: string }
-              - { name: title, label: Title, type: string }
-              - { name: text, label: Text, type: text }
-              - name: buttons
-                label: Buttons
-                component: button
-                list: { max: 3, collapsible: { collapsed: true, summary: "{label}" } }
-              - name: note
-                label: Small note under the buttons
-                type: object
+                  - name: buttons
+                    label: Buttons
+                    component: button
+                    list: { max: 3, collapsible: { collapsed: true, summary: "{label}" } }
+                  - name: objectives
+                    label: Objective boxes
+                    type: object
+                    description: Numbered automatically (01, 02 …) in the order shown here.
+                    list: { max: 6, collapsible: { collapsed: true, summary: "{title}" } }
+                    fields:
+                      - { name: title, label: Title, type: string }
+                      - { name: text, label: Text, type: text }
+              - name: events
+                label: Events
                 fields:
-                  - { name: text, label: Text, type: string, description: "Leave text and link text empty to hide the note." }
-                  - { name: linkLabel, label: Link text, type: string }
-                  - { name: link, label: Link, component: link }
+                  - { name: show, label: Show this section, type: boolean, default: true }
+                  - { name: eyebrow, label: Small text above the title, type: string }
+                  - { name: title, label: Title, type: string }
+                  - { name: text, label: Text, type: text }
+                  - name: featured
+                    label: Featured event
+                    type: reference
+                    description: Leave empty to always feature the most recent event.
+                    options: { collection: events, label: "{shortTitle} – {location}", search: "shortTitle,title" }
+                  - { name: pastCount, label: How many other events to list, type: number, default: 0, description: "0 = all of them." }
+                  - { name: upcomingLabel, label: Label when the event is in the future, type: string, default: Next event }
+                  - { name: latestLabel, label: Label when the event is over, type: string, default: Latest edition }
+                  - { name: buttonLabel, label: Button text (the event name is added after it), type: string, default: Explore }
+                  - { name: programmeLabel, label: "Bullet: conference programme", type: string, description: "Shown only if the event has a conference agenda." }
+                  - { name: speakersLabel, label: "Bullet: word after the number of speakers", type: string }
+                  - { name: presentationsLabel, label: "Bullet: presentations", type: string, description: "Shown only if the event has presentations." }
+                  - { name: galleryLabel, label: "Bullet: photos and video", type: string, description: "Leave empty to hide this bullet." }
+              - name: news
+                label: News
+                fields:
+                  - { name: show, label: Show this section, type: boolean, default: true }
+                  - { name: eyebrow, label: Small text above the title, type: string }
+                  - { name: title, label: Title, type: string }
+                  - { name: count, label: How many news items, type: number, default: 3, description: "Items marked \"Feature on home page\" come first, then the newest." }
+                  - { name: button, label: Button, component: button }
+              - name: people
+                label: People
+                fields:
+                  - { name: show, label: Show this section, type: boolean, default: true }
+                  - { name: eyebrow, label: Small text above the title, type: string }
+                  - { name: title, label: Title, type: string }
+                  - name: group
+                    label: Which group
+                    type: select
+                    default: Board of Directors
+                    options: { values: [Board of Directors, General Assembly, Fiscal Council, Honorary] }
+                  - { name: count, label: How many people, type: number, default: 0, description: "0 = everyone in the group." }
+                  - { name: button, label: Button, component: button }
+              - name: members
+                label: Members
+                fields:
+                  - { name: show, label: Show this section, type: boolean, default: true }
+                  - { name: eyebrow, label: Small text above the title, type: string }
+                  - { name: title, label: Title, type: string }
+                  - { name: showLogos, label: Show member logos, type: boolean, default: true, description: "Logos are managed in Site settings → Member logos." }
+                  - { name: showAffiliations, label: Show affiliations, type: boolean, default: true, description: "Affiliations are managed in Site settings → Affiliations." }
+                  - { name: affiliationPrefix, label: Text before each affiliation name, type: string, default: Member of }
+              - name: membership-banner
+                label: Membership banner
+                fields:
+                  - { name: show, label: Show this section, type: boolean, default: true }
+                  - { name: eyebrow, label: Small text above the title, type: string }
+                  - { name: title, label: Title, type: string }
+                  - { name: text, label: Text, type: text }
+                  - name: buttons
+                    label: Buttons
+                    component: button
+                    list: { max: 3, collapsible: { collapsed: true, summary: "{label}" } }
+                  - name: note
+                    label: Small note under the buttons
+                    type: object
+                    fields:
+                      - { name: text, label: Text, type: string, description: "Leave text and link text empty to hide the note." }
+                      - { name: linkLabel, label: Link text, type: string }
+                      - { name: link, label: Link, component: link }
 
-  # ----------------------------------------------------------------- MENUS
-  - name: navigation
-    label: Menus
-    description: The top menu and the footer, shown on every page.
-    type: file
-    path: src/data/navigation.json
-    format: json
-    fields:
-      - name: header
-        label: Top menu
-        type: object
+      # ----------------------------------------------------------------- MENUS
+      - name: navigation
+        label: Menus
+        description: The top menu and the footer, shown on every page.
+        type: file
+        path: src/data/navigation.json
+        format: json
         fields:
-          - name: links
-            label: Menu items
-            type: object
-            list: { collapsible: { collapsed: true, summary: "{label}" } }
-            fields:
-              - { name: label, label: Text, type: string }
-              - { name: link, label: Link, component: link }
-          - name: membersLink
-            label: Members area link (with padlock)
+          - name: header
+            label: Top menu
             type: object
             fields:
-              - { name: show, label: Show, type: boolean, default: true }
-              - { name: label, label: Text, type: string }
-              - { name: link, label: Link, component: link }
-          - name: button
-            label: Red button
-            type: object
-            fields:
-              - { name: show, label: Show, type: boolean, default: true }
-              - { name: label, label: Text, type: string }
-              - { name: link, label: Link, component: link }
-      - name: footer
-        label: Footer
-        type: object
-        fields:
-          - { name: addressTitle, label: Title above the address, type: string }
-          - name: columns
-            label: Link columns
-            type: object
-            list: { max: 5, collapsible: { collapsed: true, summary: "{title}" } }
-            fields:
-              - { name: title, label: Column title, type: string }
               - name: links
-                label: Links
+                label: Menu items
                 type: object
                 list: { collapsible: { collapsed: true, summary: "{label}" } }
                 fields:
                   - { name: label, label: Text, type: string }
                   - { name: link, label: Link, component: link }
-          - name: legal
-            label: Bottom links (privacy, cookies …)
+              - name: membersLink
+                label: Members area link (with padlock)
+                type: object
+                fields:
+                  - { name: show, label: Show, type: boolean, default: true }
+                  - { name: label, label: Text, type: string }
+                  - { name: link, label: Link, component: link }
+              - name: button
+                label: Red button
+                type: object
+                fields:
+                  - { name: show, label: Show, type: boolean, default: true }
+                  - { name: label, label: Text, type: string }
+                  - { name: link, label: Link, component: link }
+          - name: footer
+            label: Footer
             type: object
+            fields:
+              - { name: addressTitle, label: Title above the address, type: string }
+              - name: columns
+                label: Link columns
+                type: object
+                list: { max: 5, collapsible: { collapsed: true, summary: "{title}" } }
+                fields:
+                  - { name: title, label: Column title, type: string }
+                  - name: links
+                    label: Links
+                    type: object
+                    list: { collapsible: { collapsed: true, summary: "{label}" } }
+                    fields:
+                      - { name: label, label: Text, type: string }
+                      - { name: link, label: Link, component: link }
+              - name: legal
+                label: Bottom links (privacy, cookies …)
+                type: object
+                list: { collapsible: { collapsed: true, summary: "{label}" } }
+                fields:
+                  - { name: label, label: Text, type: string }
+                  - { name: link, label: Link, component: link }
+
+      # ---------------------------------------------------------- PAGE HEADERS
+      - name: headers
+        label: Page headers
+        description: Title and intro at the top of the listing pages, plus the text Google shows in search results.
+        type: file
+        path: src/data/headers.json
+        format: json
+        fields:
+          - name: news
+            label: News page
+            type: object
+            fields:
+              - { name: eyebrow, label: Small text above the title, type: string }
+              - { name: title, label: Title, type: string }
+              - { name: intro, label: Intro, type: text }
+              - { name: seoTitle, label: Browser tab title, type: string }
+              - { name: seoDescription, label: Google description, type: text, description: "About 150 characters. Shown under the page title in search results." }
+          - name: events
+            label: Events page
+            type: object
+            fields:
+              - { name: eyebrow, label: Small text above the title, type: string }
+              - { name: title, label: Title, type: string }
+              - { name: intro, label: Intro, type: text }
+              - { name: seoTitle, label: Browser tab title, type: string }
+              - { name: seoDescription, label: Google description, type: text, description: "About 150 characters. Shown under the page title in search results." }
+          - name: governance
+            label: Governance page
+            type: object
+            fields:
+              - { name: eyebrow, label: Small text above the title, type: string }
+              - { name: title, label: Title, type: string }
+              - { name: intro, label: Intro, type: text }
+              - { name: seoTitle, label: Browser tab title, type: string }
+              - { name: seoDescription, label: Google description, type: text, description: "About 150 characters. Shown under the page title in search results." }
+          - name: contact
+            label: Contact page
+            type: object
+            fields:
+              - { name: eyebrow, label: Small text above the title, type: string }
+              - { name: title, label: Title, type: string }
+              - { name: intro, label: Intro, type: text }
+              - { name: seoTitle, label: Browser tab title, type: string }
+              - { name: seoDescription, label: Google description, type: text, description: "About 150 characters. Shown under the page title in search results." }
+          - name: notFound
+            label: Page not found (404)
+            type: object
+            fields:
+              - { name: eyebrow, label: Small text above the title, type: string }
+              - { name: title, label: Title, type: string }
+              - { name: intro, label: Intro, type: text }
+              - { name: seoTitle, label: Browser tab title, type: string }
+              - { name: seoDescription, label: Google description, type: text, description: "About 150 characters. Shown under the page title in search results." }
+
+  # ======================================================================
+  - name: content
+    label: News, events & people
+    type: group
+    items:
+      # -------------------------------------------------------------- NEWS
+      - name: news
+        label: News & press
+        description: Press releases and media coverage. New items start as a draft – untick "Draft" when ready to publish.
+        type: collection
+        path: src/content/news
+        filename: "{year}-{month}-{day}-{primary}.md"
+        view:
+          fields: [title, date, type, draft]
+          primary: title
+          sort: [date, title]
+          search: [title, summary, source]
+          default: { sort: date, order: desc }
+        fields:
+          - { name: title, label: Title, type: string, required: true }
+          - { name: date, label: Date, type: date, required: true, description: "Publication date. Newest items are shown first." }
+          - name: type
+            label: Type
+            type: select
+            required: true
+            default: Press release
+            options: { values: [Press release, Media coverage, Opinion, Interview, Statement] }
+          - { name: source, label: Source / publication, type: string, description: "For media coverage, e.g. Jornal Económico. Not shown for press releases." }
+          - name: language
+            label: Language
+            type: select
+            default: EN
+            options: { values: [EN, PT] }
+          - { name: summary, label: Summary, type: text, description: "1–2 sentences shown on the news cards and in Google results." }
+          - { name: image, label: Photo, type: image, options: { media: images }, description: "Optional. Landscape photos work best. Large photos are resized automatically." }
+          - { name: imageAlt, label: Photo description, type: string, description: "Describe the photo in a few words, for blind visitors and Google. E.g. \"Panel discussion at MMW 2025\"." }
+          - name: links
+            label: External links
+            type: object
+            description: Links to the original article, video, etc.
             list: { collapsible: { collapsed: true, summary: "{label}" } }
             fields:
-              - { name: label, label: Text, type: string }
-              - { name: link, label: Link, component: link }
+              - { name: label, label: Link text, type: string }
+              - { name: url, label: Web address, type: string, pattern: { regex: "^$|^(https?://|/)\\S*$", message: "Start with https:// (or / for a page on this site)." } }
+          - name: documents
+            label: Documents (PDF)
+            type: object
+            list: { collapsible: { collapsed: true, summary: "{title}" } }
+            fields:
+              - { name: title, label: Title, type: string }
+              - { name: file, label: File, type: file, options: { media: documents } }
+          - name: event
+            label: Related event
+            type: reference
+            description: Optional. The news item is then also listed on that event's page.
+            options: { collection: events, label: "{shortTitle} – {location}", search: "shortTitle,title" }
+          - { name: featured, label: Pin on home page, type: boolean, description: "Pinned items appear first in the home page News section." }
+          - { name: draft, label: Draft (not visible on the website), type: boolean, default: true, description: "Untick to publish." }
+          - { name: body, label: Text, type: rich-text }
 
-  # ---------------------------------------------------------- PAGE HEADERS
-  - name: headers
-    label: Page headers
-    description: Title and intro at the top of the listing pages, plus the text Google shows in search results.
-    type: file
-    path: src/data/headers.json
-    format: json
-    fields:
-      - name: news
-        label: News page
-        type: object
-        fields:
-          - { name: eyebrow, label: Small text above the title, type: string }
-          - { name: title, label: Title, type: string }
-          - { name: intro, label: Intro, type: text }
-          - { name: seoTitle, label: Browser tab title, type: string }
-          - { name: seoDescription, label: Google description, type: text, description: "About 150 characters. Shown under the page title in search results." }
+      # ------------------------------------------------------------ EVENTS
       - name: events
-        label: Events page
-        type: object
+        label: Events
+        description: Annual meetings (MMW / PSW). The most recent one is featured on the home page unless another is chosen there.
+        type: collection
+        path: src/content/events
+        filename: "{primary}.md"
+        view:
+          fields: [shortTitle, startDate, location, draft]
+          primary: shortTitle
+          sort: [startDate, shortTitle]
+          search: [title, shortTitle, location]
+          default: { sort: startDate, order: desc }
         fields:
-          - { name: eyebrow, label: Small text above the title, type: string }
-          - { name: title, label: Title, type: string }
-          - { name: intro, label: Intro, type: text }
-          - { name: seoTitle, label: Browser tab title, type: string }
-          - { name: seoDescription, label: Google description, type: text, description: "About 150 characters. Shown under the page title in search results." }
-      - name: governance
-        label: Governance page
-        type: object
-        fields:
-          - { name: eyebrow, label: Small text above the title, type: string }
-          - { name: title, label: Title, type: string }
-          - { name: intro, label: Intro, type: text }
-          - { name: seoTitle, label: Browser tab title, type: string }
-          - { name: seoDescription, label: Google description, type: text, description: "About 150 characters. Shown under the page title in search results." }
-      - name: contact
-        label: Contact page
-        type: object
-        fields:
-          - { name: eyebrow, label: Small text above the title, type: string }
-          - { name: title, label: Title, type: string }
-          - { name: intro, label: Intro, type: text }
-          - { name: seoTitle, label: Browser tab title, type: string }
-          - { name: seoDescription, label: Google description, type: text, description: "About 150 characters. Shown under the page title in search results." }
-      - name: notFound
-        label: Page not found (404)
-        type: object
-        fields:
-          - { name: eyebrow, label: Small text above the title, type: string }
-          - { name: title, label: Title, type: string }
-          - { name: intro, label: Intro, type: text }
-          - { name: seoTitle, label: Browser tab title, type: string }
-          - { name: seoDescription, label: Google description, type: text, description: "About 150 characters. Shown under the page title in search results." }
-
-  # ------------------------------------------------------------------ NEWS
-  - name: news
-    label: News & press
-    type: collection
-    path: src/content/news
-    filename: "{year}-{month}-{day}-{primary}.md"
-    view:
-      fields: [title, date, type]
-      primary: title
-      sort: [date, title]
-      default: { sort: date, order: desc }
-    fields:
-      - { name: title, label: Title, type: string, required: true }
-      - { name: date, label: Date, type: date, required: true }
-      - name: type
-        label: Type
-        type: select
-        options: { values: [Press release, Media coverage, Opinion, Interview, Statement] }
-      - { name: source, label: Source / publication, type: string }
-      - name: language
-        label: Language
-        type: select
-        default: EN
-        options: { values: [EN, PT] }
-      - { name: summary, label: Summary (shown on cards), type: text }
-      - { name: image, label: Image, type: image, options: { media: images } }
-      - name: links
-        label: External links
-        type: object
-        list: true
-        fields:
-          - { name: label, label: Label, type: string }
-          - { name: url, label: URL, type: string }
-      - name: documents
-        label: Documents (PDF)
-        type: object
-        list: true
-        fields:
-          - { name: title, label: Title, type: string }
-          - { name: file, label: File, type: file, options: { media: documents } }
-      - { name: event, label: Related event (slug, e.g. mmw-2025), type: string }
-      - { name: featured, label: Feature on home page, type: boolean }
-      - { name: draft, label: Draft (hidden), type: boolean }
-      - { name: body, label: Text, type: rich-text }
-
-  # ---------------------------------------------------------------- EVENTS
-  - name: events
-    label: Events
-    type: collection
-    path: src/content/events
-    filename: "{primary}.md"
-    view:
-      fields: [shortTitle, startDate, location]
-      primary: shortTitle
-      default: { sort: startDate, order: desc }
-    fields:
-      - { name: title, label: Title, type: string, required: true }
-      - { name: shortTitle, label: Short title (e.g. MMW 2027), type: string, required: true }
-      - name: series
-        label: Series
-        type: select
-        options: { values: [Madeira Maritime Week, Portugal Shipping Week, Annual Meeting] }
-      - { name: edition, label: Edition, type: string }
-      - { name: startDate, label: Start date, type: date, required: true }
-      - { name: endDate, label: End date, type: date }
-      - { name: location, label: Location, type: string, required: true }
-      - { name: summary, label: Summary, type: text, required: true }
-      - { name: heroImage, label: Main image, type: image, options: { media: images } }
-      - { name: registrationUrl, label: Registration link, type: string }
-      - { name: externalUrl, label: External event website, type: string }
-      - name: programme
-        label: Programme (social / week)
-        type: object
-        list: true
-        fields:
-          - { name: day, label: Day, type: string }
-          - name: items
-            label: Items
+          - { name: title, label: Full title, type: string, required: true, description: "E.g. Madeira Maritime Week 2027." }
+          - { name: shortTitle, label: Short title, type: string, required: true, description: "E.g. MMW 2027. Also used for the page address – don't change it after publishing." }
+          - name: series
+            label: Series
+            type: select
+            required: true
+            options: { values: [Madeira Maritime Week, Portugal Shipping Week, Annual Meeting] }
+          - { name: edition, label: Edition, type: string, description: "Optional, e.g. 3rd edition · EISAP 8th Annual Meeting." }
+          - { name: startDate, label: Start date, type: date, required: true }
+          - { name: endDate, label: End date, type: date, description: "Leave empty for a one-day event." }
+          - { name: location, label: Location, type: string, required: true, description: "E.g. Funchal, Madeira." }
+          - { name: summary, label: Summary, type: text, required: true, description: "1–2 sentences, shown on the home page and in Google results." }
+          - { name: heroImage, label: Main photo, type: image, options: { media: images }, description: "Wide landscape photo. Resized automatically." }
+          - { name: heroImageAlt, label: Main photo description, type: string, description: "A few words describing the photo, for blind visitors." }
+          - { name: registrationUrl, label: Registration link, type: string, pattern: { regex: "^$|^(https?://|/)\\S*$", message: "Start with https://" } }
+          - { name: externalUrl, label: Event website, type: string, pattern: { regex: "^$|^(https?://|/)\\S*$", message: "Start with https://" } }
+          - name: programme
+            label: Programme (social / week)
             type: object
-            list: true
+            list: { collapsible: { collapsed: true, summary: "{day}" } }
             fields:
-              - { name: time, label: Time, type: string }
-              - { name: title, label: Item, type: string }
-              - { name: venue, label: Venue, type: string }
-      - name: conference
-        label: Conference agenda
-        type: object
-        list: true
-        fields:
-          - { name: day, label: Day, type: string }
-          - name: sessions
-            label: Sessions
+              - { name: day, label: Day, type: string, description: "E.g. Tuesday, 14 October." }
+              - name: items
+                label: Items
+                type: object
+                list: { collapsible: { collapsed: true, summary: "{time} {title}" } }
+                fields:
+                  - { name: time, label: Time, type: string }
+                  - { name: title, label: Item, type: string }
+                  - { name: venue, label: Venue, type: string }
+          - name: conference
+            label: Conference agenda
             type: object
-            list: true
+            list: { collapsible: { collapsed: true, summary: "{day}" } }
             fields:
-              - { name: time, label: Time, type: string }
-              - { name: title, label: Session title, type: string }
-              - { name: keynotes, label: Keynotes / speakers, type: string }
-              - { name: moderator, label: Moderator, type: string }
-              - { name: panel, label: Panel, type: string }
-      - name: speakers
-        label: Speakers
-        type: object
-        list: true
+              - { name: day, label: Day, type: string }
+              - name: sessions
+                label: Sessions
+                type: object
+                list: { collapsible: { collapsed: true, summary: "{time} {title}" } }
+                fields:
+                  - { name: time, label: Time, type: string }
+                  - { name: title, label: Session title, type: string }
+                  - { name: keynotes, label: Keynotes / speakers, type: string }
+                  - { name: moderator, label: Moderator, type: string }
+                  - { name: panel, label: Panel, type: string }
+          - name: speakers
+            label: Speakers
+            type: object
+            list: { collapsible: { collapsed: true, summary: "{name}" } }
+            fields:
+              - { name: name, label: Name, type: string }
+              - { name: role, label: Role, type: string }
+              - { name: organisation, label: Organisation, type: string }
+              - { name: photo, label: Photo, type: image, options: { media: images }, description: "Square portrait works best." }
+          - name: presentations
+            label: Presentations
+            type: object
+            list: { collapsible: { collapsed: true, summary: "{title}" } }
+            fields:
+              - { name: title, label: Title / session, type: string }
+              - { name: presenter, label: Presenter, type: string }
+              - { name: organisation, label: Organisation, type: string }
+              - { name: file, label: File, type: file, options: { media: documents } }
+          - name: documents
+            label: Other documents
+            type: object
+            list: { collapsible: { collapsed: true, summary: "{title}" } }
+            fields:
+              - { name: title, label: Title, type: string }
+              - { name: file, label: File, type: file, options: { media: documents } }
+          - name: gallery
+            label: Photo gallery
+            type: object
+            description: "Add photos one by one. 30–60 photos per event is plenty; they are resized automatically."
+            list: { collapsible: { collapsed: true, summary: "Photo {index} {caption}" } }
+            fields:
+              - { name: image, label: Photo, type: image, options: { media: images } }
+              - { name: caption, label: Caption, type: string, description: "Also used as the photo description for blind visitors." }
+          - { name: fullAlbumUrl, label: Link to full photo album, type: string, pattern: { regex: "^$|^(https?://|/)\\S*$", message: "Start with https://" } }
+          - name: videos
+            label: Videos
+            type: object
+            list: { collapsible: { collapsed: true, summary: "{title}" } }
+            fields:
+              - { name: title, label: Title, type: string }
+              - { name: url, label: YouTube or Vimeo link, type: string, pattern: { regex: "^$|^https?://\\S*$", message: "Paste the full link, starting with https://" } }
+          - name: partners
+            label: Partners
+            type: object
+            list: { collapsible: { collapsed: true, summary: "{name}" } }
+            fields:
+              - { name: name, label: Name, type: string }
+              - { name: role, label: Role, type: string, description: "E.g. Supported by." }
+              - { name: logo, label: Logo, type: image, options: { media: images } }
+              - { name: url, label: Website, type: string, pattern: { regex: "^$|^https?://\\S*$", message: "Start with https://" } }
+          - { name: draft, label: Draft (not visible on the website), type: boolean, default: true, description: "Untick to publish." }
+          - { name: body, label: Description, type: rich-text }
+
+      # ------------------------------------------------------------ PEOPLE
+      - name: board
+        label: People
+        description: Board of Directors, General Assembly, Fiscal Council and honorary members. To change the order, use "People order".
+        type: collection
+        path: src/content/board
+        filename: "{primary}.md"
+        view:
+          fields: [name, group, role, active]
+          primary: name
+          sort: [name, group]
+          search: [name, company, role]
+          default: { sort: group }
         fields:
-          - { name: name, label: Name, type: string }
-          - { name: role, label: Role, type: string }
-          - { name: organisation, label: Organisation, type: string }
-          - { name: photo, label: Photo, type: image, options: { media: images } }
-      - name: presentations
-        label: Presentations
-        type: object
-        list: true
+          - { name: name, label: Name, type: string, required: true }
+          - name: group
+            label: Governing body
+            type: select
+            required: true
+            default: Board of Directors
+            options: { values: [Board of Directors, General Assembly, Fiscal Council, Honorary] }
+          - { name: role, label: Role, type: string, required: true, description: "E.g. President, Vice-President, Member." }
+          - { name: company, label: Company, type: string }
+          - { name: city, label: "City and country", type: string, description: "E.g. Hamburg, Germany." }
+          - { name: photo, label: Photo, type: image, options: { media: images }, description: "Square portrait works best. Initials are shown if empty." }
+          - { name: active, label: Show on website, type: boolean, default: true, description: "Untick for former members, instead of deleting them." }
+          - { name: order, label: Order, type: number, hidden: true }
+          - { name: body, label: Biography, type: rich-text }
+
+      - name: people-order
+        label: People order
+        description: Drag names to change the order on the Governance page and the home page. People not in this list appear at the end.
+        type: file
+        path: src/data/people-order.json
+        format: json
         fields:
-          - { name: title, label: Title / session, type: string }
-          - { name: presenter, label: Presenter, type: string }
-          - { name: organisation, label: Organisation, type: string }
-          - { name: file, label: File, type: file, options: { media: documents } }
+          - name: people
+            label: People (top = first)
+            type: reference
+            list: { collapsible: false }
+            options: { collection: board, label: "{name} – {group}", search: "name" }
+
+  # ======================================================================
+  - name: texts
+    label: Page texts
+    type: group
+    items:
+      - name: pages
+        label: Page texts
+        description: Texts of the fixed pages (Who we are, Objectives, Membership, Privacy, Cookies, Legal notice). New pages can't be added here – ask the developer.
+        type: collection
+        path: src/content/pages
+        operations: { create: false, delete: false, rename: false }
+        view:
+          fields: [title, updated]
+          primary: title
+          search: [title]
+        fields:
+          - { name: title, label: Title, type: string, required: true }
+          - { name: eyebrow, label: Small text above the title, type: string }
+          - { name: intro, label: Intro, type: text, description: "Short paragraph under the title." }
+          - { name: updated, label: Last updated, type: date, description: "Shown on the privacy, cookie and legal pages." }
+          - { name: body, label: Text, type: rich-text }
+
+  # ======================================================================
+  - name: members-area
+    label: Members area
+    type: group
+    items:
       - name: documents
-        label: Other documents
-        type: object
-        list: true
+        label: Members documents
+        description: Documents for the members area. Not shown on the website until the members area is switched on.
+        type: collection
+        path: src/content/documents
+        view:
+          fields: [title, date, category]
+          primary: title
+          search: [title, description]
+          default: { sort: date, order: desc }
         fields:
-          - { name: title, label: Title, type: string }
-          - { name: file, label: File, type: file, options: { media: documents } }
-      - name: gallery
-        label: Photo gallery
-        type: object
-        list: true
-        fields:
-          - { name: image, label: Photo, type: image, options: { media: images } }
-          - { name: caption, label: Caption, type: string }
-      - { name: fullAlbumUrl, label: Link to full photo album, type: string }
-      - name: videos
-        label: Videos (YouTube / Vimeo links)
-        type: object
-        list: true
-        fields:
-          - { name: title, label: Title, type: string }
-          - { name: url, label: URL, type: string }
-      - name: partners
-        label: Partners
-        type: object
-        list: true
-        fields:
-          - { name: name, label: Name, type: string }
-          - { name: role, label: Role (e.g. Supported by), type: string }
-          - { name: logo, label: Logo, type: image, options: { media: images } }
-          - { name: url, label: Website, type: string }
-      - { name: draft, label: Draft (hidden), type: boolean }
-      - { name: body, label: Description, type: rich-text }
+          - { name: title, label: Title, type: string, required: true }
+          - { name: date, label: Date, type: date, required: true }
+          - name: category
+            label: Category
+            type: select
+            required: true
+            default: Circular
+            options: { values: [Minutes, Circular, Position paper, Presentation, Report, Other] }
+          - { name: file, label: File, type: file, required: true, options: { media: members } }
+          - { name: description, label: Description, type: text }
 
-  # ----------------------------------------------------------------- BOARD
-  - name: board
-    label: Board & governance
-    type: collection
-    path: src/content/board
-    filename: "{primary}.md"
-    view:
-      fields: [name, group, role, order]
-      primary: name
-      default: { sort: order }
-    fields:
-      - { name: name, label: Name, type: string, required: true }
-      - name: group
-        label: Governing body
-        type: select
-        options: { values: [Board of Directors, General Assembly, Fiscal Council, Honorary] }
-      - { name: role, label: Role, type: string, required: true }
-      - { name: company, label: Company, type: string }
-      - { name: city, label: "City, country", type: string }
-      - { name: photo, label: Photo, type: image, options: { media: images } }
-      - { name: order, label: Order (1 = first), type: number }
-      - { name: active, label: Show on website, type: boolean, default: true }
-      - { name: body, label: Biography, type: rich-text }
-
-  # ----------------------------------------------------------------- PAGES
-  - name: pages
-    label: Pages
-    type: collection
-    path: src/content/pages
-    view: { fields: [title] }
-    fields:
-      - { name: title, label: Title, type: string, required: true }
-      - { name: eyebrow, label: Small label above title, type: string }
-      - { name: intro, label: Intro, type: text }
-      - { name: updated, label: Last updated, type: date }
-      - { name: body, label: Text, type: rich-text }
-
-  # ----------------------------------------------------- MEMBERS DOCUMENTS
-  - name: documents
-    label: Members area – documents
-    type: collection
-    path: src/content/documents
-    view:
-      fields: [title, date, category]
-      default: { sort: date, order: desc }
-    fields:
-      - { name: title, label: Title, type: string, required: true }
-      - { name: date, label: Date, type: date, required: true }
-      - name: category
-        label: Category
-        type: select
-        options: { values: [Minutes, Circular, Position paper, Presentation, Report, Other] }
-      - { name: file, label: File, type: file, options: { media: members } }
-      - { name: description, label: Description, type: text }
-
-  # -------------------------------------------------------------- SETTINGS
-  - name: site
-    label: Site settings
-    type: file
-    path: src/data/site.json
-    format: json
-    fields:
-      - { name: name, label: Site name, type: string }
-      - { name: legalName, label: Legal name, type: string }
-      - { name: brand, label: Brand, type: string }
-      - { name: description, label: Default description (SEO), type: text }
-      - { name: founded, label: Founded, type: string }
-      - { name: phone, label: Phone, type: string }
-      - { name: email, label: Email, type: string }
-      - name: offices
-        label: Offices
-        type: object
-        list: true
+  # ======================================================================
+  - name: settings
+    label: Settings
+    type: group
+    items:
+      # -------------------------------------------------------------- SETTINGS
+      - name: site
+        label: Site settings
+        type: file
+        path: src/data/site.json
+        format: json
         fields:
-          - { name: name, label: Name, type: string }
-          - { name: address, label: Address, type: text }
-      - name: contacts
-        label: Contact persons
-        type: object
-        list: true
-        fields:
-          - { name: name, label: Name, type: string }
-          - { name: role, label: Role, type: string }
-          - { name: location, label: Location, type: string }
-          - { name: email, label: Email, type: string }
-      - name: affiliations
-        label: Affiliations
-        type: object
-        list: true
-        fields:
-          - { name: name, label: Name, type: string }
-          - { name: description, label: Description, type: string }
-          - { name: url, label: Website, type: string }
-      - name: memberLogos
-        label: Member logos (home page)
-        description: Shown in the Members section of the home page.
-        type: object
-        list: true
-        fields:
-          - { name: name, label: Member, type: string }
-          - { name: logo, label: Logo, type: image, options: { media: images } }
-      - name: membership
-        label: Membership
-        type: object
-        fields:
-          - { name: formUrl, label: Form endpoint (optional), type: string }
-          - { name: agreementIndividual, label: Agreement – individual, type: file, options: { media: documents } }
-          - { name: agreementCorporate, label: Agreement – corporate, type: file, options: { media: documents } }
-      - { name: statutesPdf, label: Statutes PDF, type: file, options: { media: documents } }
-      - name: labels
-        label: Small texts
-        type: object
-        description: Short texts used on several pages.
-        fields:
-          - { name: shortName, label: Short name (contact page card), type: string }
-          - { name: statutesTitle, label: Statutes download – title, type: string }
-          - { name: statutesNote, label: Statutes download – small text, type: string }
-          - { name: affiliationsTitle, label: '"Who we are" page – affiliations heading', type: string }
-          - { name: openMap, label: Contact page – map link text, type: string }
-          - { name: membersArea, label: Members area – name, type: string }
-      - { name: analyticsToken, label: Cloudflare Web Analytics token (optional), type: string }
-      - name: social
-        label: Social links
-        type: object
-        fields:
-          - { name: linkedin, label: LinkedIn, type: string }
-          - { name: youtube, label: YouTube, type: string }
-          - { name: vimeo, label: Vimeo, type: string }
+          - { name: name, label: Site name, type: string, description: "Shown in the browser tab and the footer." }
+          - { name: legalName, label: Legal name, type: string }
+          - { name: brand, label: Brand, type: string }
+          - { name: description, label: Default Google description, type: text, description: "Used for pages that don't have their own. About 150 characters." }
+          - { name: founded, label: Founded, type: string }
+          - { name: phone, label: Phone, type: string, description: "Shown in the footer and on the Contact page." }
+          - { name: email, label: Email, type: string, description: "Main contact address. Membership requests are sent here." }
+          - name: offices
+            label: Offices
+            description: The first office is shown in the footer.
+            type: object
+            list: { collapsible: { collapsed: true, summary: "{name}" } }
+            fields:
+              - { name: name, label: Name, type: string }
+              - { name: address, label: Address, type: text }
+          - name: contacts
+            label: Contact persons
+            description: Shown on the Contact page.
+            type: object
+            list: { collapsible: { collapsed: true, summary: "{name}" } }
+            fields:
+              - { name: name, label: Name, type: string }
+              - { name: role, label: Role, type: string }
+              - { name: location, label: Location, type: string }
+              - { name: email, label: Email, type: string }
+          - name: affiliations
+            label: Affiliations
+            description: Organisations EISAP belongs to. Shown on the home page and the Who we are page.
+            type: object
+            list: { collapsible: { collapsed: true, summary: "{name}" } }
+            fields:
+              - { name: name, label: Name, type: string }
+              - { name: description, label: Description, type: string }
+              - { name: url, label: Website, type: string }
+          - name: memberLogos
+            label: Member logos (home page)
+            description: Shown in the Members section of the home page.
+            type: object
+            list: { collapsible: { collapsed: true, summary: "{name}" } }
+            fields:
+              - { name: name, label: Member, type: string }
+              - { name: logo, label: Logo, type: image, options: { media: images } }
+          - name: membership
+            label: Membership
+            type: object
+            fields:
+              - { name: formUrl, label: Form endpoint (optional), type: string, description: "Leave empty – the membership form then opens the visitor's email program. Only for a form service like Formspree or Tally." }
+              - { name: agreementIndividual, label: Agreement – individual, type: file, options: { media: documents } }
+              - { name: agreementCorporate, label: Agreement – corporate, type: file, options: { media: documents } }
+          - { name: statutesPdf, label: Statutes PDF, type: file, options: { media: documents } }
+          - name: labels
+            label: Small texts
+            type: object
+            description: Short texts used on several pages.
+            fields:
+              - { name: shortName, label: Short name (contact page card), type: string }
+              - { name: statutesTitle, label: Statutes download – title, type: string }
+              - { name: statutesNote, label: Statutes download – small text, type: string }
+              - { name: affiliationsTitle, label: '"Who we are" page – affiliations heading', type: string }
+              - { name: openMap, label: Contact page – map link text, type: string }
+              - { name: membersArea, label: Members area – name, type: string }
+          - { name: analyticsToken, label: Cloudflare Web Analytics token (optional), type: string, description: "Technical – leave as is." }
+          - name: social
+            label: Social links
+            type: object
+            fields:
+              - { name: linkedin, label: LinkedIn, type: string }
+              - { name: youtube, label: YouTube, type: string }
+              - { name: vimeo, label: Vimeo, type: string }

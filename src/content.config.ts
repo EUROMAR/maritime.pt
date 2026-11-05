@@ -19,9 +19,11 @@ const news = defineCollection({
     language: z.enum(['EN', 'PT']).default('EN'),
     summary: z.string().optional(),
     image: z.string().optional(),
+    imageAlt: z.string().optional(),
     links: z.array(z.object({ label: z.string(), url: z.string() })).default([]),
     documents: z.array(fileRef).default([]),
-    event: z.string().optional(),       // slug of related event
+    // Related event: a slug (mmw-2025) or the CMS reference path (src/content/events/mmw-2025.md)
+    event: z.string().optional().transform((v) => v ? v.split('/').pop()!.replace(/\.md$/, '') || undefined : undefined),
     featured: z.boolean().default(false),
     draft: z.boolean().default(false),
   }),
@@ -39,6 +41,7 @@ const events = defineCollection({
     location: z.string(),
     summary: z.string(),
     heroImage: z.string().optional(),
+    heroImageAlt: z.string().optional(),
     registrationUrl: z.string().optional(),
     externalUrl: z.string().optional(),
     programme: z.array(z.object({

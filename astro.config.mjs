@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { readFileSync } from 'node:fs';
+import optimizeImages from './integrations/optimize-images.mjs';
 
 /**
  * Old-URL redirects are kept in ONE place: public/_redirects.
@@ -21,6 +22,6 @@ export default defineConfig({
   site: 'https://www.maritime.pt',
   trailingSlash: 'always',
   redirects,
-  integrations: [sitemap({ filter: (page) => !page.includes('/members/') })],
+  integrations: [sitemap({ filter: (page) => !page.includes('/members/') }), optimizeImages()],
   build: { format: 'directory' },
 });

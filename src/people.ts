@@ -7,4 +7,4 @@ const rank = new Map((order.people ?? []).map((p: unknown, i: number) => [String
 
 export const getPeople = async (group?: string) =>
   (await getCollection('board', (b) => b.data.active && (!group || b.data.group === group)))
-    .sort((a, b) => (rank.get(a.id) ?? 1e6) - (rank.get(b.id) ?? 1e6) || a.data.order - b.data.order);
+    .sort((a, b) => (rank.get(a.id) ?? 1e6) - (rank.get(b.id) ?? 1e6) || a.data.order - b.data.order || a.data.name.localeCompare(b.data.name));
