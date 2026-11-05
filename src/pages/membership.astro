@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { getEntry, render } from 'astro:content';
+import site from '../data/site.json';
+
+const page = (await getEntry('pages', 'membership'))!;
+const { Content } = await render(page);
+const formUrl = site.membership.formUrl; // set to a form endpoint (e.g. Tally, Formspree, Cloudflare Function) to enable direct submission
+---
+<Base title="Become a member" description="Join EISAP – the Shipping Association of Portugal.">
+  <PageHero eyebrow={page.data.eyebrow} title={page.data.title} intro={page.data.intro} />
+  <section>
+    <div class="wrap grid-2">
+      <div class="prose"><Content /></div>
+      <div class="pillars">
+        <a class="file" href={site.membership.agreementCorporate} target="_blank" rel="noopener"><span class="ext">pdf</span><span><strong>Membership agreement – corporate members</strong><small>Download, complete and return by email</small></span></a>
+        <a class="file" href={site.membership.agreementIndividual} target="_blank" rel="noopener"><span class="ext">pdf</span><span><strong>Membership agreement – individual members</strong><small>Download, complete and return by email</small></span></a>
+        <a class="file" href={site.statutesPdf} target="_blank" rel="noopener"><span class="ext">pdf</span><span><strong>Statutes of Association</strong><small>English</small></span></a>
+      </div>
+    </div>
+  </section>
+  <section id="apply" class="section-alt">
+    <div class="wrap narrow">
+      <span class="eyebrow">Apply</span>
+      <h2>Membership request</h2>
+      <p class="muted" style="margin-bottom:24px">Send us a short request and the Secretary General will get in touch.</p>
+      <form class="form" id="apply-form" method="post" action={formUrl || undefined} data-mailto={site.email}>
+        <div class="two">
+          <label>Full name<input name="name" required autocomplete="name" /></label>
+          <label>Company<input name="company" required autocomplete="organization" /></label>
+        </div>
+        <div class="two">
+          <label>Email<input type="email" name="email" required autocomplete="email" /></label>
+          <label>Phone<input name="phone" autocomplete="tel" /></label>
+        </div>
+        <div class="two">
+          <label>Membership type<select name="type"><option>Corporate</option><option>Individual</option></select></label>
+          <label>Ships registered in MAR (approx.)<input name="ships" inputmode="numeric" /></label>
+        </div>
+        <label>Message<textarea name="message" rows="4"></textarea></label>
+        <label style="display:flex;gap:10px;align-items:flex-start;font-weight:400"><input type="checkbox" required style="margin-top:4px" /> <span>I agree that EISAP processes my data to handle this request (<a href="/privacy/" style="color:var(--green)">privacy policy</a>).</span></label>
+        <div><button class="btn btn-primary" type="submit">Send request</button></div>
+        {!formUrl && <p class="muted" style="font-size:.85rem">This opens your email program with the request pre-filled.</p>}
+      </form>
+    </div>
+  </section>
+</Base>
+<script>
+  const f = document.getElementById('apply-form') as HTMLFormElement | null;
+  if (f && !f.getAttribute('action')) {
+    f.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const d = new FormData(f);
+      const body = ['name', 'company', 'email', 'phone', 'type', 'ships', 'message'].map((k) => `${k[0].toUpperCase() + k.slice(1)}: ${d.get(k) ?? ''}`).join('\n');
+      location.href = `mailto:${f.dataset.mailto}?subject=${encodeURIComponent('EISAP membership request – ' + (d.get('company') ?? ''))}&body=${encodeURIComponent(body)}`;
+    });
+  }
+</script>

@@ -1,0 +1,27 @@
+---
+/**
+ * Members area – "coming soon" placeholder.
+ * When the members area goes live (Cloudflare Access configured), replace this page
+ * with the document library version (see README → "Turn on the members area").
+ */
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import site from '../../data/site.json';
+---
+<Base title="Members area" noindex>
+  <PageHero eyebrow="Members area" title="Our members' portal is on its way" intro="We are preparing a dedicated space for EISAP members – a single place for circulars, meeting minutes, position papers and event presentations." />
+  <section>
+    <div class="wrap narrow">
+      <div class="grid-3">
+        <div class="pillar"><i>01</i><div><h3>Documents</h3><p>Minutes, circulars and position papers in one place.</p></div></div>
+        <div class="pillar"><i>02</i><div><h3>Updates</h3><p>Briefings on MAR and the Portuguese flag.</p></div></div>
+        <div class="pillar"><i>03</i><div><h3>Simple access</h3><p>Secure login with a one-time code by email.</p></div></div>
+      </div>
+      <p class="lead" style="margin-top:36px">Until then, members can request any document directly from the Secretariat.</p>
+      <div class="ctas" style="margin-top:20px">
+        <a class="btn btn-green" href={`mailto:${site.email}?subject=${encodeURIComponent('EISAP member – document request')}`}>Contact the Secretariat</a>
+        <a class="btn btn-ghost" style="color:var(--green)" href="/membership/">Not a member yet? Join EISAP</a>
+      </div>
+    </div>
+  </section>
+</Base>

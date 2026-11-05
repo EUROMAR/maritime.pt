@@ -1,0 +1,39 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import FileList from '../../components/FileList.astro';
+import { getCollection, getEntry, render } from 'astro:content';
+import { fmtDate } from '../../lib';
+
+export async function getStaticPaths() {
+  const items = await getCollection('news', (n) => !n.data.draft);
+  return items.map((item) => ({ params: { id: item.id }, props: { item } }));
+}
+const { item } = Astro.props;
+const d = item.data;
+const { Content } = await render(item);
+const event = d.event ? await getEntry('events', d.event) : undefined;
+---
+<Base title={d.title} description={d.summary} image={d.image}>
+  <PageHero eyebrow={`${d.type} · ${fmtDate(d.date, { day: 'numeric', month: 'long', year: 'numeric' })}`} title={d.title} crumbs={[{ href: '/news/', label: 'News' }]}>
+    {d.source && d.type !== 'Press release' && <p style="margin-top:6px">Source: {d.source}{d.language === 'PT' ? ' (in Portuguese)' : ''}</p>}
+  </PageHero>
+  <section>
+    <div class="wrap narrow">
+      {d.image && <img src={d.image} alt="" style="border-radius:14px;margin-bottom:28px" />}
+      {d.summary && <p class="lead" style="margin-bottom:24px">{d.summary}</p>}
+      <div class="prose"><Content /></div>
+      {d.documents.length > 0 && (<><h3 style="margin:36px 0 14px">Documents</h3><FileList files={d.documents} /></>)}
+      {d.links.length > 0 && (
+        <>
+          <h3 style="margin:36px 0 14px">{d.type === 'Press release' ? 'Coverage' : 'Read the article'}</h3>
+          <div class="files">
+            {d.links.map((l) => <a class="file" href={l.url} target="_blank" rel="noopener"><span class="ext">↗</span><span><strong>{l.label}</strong><small>External link</small></span></a>)}
+          </div>
+        </>
+      )}
+      {event && <p style="margin-top:36px">Related event: <a style="color:var(--green);font-weight:600" href={`/events/${event.id}/`}>{event.data.shortTitle}</a></p>}
+      <p style="margin-top:40px"><a href="/news/" class="btn btn-ghost" style="color:var(--green)">← All news</a></p>
+    </div>
+  </section>
+</Base>

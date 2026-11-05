@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import { getCollection } from 'astro:content';
+import { dateRange } from '../../lib';
+
+const events = (await getCollection('events', (e) => !e.data.draft)).sort((a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf());
+const now = new Date();
+const upcoming = events.filter((e) => e.data.startDate > now).reverse();
+const past = events.filter((e) => e.data.startDate <= now);
+---
+<Base title="Annual meetings" description="EISAP annual meetings – Madeira Maritime Week and Portugal Shipping Week.">
+  <PageHero eyebrow="Events" title="Annual meetings" intro="EISAP organises its Annual Meetings alternately as part of Portugal Shipping Week (PSW) in the Lisbon area or Madeira Maritime Week (MMW) in Madeira." />
+  <section>
+    <div class="wrap">
+      <h2>Upcoming</h2>
+      {upcoming.length ? (
+        <div class="grid-3" style="margin-top:20px">{upcoming.map((e) => <a class="card" href={`/events/${e.id}/`}><div class="body"><div class="meta"><span class="tag">{e.data.series}</span></div><h3>{e.data.title}</h3><p>{dateRange(e.data.startDate, e.data.endDate)} · {e.data.location}</p><span class="more">Details →</span></div></a>)}</div>
+      ) : (
+        <div class="empty" style="margin-top:20px">The next annual meeting will be announced soon. <a href="/contact/" style="color:var(--green)">Contact us</a> to be kept informed.</div>
+      )}
+    </div>
+  </section>
+  <section class="section-alt">
+    <div class="wrap">
+      <h2>Past editions</h2>
+      <div class="grid-3" style="margin-top:20px">
+        {past.map((e) => (
+          <a class="card" href={`/events/${e.id}/`}>
+            <div class="thumb" style={e.data.heroImage ? '' : 'background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;font-size:1.6rem;font-weight:700;letter-spacing:0;text-transform:none'}>
+              {e.data.heroImage ? <img src={e.data.heroImage} alt="" loading="lazy" /> : e.data.shortTitle}
+            </div>
+            <div class="body">
+              <div class="meta"><span class="tag">{e.data.series}</span><span>{dateRange(e.data.startDate, e.data.endDate)}</span></div>
+              <h3>{e.data.title}</h3>
+              <p>{e.data.location}</p>
+              <span class="more">View edition →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

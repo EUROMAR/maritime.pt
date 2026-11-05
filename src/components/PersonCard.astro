@@ -1,0 +1,14 @@
+---
+import { initials } from '../lib';
+interface Props { name: string; role?: string; meta?: string; photo?: string; bio?: boolean }
+const { name, role, meta, photo, bio = false } = Astro.props;
+---
+<div class="person">
+  <div class="avatar"><span>{initials(name)}</span>{photo && <img src={photo} alt={name} loading="lazy" onerror="this.remove()" />}</div>
+  <h3>{name}</h3>
+  {role && <div class="role">{role}</div>}
+  {meta && <p>{meta}</p>}
+  {bio && (
+    <details><summary>Biography</summary><slot /></details>
+  )}
+</div>

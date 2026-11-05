@@ -1,0 +1,142 @@
+---
+import Base from '../layouts/Base.astro';
+import NewsCard from '../components/NewsCard.astro';
+import PersonCard from '../components/PersonCard.astro';
+import { getCollection, getEntry, render } from 'astro:content';
+import site from '../data/site.json';
+import { dateRange } from '../lib';
+
+const news = (await getCollection('news', (n) => !n.data.draft))
+  .sort((a, b) => Number(b.data.featured) - Number(a.data.featured) || b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+const events = (await getCollection('events', (e) => !e.data.draft)).sort((a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf());
+const [latest, ...past] = events;
+const now = new Date();
+const isUpcoming = latest && latest.data.startDate > now;
+const board = (await getCollection('board', (b) => b.data.group === 'Board of Directors' && b.data.active)).sort((a, b) => a.data.order - b.data.order);
+const objectives = [
+  ['Represent', 'Defend the interests of Portuguese and international shipowners with vessels registered under MAR.'],
+  ['Promote MAR', 'Contribute to the promotion, development and harmonisation of the register with IBC and the Regional Government of Madeira.'],
+  ['Develop talent', 'Support job creation for young Portuguese and European seafarers and shore staff.'],
+  ['Build the cluster', 'Foster a robust Portuguese maritime cluster with professional and academic partners.'],
+];
+---
+<Base>
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">EISAP · Founded {site.founded} · Funchal &amp; Lisbon</span>
+      <h1>The voice of shipowners under the Portuguese flag</h1>
+      <p>The Shipping Association of Portugal represents the majority of owners of ships registered in MAR – the International Shipping Register of Madeira – working with the Regional Government of Madeira, the IBC and industry to develop a strong Portuguese maritime cluster.</p>
+      <div class="ctas">
+        <a href="/membership/" class="btn btn-primary">Become a member</a>
+        <a href="/about/" class="btn btn-ghost">What we do</a>
+      </div>
+      <div class="stats">
+        {site.stats.map((s) => <div class="stat"><b>{s.value}</b><span>{s.label}</span></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap grid-2">
+      <div>
+        <span class="eyebrow">Who we are</span>
+        <h2>Representing international shipowners in MAR</h2>
+        <p class="lead">EISAP is a private association representing the majority of owners of ships sailing under the Portuguese flag. Headquartered in Funchal, close to the International Business Centre of Madeira, with an office in Lisbon for direct connection with our associates.</p>
+        <p style="margin-top:28px" class="ctas">
+          <a href="/about/" class="btn btn-green">About EISAP</a>
+          <a href={site.statutesPdf} class="btn btn-ghost" style="color:var(--green)">Statutes (PDF)</a>
+        </p>
+      </div>
+      <div class="pillars">
+        {objectives.map(([t, d], i) => (
+          <div class="pillar"><i>{String(i + 1).padStart(2, '0')}</i><div><h3>{t}</h3><p>{d}</p></div></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {latest && (
+    <section class="section-alt">
+      <div class="wrap">
+        <span class="eyebrow">Annual meetings</span>
+        <h2>Madeira Maritime Week &amp; Portugal Shipping Week</h2>
+        <p class="lead" style="margin-bottom:32px">Our annual meetings alternate between Madeira Maritime Week (MMW) and Portugal Shipping Week (PSW) in the Lisbon area.</p>
+        <div class="event">
+          <div class="event-img" style={latest.data.heroImage ? `background-image:linear-gradient(180deg,rgba(8,57,29,.1),rgba(8,57,29,.75)),url(${latest.data.heroImage})` : undefined}>
+            <div class="badge">{latest.data.shortTitle}</div>
+            <div>{dateRange(latest.data.startDate, latest.data.endDate)} · {latest.data.location}</div>
+          </div>
+          <div class="event-body">
+            <span class="eyebrow">{isUpcoming ? 'Next event' : 'Latest edition'}</span>
+            <h3 style="font-size:1.5rem;margin-top:6px">{latest.data.title}</h3>
+            <p class="muted" style="margin-top:10px">{latest.data.summary}</p>
+            <ul class="bullets">
+              {latest.data.conference.length > 0 && <li>Conference programme{latest.data.speakers.length ? ` & ${latest.data.speakers.length} speakers` : ''}</li>}
+              {latest.data.presentations.length > 0 && <li>Presentations available for download</li>}
+              <li>Photo gallery &amp; event video</li>
+            </ul>
+            <a href={`/events/${latest.id}/`} class="btn btn-green">Explore {latest.data.shortTitle}</a>
+            <div class="chips" style="margin-top:28px">
+              {past.map((e) => <a class="chip" href={`/events/${e.id}/`}>{e.data.shortTitle} · {e.data.location}</a>)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section>
+    <div class="wrap">
+      <div class="head-row">
+        <div><span class="eyebrow">News &amp; press</span><h2 style="margin-bottom:0">Latest from EISAP</h2></div>
+        <a href="/news/" class="btn btn-ghost" style="color:var(--green)">All news</a>
+      </div>
+      <div class="grid-3">{news.map((n) => <NewsCard item={n} />)}</div>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="wrap">
+      <div class="head-row">
+        <div><span class="eyebrow">Governance</span><h2 style="margin-bottom:0">Board of Directors</h2></div>
+        <a href="/governance/" class="btn btn-ghost" style="color:var(--green)">Full governance</a>
+      </div>
+      <div class="grid-4">
+        {board.map((p) => <PersonCard name={p.data.name} role={p.data.role} meta={[p.data.company, p.data.city?.split(',')[0]].filter(Boolean).join(', ')} photo={p.data.photo} />)}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="eyebrow">Our members</span>
+      <h2>Shipowners and managers from across Europe</h2>
+      {site.memberLogos.length > 0 ? (
+        <div class="logos">{site.memberLogos.map((m: any) => <div class="logo-box"><img src={m.logo} alt={m.name} loading="lazy" /></div>)}</div>
+      ) : (
+        <div class="logos">{Array.from({ length: 6 }).map(() => <div class="logo-box">Member logo</div>)}</div>
+      )}
+      <div class="affil">
+        {site.affiliations.map((a) => <div><b>Member of {a.name}</b><span>{a.description}</span></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="cta">
+        <div>
+          <span class="eyebrow">Membership</span>
+          <h2>Own or manage ships under the Portuguese flag?</h2>
+          <p>Join EISAP to have your voice heard with the Portuguese and Madeiran authorities, connect with fellow owners and access members-only documents and briefings.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="/membership/#apply" class="btn btn-primary">Apply for membership</a>
+          <a href="/contact/" class="btn btn-ghost">Talk to the Secretary General</a>
+          <div class="cta-note">Members area: <a href="/members/">coming soon</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

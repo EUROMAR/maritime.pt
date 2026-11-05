@@ -1,0 +1,36 @@
+---
+import Logo from './Logo.astro';
+const path = Astro.url.pathname;
+const links = [
+  { href: '/about/', label: 'About' },
+  { href: '/events/', label: 'Events' },
+  { href: '/news/', label: 'News' },
+  { href: '/governance/', label: 'Governance' },
+  { href: '/membership/', label: 'Membership' },
+  { href: '/contact/', label: 'Contact' },
+];
+---
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="/" class="logo" aria-label="Home"><Logo /></a>
+    <button class="burger" aria-label="Open menu" aria-expanded="false" id="burger"><span></span><span></span><span></span></button>
+    <nav class="menu" id="menu" aria-label="Main">
+      {links.map((l) => (
+        <a href={l.href} aria-current={path.startsWith(l.href) ? 'page' : undefined}>{l.label}</a>
+      ))}
+      <a href="/members/" class="login" title="Members area">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        Members area
+      </a>
+      <a href="/membership/#apply" class="btn btn-primary btn-sm">Become a member</a>
+    </nav>
+  </div>
+</header>
+<script>
+  const b = document.getElementById('burger');
+  const m = document.getElementById('menu');
+  b?.addEventListener('click', () => {
+    const open = m?.classList.toggle('open');
+    b.setAttribute('aria-expanded', String(!!open));
+  });
+</script>

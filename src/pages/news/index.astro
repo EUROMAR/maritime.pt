@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import NewsCard from '../../components/NewsCard.astro';
+import { getCollection } from 'astro:content';
+
+const items = (await getCollection('news', (n) => !n.data.draft)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const years = [...new Set(items.map((n) => n.data.date.getUTCFullYear()))];
+const types = [...new Set(items.map((n) => n.data.type))];
+---
+<Base title="News & press" description="Press releases, media coverage and opinion from EISAP – the Shipping Association of Portugal.">
+  <PageHero eyebrow="News & press" title="News, press releases and media coverage" intro="EISAP's press releases and how the media has covered the Portuguese flag and MAR since 2016." />
+  <section>
+    <div class="wrap">
+      <div class="chips" id="filters" style="margin-bottom:12px">
+        <button class="chip active" data-type="all">All</button>
+        {types.map((t) => <button class="chip" data-type={t}>{t}</button>)}
+      </div>
+      <div class="chips" style="margin-bottom:32px">
+        {years.map((y) => <a class="chip" href={`#y${y}`}>{y}</a>)}
+      </div>
+      {years.map((y) => (
+        <div id={`y${y}`} style="margin-bottom:48px">
+          <h2 style="font-size:1.4rem">{y}</h2>
+          <div class="grid-3">
+            {items.filter((n) => n.data.date.getUTCFullYear() === y).map((n) => (
+              <div data-type={n.data.type} class="news-item" style="display:contents"><NewsCard item={n} /></div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</Base>
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>('#filters .chip');
+  btns.forEach((b) => b.addEventListener('click', () => {
+    btns.forEach((x) => x.classList.toggle('active', x === b));
+    const t = b.dataset.type;
+    document.querySelectorAll<HTMLElement>('.news-item').forEach((el) => {
+      (el.firstElementChild as HTMLElement).style.display = t === 'all' || el.dataset.type === t ? '' : 'none';
+    });
+  }));
+</script>

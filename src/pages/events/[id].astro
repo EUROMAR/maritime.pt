@@ -1,0 +1,137 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import PersonCard from '../../components/PersonCard.astro';
+import FileList from '../../components/FileList.astro';
+import Video from '../../components/Video.astro';
+import NewsCard from '../../components/NewsCard.astro';
+import { getCollection, render } from 'astro:content';
+import { dateRange } from '../../lib';
+
+export async function getStaticPaths() {
+  const events = await getCollection('events', (e) => !e.data.draft);
+  return events.map((event) => ({ params: { id: event.id }, props: { event } }));
+}
+const { event } = Astro.props;
+const d = event.data;
+const { Content } = await render(event);
+const news = (await getCollection('news', (n) => n.data.event === event.id && !n.data.draft)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const tabs = [
+  ['overview', 'Overview', true],
+  ['programme', 'Programme', d.programme.length > 0],
+  ['conference', 'Conference', d.conference.length > 0],
+  ['speakers', 'Speakers', d.speakers.length > 0],
+  ['presentations', 'Presentations', d.presentations.length > 0],
+  ['gallery', 'Photos', true],
+  ['video', 'Video', true],
+  ['press', 'Press', news.length > 0],
+].filter((t) => t[2]) as [string, string, boolean][];
+---
+<Base title={d.shortTitle} description={d.summary} image={d.heroImage}>
+  <PageHero eyebrow={d.series} title={d.title} intro={d.summary} crumbs={[{ href: '/events/', label: 'Events' }]} />
+  <nav class="subnav" aria-label="Event sections"><div class="wrap">{tabs.map(([id, label]) => <a href={`#${id}`}>{label}</a>)}</div></nav>
+
+  <section id="overview">
+    <div class="wrap narrow">
+      <div class="facts">
+        <div class="fact"><b>Dates</b>{dateRange(d.startDate, d.endDate)}</div>
+        <div class="fact"><b>Location</b>{d.location}</div>
+        <div class="fact"><b>Edition</b>{d.edition ?? d.series}</div>
+      </div>
+      <div class="prose"><Content /></div>
+      <div class="ctas" style="margin-top:20px">
+        {d.registrationUrl && <a class="btn btn-primary" href={d.registrationUrl} target="_blank" rel="noopener">Register</a>}
+        {d.externalUrl && <a class="btn btn-ghost" style="color:var(--green)" href={d.externalUrl} target="_blank" rel="noopener">Event website ↗</a>}
+      </div>
+      {d.documents.length > 0 && <div style="margin-top:28px"><FileList files={d.documents} /></div>}
+      {d.partners.length > 0 && (
+        <div style="margin-top:40px">
+          {[...new Set(d.partners.map((p) => p.role ?? 'Partners'))].map((role) => (
+            <div style="margin-bottom:18px">
+              <div class="eyebrow" style="margin-bottom:10px">{role}</div>
+              <div class="chips">{d.partners.filter((p) => (p.role ?? 'Partners') === role).map((p) => p.logo ? <img src={p.logo} alt={p.name} style="height:44px" /> : <span class="chip">{p.name}</span>)}</div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  {d.programme.length > 0 && (
+    <section id="programme" class="section-alt">
+      <div class="wrap narrow">
+        <h2>Programme</h2>
+        <div class="programme">
+          {d.programme.map((day) => (
+            <div class="day"><h3>{day.day}</h3>
+              <div class="rows">{day.items.map((it) => <div class="row"><time>{it.time ?? ''}</time><div>{it.title}{it.venue && <small>{it.venue}</small>}</div></div>)}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {d.conference.length > 0 && (
+    <section id="conference">
+      <div class="wrap narrow">
+        <h2>Conference agenda</h2>
+        <div class="programme">
+          {d.conference.map((day) => (
+            <div class="day"><h3>{day.day}</h3>
+              <div class="rows">{day.sessions.map((s) => (
+                <div class="row"><time>{s.time ?? ''}</time>
+                  <div class="session"><h4>{s.title}</h4>
+                    {s.keynotes && <small>{s.keynotes}</small>}
+                    {s.moderator && <small><b>Moderator:</b> {s.moderator}</small>}
+                    {s.panel && <small><b>Panel:</b> {s.panel}</small>}
+                  </div>
+                </div>
+              ))}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {d.speakers.length > 0 && (
+    <section id="speakers" class="section-alt">
+      <div class="wrap">
+        <h2>Speakers</h2>
+        <div class="grid-4" style="margin-top:24px">
+          {d.speakers.map((s) => <PersonCard name={s.name} role={s.organisation} meta={s.role} photo={s.photo} />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {d.presentations.length > 0 && (
+    <section id="presentations">
+      <div class="wrap narrow"><h2>Presentations</h2><FileList files={d.presentations} /></div>
+    </section>
+  )}
+
+  <section id="gallery" class="section-alt">
+    <div class="wrap">
+      <h2>Photos</h2>
+      {d.gallery.length > 0 ? (
+        <div class="gallery">{d.gallery.map((g) => <a href={g.image} target="_blank" rel="noopener"><img src={g.image} alt={g.caption ?? ''} loading="lazy" /></a>)}</div>
+      ) : <div class="empty">Photo selection coming soon.</div>}
+      {d.fullAlbumUrl && <p style="margin-top:20px"><a class="btn btn-ghost" style="color:var(--green)" href={d.fullAlbumUrl} target="_blank" rel="noopener">See the full album ↗</a></p>}
+    </div>
+  </section>
+
+  <section id="video">
+    <div class="wrap narrow">
+      <h2>Video</h2>
+      {d.videos.length > 0 ? d.videos.map((v) => <Video title={v.title} url={v.url} />) : <div class="empty">Video coming soon.</div>}
+    </div>
+  </section>
+
+  {news.length > 0 && (
+    <section id="press" class="section-alt">
+      <div class="wrap"><h2>In the press</h2><div class="grid-3" style="margin-top:20px">{news.slice(0, 9).map((n) => <NewsCard item={n} />)}</div></div>
+    </section>
+  )}
+</Base>

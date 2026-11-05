@@ -1,0 +1,28 @@
+---
+/** Click-to-load video (no third-party cookies until the visitor clicks). Accepts YouTube or Vimeo URLs. */
+interface Props { title: string; url: string }
+const { title, url } = Astro.props;
+let embed = '';
+const yt = url.match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/);
+const vm = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+if (yt) embed = `https://www.youtube-nocookie.com/embed/${yt[1]}?autoplay=1`;
+else if (vm) embed = `https://player.vimeo.com/video/${vm[1]}?autoplay=1&dnt=1`;
+---
+<div class="video">
+  {embed ? (
+    <button class="video-ph" data-src={embed} aria-label={`Play video: ${title}`}>▶&nbsp; {title}<br /><small style="opacity:.7">Loads from an external video service</small></button>
+  ) : (
+    <a class="video-ph" href={url} target="_blank" rel="noopener">▶&nbsp; {title}</a>
+  )}
+</div>
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.video-ph[data-src]').forEach((b) =>
+    b.addEventListener('click', () => {
+      const f = document.createElement('iframe');
+      f.src = b.dataset.src!;
+      f.allow = 'autoplay; fullscreen; picture-in-picture';
+      f.allowFullscreen = true;
+      b.replaceWith(f);
+    }, { once: true }),
+  );
+</script>

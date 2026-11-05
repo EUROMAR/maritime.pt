@@ -1,0 +1,16 @@
+---
+import { fileExt } from '../lib';
+interface Props { files: { title: string; file: string; note?: string; presenter?: string; organisation?: string }[] }
+const { files } = Astro.props;
+---
+<div class="files">
+  {files.map((f) => (
+    <a class="file" href={f.file} target="_blank" rel="noopener">
+      <span class="ext">{fileExt(f.file)}</span>
+      <span>
+        <strong>{f.presenter ? `${f.presenter}` : f.title}</strong>
+        <small>{[f.presenter ? f.title : null, f.organisation, f.note].filter(Boolean).join(' · ')}</small>
+      </span>
+    </a>
+  ))}
+</div>

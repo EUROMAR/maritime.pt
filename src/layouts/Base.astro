@@ -1,0 +1,41 @@
+---
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import site from '../data/site.json';
+
+interface Props { title?: string; description?: string; image?: string; noindex?: boolean }
+const { title, description = site.description, image = '/logo-maritime-portugal.png', noindex = false } = Astro.props;
+const fullTitle = title ? `${title} – ${site.brand} | EISAP` : `${site.brand} – ${site.name}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex,nofollow" />}
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <Header />
+  <main id="main"><slot /></main>
+  <Footer />
+  {site.analyticsToken && (
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: site.analyticsToken })}></script>
+  )}
+</body>
+</html>

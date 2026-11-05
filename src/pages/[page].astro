@@ -1,0 +1,17 @@
+---
+/** Simple text pages from src/content/pages (privacy, cookies, legal notice). */
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { getEntry, render } from 'astro:content';
+import { fmtDate } from '../lib';
+
+export function getStaticPaths() {
+  return ['privacy', 'cookies', 'legal-notice'].map((page) => ({ params: { page } }));
+}
+const entry = (await getEntry('pages', Astro.params.page!))!;
+const { Content } = await render(entry);
+---
+<Base title={entry.data.title}>
+  <PageHero title={entry.data.title} intro={entry.data.updated ? `Last updated ${fmtDate(entry.data.updated, { day: 'numeric', month: 'long', year: 'numeric' })}` : undefined} />
+  <section><div class="wrap narrow prose"><Content /></div></section>
+</Base>

@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { getEntry, render } from 'astro:content';
+import site from '../data/site.json';
+
+const about = (await getEntry('pages', 'about'))!;
+const objectives = (await getEntry('pages', 'objectives'))!;
+const { Content: AboutContent } = await render(about);
+const { Content: ObjContent } = await render(objectives);
+---
+<Base title="Who we are" description="EISAP – the Shipping Association of Portugal – represents the majority of owners of ships under the Portuguese flag.">
+  <PageHero eyebrow={about.data.eyebrow} title={about.data.title} intro={about.data.intro} />
+  <section>
+    <div class="wrap grid-2">
+      <div class="prose"><AboutContent /></div>
+      <div class="pillars">
+        {site.offices.map((o) => (
+          <div class="pillar"><i>⌂</i><div><h3>{o.name}</h3><p style="white-space:pre-line">{o.address}</p></div></div>
+        ))}
+        <a class="file" href={site.statutesPdf} target="_blank" rel="noopener"><span class="ext">pdf</span><span><strong>Statutes of Association</strong><small>English</small></span></a>
+      </div>
+    </div>
+  </section>
+  <section id="objectives" class="section-alt">
+    <div class="wrap narrow">
+      <span class="eyebrow">{objectives.data.eyebrow}</span>
+      <h2>{objectives.data.title}</h2>
+      <div class="prose"><ObjContent /></div>
+      <h3 style="margin-top:40px">Memberships</h3>
+      <div class="affil" style="margin-top:16px">
+        {site.affiliations.map((a) => <div><b>{a.name}</b><span>{a.description}</span></div>)}
+      </div>
+    </div>
+  </section>
+</Base>

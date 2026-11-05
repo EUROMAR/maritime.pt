@@ -1,0 +1,76 @@
+{
+  "name": "EISAP – Shipping Association of Portugal",
+  "legalName": "European International Shipowners' Association of Portugal",
+  "brand": "Maritime Portugal",
+  "description": "EISAP represents the majority of owners of ships sailing under the Portuguese flag, registered in MAR – the International Shipping Register of Madeira.",
+  "founded": "2016",
+  "phone": "+351 291 645 066",
+  "email": "eisap@portugal-shipowners.com",
+  "offices": [
+    {
+      "name": "Funchal (Headquarters)",
+      "address": "Quinta São Gonçalo, Rua Nova da Igreja 1\n9060-206 Funchal, Madeira, Portugal"
+    },
+    {
+      "name": "Lisbon office",
+      "address": "Praceta Faias 2\n2750-274 Guia, Portugal"
+    }
+  ],
+  "contacts": [
+    {
+      "name": "Pedro Calado",
+      "role": "Secretary General",
+      "location": "Madeira, Portugal",
+      "email": "pedro.calado@portugal-shipowners.com"
+    },
+    {
+      "name": "Duarte Vaz Pinto",
+      "role": "Advisor to the Board of Directors",
+      "location": "Lisbon, Portugal",
+      "email": "duarte.vazpinto@portugal-shipowners.com"
+    }
+  ],
+  "stats": [
+    {
+      "value": "1,000+",
+      "label": "ships registered in MAR"
+    },
+    {
+      "value": "3rd",
+      "label": "largest register in Europe"
+    },
+    {
+      "value": "11th",
+      "label": "largest register worldwide"
+    },
+    {
+      "value": "2016",
+      "label": "association founded"
+    }
+  ],
+  "affiliations": [
+    {
+      "name": "AAMC",
+      "description": "Portuguese National Shipowners' Association",
+      "url": ""
+    },
+    {
+      "name": "Fórum Oceano",
+      "description": "Association of Maritime Economy",
+      "url": ""
+    }
+  ],
+  "memberLogos": [],
+  "membership": {
+    "formUrl": "",
+    "agreementIndividual": "https://www.portugal-shipowners.com/app/download/11206369199/EISAP-Membership-Agreement_Individual.pdf",
+    "agreementCorporate": "https://www.portugal-shipowners.com/app/download/11206367499/EISAP-Membership-Agreement_Corporate.pdf"
+  },
+  "statutesPdf": "https://www.portugal-shipowners.com/app/download/12442455399/Statutes-of-EISAP_en.pdf",
+  "social": {
+    "linkedin": "",
+    "youtube": "",
+    "vimeo": ""
+  },
+  "analyticsToken": ""
+}
