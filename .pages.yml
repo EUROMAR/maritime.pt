@@ -1,0 +1,295 @@
+# Pages CMS configuration – https://pagescms.org/docs/configuration/
+# Editors log in at https://app.pagescms.org and edit the content below through forms.
+
+media:
+  - name: images
+    label: Images
+    input: public/uploads/images
+    output: /uploads/images
+    extensions: [jpg, jpeg, png, webp, svg]
+  - name: documents
+    label: Documents (public)
+    input: public/uploads/documents
+    output: /uploads/documents
+    extensions: [pdf, pptx, docx, xlsx, mp4]
+  - name: members
+    label: Members-only files
+    input: public/members/files
+    output: /members/files
+
+content:
+  # ------------------------------------------------------------------ NEWS
+  - name: news
+    label: News & press
+    type: collection
+    path: src/content/news
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date, type]
+      primary: title
+      sort: [date, title]
+      default: { sort: date, order: desc }
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: date, label: Date, type: date, required: true }
+      - name: type
+        label: Type
+        type: select
+        options: { values: [Press release, Media coverage, Opinion, Interview, Statement] }
+      - { name: source, label: Source / publication, type: string }
+      - name: language
+        label: Language
+        type: select
+        default: EN
+        options: { values: [EN, PT] }
+      - { name: summary, label: Summary (shown on cards), type: text }
+      - { name: image, label: Image, type: image, options: { media: images } }
+      - name: links
+        label: External links
+        type: object
+        list: true
+        fields:
+          - { name: label, label: Label, type: string }
+          - { name: url, label: URL, type: string }
+      - name: documents
+        label: Documents (PDF)
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: file, label: File, type: file, options: { media: documents } }
+      - { name: event, label: Related event (slug, e.g. mmw-2025), type: string }
+      - { name: featured, label: Feature on home page, type: boolean }
+      - { name: draft, label: Draft (hidden), type: boolean }
+      - { name: body, label: Text, type: rich-text }
+
+  # ---------------------------------------------------------------- EVENTS
+  - name: events
+    label: Events
+    type: collection
+    path: src/content/events
+    filename: "{primary}.md"
+    view:
+      fields: [shortTitle, startDate, location]
+      primary: shortTitle
+      default: { sort: startDate, order: desc }
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: shortTitle, label: Short title (e.g. MMW 2027), type: string, required: true }
+      - name: series
+        label: Series
+        type: select
+        options: { values: [Madeira Maritime Week, Portugal Shipping Week, Annual Meeting] }
+      - { name: edition, label: Edition, type: string }
+      - { name: startDate, label: Start date, type: date, required: true }
+      - { name: endDate, label: End date, type: date }
+      - { name: location, label: Location, type: string, required: true }
+      - { name: summary, label: Summary, type: text, required: true }
+      - { name: heroImage, label: Main image, type: image, options: { media: images } }
+      - { name: registrationUrl, label: Registration link, type: string }
+      - { name: externalUrl, label: External event website, type: string }
+      - name: programme
+        label: Programme (social / week)
+        type: object
+        list: true
+        fields:
+          - { name: day, label: Day, type: string }
+          - name: items
+            label: Items
+            type: object
+            list: true
+            fields:
+              - { name: time, label: Time, type: string }
+              - { name: title, label: Item, type: string }
+              - { name: venue, label: Venue, type: string }
+      - name: conference
+        label: Conference agenda
+        type: object
+        list: true
+        fields:
+          - { name: day, label: Day, type: string }
+          - name: sessions
+            label: Sessions
+            type: object
+            list: true
+            fields:
+              - { name: time, label: Time, type: string }
+              - { name: title, label: Session title, type: string }
+              - { name: keynotes, label: Keynotes / speakers, type: string }
+              - { name: moderator, label: Moderator, type: string }
+              - { name: panel, label: Panel, type: string }
+      - name: speakers
+        label: Speakers
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: role, label: Role, type: string }
+          - { name: organisation, label: Organisation, type: string }
+          - { name: photo, label: Photo, type: image, options: { media: images } }
+      - name: presentations
+        label: Presentations
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title / session, type: string }
+          - { name: presenter, label: Presenter, type: string }
+          - { name: organisation, label: Organisation, type: string }
+          - { name: file, label: File, type: file, options: { media: documents } }
+      - name: documents
+        label: Other documents
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: file, label: File, type: file, options: { media: documents } }
+      - name: gallery
+        label: Photo gallery
+        type: object
+        list: true
+        fields:
+          - { name: image, label: Photo, type: image, options: { media: images } }
+          - { name: caption, label: Caption, type: string }
+      - { name: fullAlbumUrl, label: Link to full photo album, type: string }
+      - name: videos
+        label: Videos (YouTube / Vimeo links)
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: url, label: URL, type: string }
+      - name: partners
+        label: Partners
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: role, label: Role (e.g. Supported by), type: string }
+          - { name: logo, label: Logo, type: image, options: { media: images } }
+          - { name: url, label: Website, type: string }
+      - { name: draft, label: Draft (hidden), type: boolean }
+      - { name: body, label: Description, type: rich-text }
+
+  # ----------------------------------------------------------------- BOARD
+  - name: board
+    label: Board & governance
+    type: collection
+    path: src/content/board
+    filename: "{primary}.md"
+    view:
+      fields: [name, group, role, order]
+      primary: name
+      default: { sort: order }
+    fields:
+      - { name: name, label: Name, type: string, required: true }
+      - name: group
+        label: Governing body
+        type: select
+        options: { values: [Board of Directors, General Assembly, Fiscal Council, Honorary] }
+      - { name: role, label: Role, type: string, required: true }
+      - { name: company, label: Company, type: string }
+      - { name: city, label: "City, country", type: string }
+      - { name: photo, label: Photo, type: image, options: { media: images } }
+      - { name: order, label: Order (1 = first), type: number }
+      - { name: active, label: Show on website, type: boolean, default: true }
+      - { name: body, label: Biography, type: rich-text }
+
+  # ----------------------------------------------------------------- PAGES
+  - name: pages
+    label: Pages
+    type: collection
+    path: src/content/pages
+    view: { fields: [title] }
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: eyebrow, label: Small label above title, type: string }
+      - { name: intro, label: Intro, type: text }
+      - { name: updated, label: Last updated, type: date }
+      - { name: body, label: Text, type: rich-text }
+
+  # ----------------------------------------------------- MEMBERS DOCUMENTS
+  - name: documents
+    label: Members area – documents
+    type: collection
+    path: src/content/documents
+    view:
+      fields: [title, date, category]
+      default: { sort: date, order: desc }
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: date, label: Date, type: date, required: true }
+      - name: category
+        label: Category
+        type: select
+        options: { values: [Minutes, Circular, Position paper, Presentation, Report, Other] }
+      - { name: file, label: File, type: file, options: { media: members } }
+      - { name: description, label: Description, type: text }
+
+  # -------------------------------------------------------------- SETTINGS
+  - name: site
+    label: Site settings
+    type: file
+    path: src/data/site.json
+    format: json
+    fields:
+      - { name: name, label: Site name, type: string }
+      - { name: legalName, label: Legal name, type: string }
+      - { name: brand, label: Brand, type: string }
+      - { name: description, label: Default description (SEO), type: text }
+      - { name: founded, label: Founded, type: string }
+      - { name: phone, label: Phone, type: string }
+      - { name: email, label: Email, type: string }
+      - name: offices
+        label: Offices
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: address, label: Address, type: text }
+      - name: contacts
+        label: Contact persons
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: role, label: Role, type: string }
+          - { name: location, label: Location, type: string }
+          - { name: email, label: Email, type: string }
+      - name: stats
+        label: Home page figures
+        type: object
+        list: true
+        fields:
+          - { name: value, label: Value, type: string }
+          - { name: label, label: Label, type: string }
+      - name: affiliations
+        label: Affiliations
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: description, label: Description, type: string }
+          - { name: url, label: Website, type: string }
+      - name: memberLogos
+        label: Member logos (home page)
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Member, type: string }
+          - { name: logo, label: Logo, type: image, options: { media: images } }
+      - name: membership
+        label: Membership
+        type: object
+        fields:
+          - { name: formUrl, label: Form endpoint (optional), type: string }
+          - { name: agreementIndividual, label: Agreement – individual, type: file, options: { media: documents } }
+          - { name: agreementCorporate, label: Agreement – corporate, type: file, options: { media: documents } }
+      - { name: statutesPdf, label: Statutes PDF, type: file, options: { media: documents } }
+      - { name: analyticsToken, label: Cloudflare Web Analytics token (optional), type: string }
+      - name: social
+        label: Social links
+        type: object
+        fields:
+          - { name: linkedin, label: LinkedIn, type: string }
+          - { name: youtube, label: YouTube, type: string }
+          - { name: vimeo, label: Vimeo, type: string }
