@@ -51,26 +51,19 @@
   "affiliations": [
     {
       "name": "AAMC",
-      "description": "Portuguese National Shipowners' Association",
-      "url": ""
+      "description": "Portuguese National Shipowners' Association"
     },
     {
       "name": "Fórum Oceano",
-      "description": "Association of Maritime Economy",
-      "url": ""
+      "description": "Association of Maritime Economy"
     }
   ],
-  "memberLogos": [],
   "membership": {
-    "formUrl": "",
     "agreementIndividual": "https://www.portugal-shipowners.com/app/download/11206369199/EISAP-Membership-Agreement_Individual.pdf",
     "agreementCorporate": "https://www.portugal-shipowners.com/app/download/11206367499/EISAP-Membership-Agreement_Corporate.pdf"
   },
   "statutesPdf": "https://www.portugal-shipowners.com/app/download/12442455399/Statutes-of-EISAP_en.pdf",
   "social": {
-    "linkedin": "",
-    "youtube": "",
-    "vimeo": ""
-  },
-  "analyticsToken": ""
+    "linkedin": "https://www.linkedin.com/company/eisap-european-international-shipowners-association-of-portugal/posts/"
+  }
 }
