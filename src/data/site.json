@@ -32,7 +32,7 @@
   ],
   "stats": [
     {
-      "value": "1,000+",
+      "value": "1,200+",
       "label": "ships registered in MAR"
     },
     {
@@ -51,11 +51,13 @@
   "affiliations": [
     {
       "name": "AAMC",
-      "description": "Portuguese National Shipowners' Association"
+      "description": "Portuguese National Shipowners' Association",
+      "url": "https://www.aamc.pt/"
     },
     {
       "name": "Fórum Oceano",
-      "description": "Association of Maritime Economy"
+      "description": "Association of Maritime Economy",
+      "url": "https://forumoceano.pt/en"
     }
   ],
   "memberLogos": [
