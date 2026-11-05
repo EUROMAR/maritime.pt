@@ -222,3 +222,43 @@ a.card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(14,90,46,.08
   .hero{padding:80px 0 120px}
   .row{grid-template-columns:70px 1fr}
 }
+
+/* Content from the CMS: never wider than the screen */
+.prose{overflow-wrap:break-word}
+.prose img,.prose video,.prose iframe{max-width:100%;height:auto}
+.prose iframe{aspect-ratio:16/9;width:100%}
+.prose table{display:block;overflow-x:auto;max-width:100%;border-collapse:collapse}
+.prose td,.prose th{padding:6px 10px;border:1px solid var(--line)}
+/* Event pages: section links stay visible below the sticky tab bar */
+html:has(.subnav){scroll-padding-top:140px}
+
+/* Phones and small tablets */
+@media (max-width:960px){
+  .menu{max-height:calc(100vh - 76px);overflow-y:auto;gap:0;padding:8px 24px 20px}
+  .menu a:not(.btn){display:block;width:100%;padding:12px 0;border-bottom:1px solid var(--line)}
+  .menu a.login{display:flex;align-items:center;gap:8px}
+  .menu .btn{margin-top:16px}
+  .burger{min-width:44px;min-height:44px;-webkit-tap-highlight-color:transparent;border-radius:8px}
+  .burger:focus-visible{outline:2px solid var(--green)}
+  body.menu-open{overflow:hidden}
+  /* Event tab bar: swipeable, with a fade showing there is more */
+  .subnav .wrap{scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none;mask-image:linear-gradient(90deg,#000 85%,transparent);-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);padding-right:40px}
+  .subnav .wrap::-webkit-scrollbar{display:none}
+  .subnav a{scroll-snap-align:start}
+  /* Comfortable tap targets */
+  .chip{padding:9px 14px;min-height:40px;display:inline-flex;align-items:center}
+  .legal div{gap:4px 18px}
+  .legal a{display:inline-block;padding:10px 0}
+  .site-footer ul{gap:2px}
+  .site-footer ul a{display:inline-block;padding:7px 0}
+  .form input[type=checkbox]{width:22px;height:22px;flex:0 0 22px;margin-top:2px !important}
+}
+@media (max-width:600px){
+  /* Readable small text */
+  .card .meta,.person .role,.row small,.file small,.fact b{font-size:.8125rem}
+  /* Forms: 16px text stops iPhones zooming in; bigger checkbox */
+  .form input,.form select,.form textarea{font-size:16px}
+  .form .btn{width:100%;justify-content:center}
+  .btn{min-height:44px}
+  .ctas .btn{flex:1 1 auto;justify-content:center}
+}
