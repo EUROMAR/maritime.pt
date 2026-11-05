@@ -58,6 +58,28 @@
       "description": "Association of Maritime Economy"
     }
   ],
+  "memberLogos": [
+    {
+      "name": "Langh",
+      "logo": "/uploads/images/images (1).jpeg"
+    },
+    {
+      "name": "MSC Shipmanagement",
+      "logo": "/uploads/images/images.jpeg"
+    },
+    {
+      "name": "Harren Group",
+      "logo": "/uploads/images/images12.png"
+    },
+    {
+      "name": "Hellas Confidence Shipmanagement",
+      "logo": "/uploads/images/images123.png"
+    },
+    {
+      "name": "Hammonia Reederei",
+      "logo": "/uploads/images/images2.png"
+    }
+  ],
   "membership": {
     "agreementIndividual": "https://www.portugal-shipowners.com/app/download/11206369199/EISAP-Membership-Agreement_Individual.pdf",
     "agreementCorporate": "https://www.portugal-shipowners.com/app/download/11206367499/EISAP-Membership-Agreement_Corporate.pdf"
