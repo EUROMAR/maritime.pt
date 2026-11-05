@@ -2,6 +2,8 @@
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import { getCollection } from 'astro:content';
+import headers from '../../data/headers.json';
+const h = headers.events;
 import { dateRange } from '../../lib';
 
 const events = (await getCollection('events', (e) => !e.data.draft)).sort((a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf());
@@ -9,8 +11,8 @@ const now = new Date();
 const upcoming = events.filter((e) => e.data.startDate > now).reverse();
 const past = events.filter((e) => e.data.startDate <= now);
 ---
-<Base title="Annual meetings" description="EISAP annual meetings – Madeira Maritime Week and Portugal Shipping Week.">
-  <PageHero eyebrow="Events" title="Annual meetings" intro="EISAP organises its Annual Meetings alternately as part of Portugal Shipping Week (PSW) in the Lisbon area or Madeira Maritime Week (MMW) in Madeira." />
+<Base title={h.seoTitle} description={h.seoDescription || undefined}>
+  <PageHero eyebrow={h.eyebrow} title={h.title} intro={h.intro} />
   <section>
     <div class="wrap">
       <h2>Upcoming</h2>

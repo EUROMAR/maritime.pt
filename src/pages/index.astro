@@ -1,137 +1,25 @@
 ---
+/** Home page: sections come from src/data/home.json (Pages CMS → Home page), in that order. */
 import Base from '../layouts/Base.astro';
-import NewsCard from '../components/NewsCard.astro';
-import PersonCard from '../components/PersonCard.astro';
-import { getCollection, getEntry, render } from 'astro:content';
-import site from '../data/site.json';
+import Hero from '../components/home/Hero.astro';
+import About from '../components/home/About.astro';
+import Events from '../components/home/Events.astro';
+import News from '../components/home/News.astro';
+import People from '../components/home/People.astro';
+import Members from '../components/home/Members.astro';
+import Cta from '../components/home/Cta.astro';
 import home from '../data/home.json';
-import { dateRange } from '../lib';
 
-const news = (await getCollection('news', (n) => !n.data.draft))
-  .sort((a, b) => Number(b.data.featured) - Number(a.data.featured) || b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
-const events = (await getCollection('events', (e) => !e.data.draft)).sort((a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf());
-const [latest, ...past] = events;
-const now = new Date();
-const isUpcoming = latest && latest.data.startDate > now;
-const board = (await getCollection('board', (b) => b.data.group === 'Board of Directors' && b.data.active)).sort((a, b) => a.data.order - b.data.order);
+const components: Record<string, any> = {
+  'top-banner': Hero, 'who-we-are': About, events: Events, news: News, people: People, members: Members, 'membership-banner': Cta,
+};
+// Full-width sections (banner, call to action) don't take part in the light/grey alternation.
+const ownBackground = new Set(['top-banner', 'membership-banner']);
+let n = 0;
+const sections = ((home as any).sections ?? [])
+  .filter((s: any) => s && s.show !== false && components[s.section])
+  .map((s: any) => ({ s, Component: components[s.section], alt: ownBackground.has(s.section) ? false : n++ % 2 === 1 }));
 ---
 <Base>
-  <section class="hero">
-    <div class="wrap">
-      <span class="eyebrow">{home.hero.eyebrow}</span>
-      <h1>{home.hero.title}</h1>
-      <p>{home.hero.text}</p>
-      <div class="ctas">
-        <a href={home.hero.primaryButton.link} class="btn btn-primary">{home.hero.primaryButton.label}</a>
-        <a href={home.hero.secondaryButton.link} class="btn btn-ghost">{home.hero.secondaryButton.label}</a>
-      </div>
-      <div class="stats">
-        {site.stats.map((s) => <div class="stat"><b>{s.value}</b><span>{s.label}</span></div>)}
-      </div>
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="wrap grid-2">
-      <div>
-        <span class="eyebrow">{home.about.eyebrow}</span>
-        <h2>{home.about.title}</h2>
-        <p class="lead">{home.about.text}</p>
-        <p style="margin-top:28px" class="ctas">
-          <a href="/about/" class="btn btn-green">About EISAP</a>
-          <a href={site.statutesPdf} class="btn btn-ghost" style="color:var(--green)">Statutes (PDF)</a>
-        </p>
-      </div>
-      <div class="pillars">
-        {home.about.objectives.map(({ title: t, text: d }, i) => (
-          <div class="pillar"><i>{String(i + 1).padStart(2, '0')}</i><div><h3>{t}</h3><p>{d}</p></div></div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  {latest && (
-    <section class="section-alt">
-      <div class="wrap">
-        <span class="eyebrow">{home.events.eyebrow}</span>
-        <h2>{home.events.title}</h2>
-        <p class="lead" style="margin-bottom:32px">{home.events.text}</p>
-        <div class="event">
-          <div class="event-img" style={latest.data.heroImage ? `background-image:linear-gradient(180deg,rgba(8,57,29,.1),rgba(8,57,29,.75)),url(${latest.data.heroImage})` : undefined}>
-            <div class="badge">{latest.data.shortTitle}</div>
-            <div>{dateRange(latest.data.startDate, latest.data.endDate)} · {latest.data.location}</div>
-          </div>
-          <div class="event-body">
-            <span class="eyebrow">{isUpcoming ? 'Next event' : 'Latest edition'}</span>
-            <h3 style="font-size:1.5rem;margin-top:6px">{latest.data.title}</h3>
-            <p class="muted" style="margin-top:10px">{latest.data.summary}</p>
-            <ul class="bullets">
-              {latest.data.conference.length > 0 && <li>Conference programme{latest.data.speakers.length ? ` & ${latest.data.speakers.length} speakers` : ''}</li>}
-              {latest.data.presentations.length > 0 && <li>Presentations available for download</li>}
-              <li>Photo gallery &amp; event video</li>
-            </ul>
-            <a href={`/events/${latest.id}/`} class="btn btn-green">Explore {latest.data.shortTitle}</a>
-            <div class="chips" style="margin-top:28px">
-              {past.map((e) => <a class="chip" href={`/events/${e.id}/`}>{e.data.shortTitle} · {e.data.location}</a>)}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )}
-
-  <section>
-    <div class="wrap">
-      <div class="head-row">
-        <div><span class="eyebrow">{home.news.eyebrow}</span><h2 style="margin-bottom:0">{home.news.title}</h2></div>
-        <a href="/news/" class="btn btn-ghost" style="color:var(--green)">All news</a>
-      </div>
-      <div class="grid-3">{news.map((n) => <NewsCard item={n} />)}</div>
-    </div>
-  </section>
-
-  <section class="section-alt">
-    <div class="wrap">
-      <div class="head-row">
-        <div><span class="eyebrow">{home.board.eyebrow}</span><h2 style="margin-bottom:0">{home.board.title}</h2></div>
-        <a href="/governance/" class="btn btn-ghost" style="color:var(--green)">Full governance</a>
-      </div>
-      <div class="grid-4">
-        {board.map((p) => <PersonCard name={p.data.name} role={p.data.role} meta={[p.data.company, p.data.city?.split(',')[0]].filter(Boolean).join(', ')} photo={p.data.photo} />)}
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <span class="eyebrow">{home.members.eyebrow}</span>
-      <h2>{home.members.title}</h2>
-      {site.memberLogos.length > 0 ? (
-        <div class="logos">{site.memberLogos.map((m: any) => <div class="logo-box"><img src={m.logo} alt={m.name} loading="lazy" /></div>)}</div>
-      ) : (
-        <div class="logos">{Array.from({ length: 6 }).map(() => <div class="logo-box">Member logo</div>)}</div>
-      )}
-      <div class="affil">
-        {site.affiliations.map((a) => <div><b>Member of {a.name}</b><span>{a.description}</span></div>)}
-      </div>
-    </div>
-  </section>
-
-  <section style="padding-top:0">
-    <div class="wrap">
-      <div class="cta">
-        <div>
-          <span class="eyebrow">{home.cta.eyebrow}</span>
-          <h2>{home.cta.title}</h2>
-          <p>{home.cta.text}</p>
-        </div>
-        <div class="cta-actions">
-          <a href="/membership/#apply" class="btn btn-primary">Apply for membership</a>
-          <a href="/contact/" class="btn btn-ghost">Talk to the Secretary General</a>
-          <div class="cta-note">Members area: <a href="/members/">coming soon</a></div>
-        </div>
-      </div>
-    </div>
-  </section>
+  {sections.map(({ s, Component, alt }: any) => <Component s={s} alt={alt} />)}
 </Base>

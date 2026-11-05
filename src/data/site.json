@@ -30,24 +30,6 @@
       "email": "pedro.calado@portugal-shipowners.com"
     }
   ],
-  "stats": [
-    {
-      "value": "1,200+",
-      "label": "ships registered in MAR"
-    },
-    {
-      "value": "3rd",
-      "label": "largest register in Europe"
-    },
-    {
-      "value": "11th",
-      "label": "largest register worldwide"
-    },
-    {
-      "value": "2016",
-      "label": "association founded"
-    }
-  ],
   "affiliations": [
     {
       "name": "AAMC",
@@ -89,5 +71,13 @@
   "statutesPdf": "https://www.portugal-shipowners.com/app/download/12442455399/Statutes-of-EISAP_en.pdf",
   "social": {
     "linkedin": "https://www.linkedin.com/company/eisap-european-international-shipowners-association-of-portugal/posts/"
+  },
+  "labels": {
+    "shortName": "EISAP",
+    "statutesTitle": "Statutes of Association",
+    "statutesNote": "English",
+    "affiliationsTitle": "Memberships",
+    "openMap": "Open map ↗",
+    "membersArea": "Members area"
   }
 }

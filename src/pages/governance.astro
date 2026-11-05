@@ -2,14 +2,17 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import PersonCard from '../components/PersonCard.astro';
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
+import { getPeople } from '../people';
+import headers from '../data/headers.json';
+const h = headers.governance;
 
-const all = (await getCollection('board', (b) => b.data.active)).sort((a, b) => a.data.order - b.data.order);
+const all = await getPeople();
 const groups = ['Board of Directors', 'General Assembly', 'Fiscal Council', 'Honorary'] as const;
 const rendered = await Promise.all(all.map(async (p) => ({ p, Content: (await render(p)).Content })));
 ---
-<Base title="Governance" description="Board of Directors, General Assembly and Fiscal Council of EISAP.">
-  <PageHero eyebrow="Governance" title="Board & governing bodies" intro="EISAP is led by shipowners and maritime professionals from across Europe." />
+<Base title={h.seoTitle} description={h.seoDescription || undefined}>
+  <PageHero eyebrow={h.eyebrow} title={h.title} intro={h.intro} />
   {groups.map((g, i) => {
     const people = rendered.filter((r) => r.p.data.group === g);
     return people.length > 0 && (

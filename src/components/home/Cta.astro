@@ -1,0 +1,23 @@
+---
+import Buttons from './Buttons.astro';
+import { href } from '../../links';
+const { s } = Astro.props;
+const note = s.note ?? {};
+---
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="cta">
+      <div>
+        {s.eyebrow && <span class="eyebrow">{s.eyebrow}</span>}
+        {s.title && <h2>{s.title}</h2>}
+        {s.text && <p>{s.text}</p>}
+      </div>
+      <div class="cta-actions">
+        <Buttons buttons={s.buttons} as="fragment" />
+        {(note.text || note.linkLabel) && (
+          <div class="cta-note">{note.text}{note.text && note.linkLabel ? ' ' : ''}{note.linkLabel && <a href={href(note.link)}>{note.linkLabel}</a>}</div>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

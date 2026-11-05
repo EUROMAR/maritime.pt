@@ -1,33 +1,179 @@
 {
-  "hero": {
-    "eyebrow": "EISAP · Founded 2016 · Funchal & Lisbon",
-    "title": "The voice of shipowners under the Portuguese flag",
-    "text": "The Shipping Association of Portugal represents the majority of owners of ships registered in MAR – the International Shipping Register of Madeira – working with the Regional Government of Madeira, the IBC and industry to develop a strong Portuguese maritime cluster.",
-    "primaryButton": { "label": "Become a member", "link": "/membership/" },
-    "secondaryButton": { "label": "What we do", "link": "/about/" }
-  },
-  "about": {
-    "eyebrow": "Who we are",
-    "title": "Representing international shipowners in MAR",
-    "text": "EISAP is a private association representing the majority of owners of ships sailing under the Portuguese flag. Headquartered in Funchal, close to the International Business Centre of Madeira, with an office in Lisbon for direct connection with our associates.",
-    "objectives": [
-      { "title": "Represent", "text": "Defend the interests of Portuguese and international shipowners with vessels registered under MAR." },
-      { "title": "Promote MAR", "text": "Contribute to the promotion, development and harmonisation of the register with IBC and the Regional Government of Madeira." },
-      { "title": "Develop talent", "text": "Support job creation for young Portuguese and European seafarers and shore staff." },
-      { "title": "Build the cluster", "text": "Foster a robust Portuguese maritime cluster with professional and academic partners." }
-    ]
-  },
-  "events": {
-    "eyebrow": "Annual meetings",
-    "title": "Madeira Maritime Week & Portugal Shipping Week",
-    "text": "Our annual meetings alternate between Madeira Maritime Week (MMW) and Portugal Shipping Week (PSW) in the Lisbon area."
-  },
-  "news": { "eyebrow": "News & press", "title": "Latest from EISAP" },
-  "board": { "eyebrow": "Governance", "title": "Board of Directors" },
-  "members": { "eyebrow": "Our members", "title": "Shipowners and managers from across Europe" },
-  "cta": {
-    "eyebrow": "Membership",
-    "title": "Own or manage ships under the Portuguese flag?",
-    "text": "Join EISAP to have your voice heard with the Portuguese and Madeiran authorities, connect with fellow owners and access members-only documents and briefings."
-  }
+  "sections": [
+    {
+      "section": "top-banner",
+      "show": true,
+      "eyebrow": "EISAP · Founded 2016 · Funchal & Lisbon",
+      "title": "The voice of shipowners under the Portuguese flag",
+      "text": "The Shipping Association of Portugal represents the majority of owners of ships registered in MAR – the International Shipping Register of Madeira – working with the Regional Government of Madeira, the IBC and industry to develop a strong Portuguese maritime cluster.",
+      "buttons": [
+        {
+          "label": "Become a member",
+          "link": {
+            "page": "/membership/",
+            "url": ""
+          },
+          "style": "red"
+        },
+        {
+          "label": "What we do",
+          "link": {
+            "page": "/about/",
+            "url": ""
+          },
+          "style": "outline"
+        }
+      ],
+      "stats": [
+        {
+          "value": "1,200+",
+          "label": "ships registered in MAR"
+        },
+        {
+          "value": "3rd",
+          "label": "largest register in Europe"
+        },
+        {
+          "value": "11th",
+          "label": "largest register worldwide"
+        },
+        {
+          "value": "2016",
+          "label": "association founded"
+        }
+      ]
+    },
+    {
+      "section": "who-we-are",
+      "show": true,
+      "eyebrow": "Who we are",
+      "title": "Representing international shipowners in MAR",
+      "text": "EISAP is a private association representing the majority of owners of ships sailing under the Portuguese flag. Headquartered in Funchal, close to the International Business Centre of Madeira, with an office in Lisbon for direct connection with our associates.",
+      "buttons": [
+        {
+          "label": "About EISAP",
+          "link": {
+            "page": "/about/",
+            "url": ""
+          },
+          "style": "green"
+        },
+        {
+          "label": "Statutes (PDF)",
+          "link": {
+            "page": "statutes",
+            "url": ""
+          },
+          "style": "outline"
+        }
+      ],
+      "objectives": [
+        {
+          "title": "Represent",
+          "text": "Defend the interests of Portuguese and international shipowners with vessels registered under MAR."
+        },
+        {
+          "title": "Promote MAR",
+          "text": "Contribute to the promotion, development and harmonisation of the register with IBC and the Regional Government of Madeira."
+        },
+        {
+          "title": "Develop talent",
+          "text": "Support job creation for young Portuguese and European seafarers and shore staff."
+        },
+        {
+          "title": "Build the cluster",
+          "text": "Foster a robust Portuguese maritime cluster with professional and academic partners."
+        }
+      ]
+    },
+    {
+      "section": "events",
+      "show": true,
+      "eyebrow": "Annual meetings",
+      "title": "Madeira Maritime Week & Portugal Shipping Week",
+      "text": "Our annual meetings alternate between Madeira Maritime Week (MMW) and Portugal Shipping Week (PSW) in the Lisbon area.",
+      "featured": "",
+      "pastCount": 0,
+      "upcomingLabel": "Next event",
+      "latestLabel": "Latest edition",
+      "buttonLabel": "Explore",
+      "programmeLabel": "Conference programme",
+      "speakersLabel": "speakers",
+      "presentationsLabel": "Presentations available for download",
+      "galleryLabel": "Photo gallery & event video"
+    },
+    {
+      "section": "news",
+      "show": true,
+      "eyebrow": "News & press",
+      "title": "Latest from EISAP",
+      "count": 3,
+      "button": {
+        "label": "All news",
+        "link": {
+          "page": "/news/",
+          "url": ""
+        },
+        "style": "outline"
+      }
+    },
+    {
+      "section": "people",
+      "show": true,
+      "eyebrow": "Governance",
+      "title": "Board of Directors",
+      "group": "Board of Directors",
+      "count": 0,
+      "button": {
+        "label": "Full governance",
+        "link": {
+          "page": "/governance/",
+          "url": ""
+        },
+        "style": "outline"
+      }
+    },
+    {
+      "section": "members",
+      "show": true,
+      "eyebrow": "Our members",
+      "title": "Shipowners and managers from across Europe",
+      "showLogos": true,
+      "showAffiliations": true,
+      "affiliationPrefix": "Member of"
+    },
+    {
+      "section": "membership-banner",
+      "show": true,
+      "eyebrow": "Membership",
+      "title": "Own or manage ships under the Portuguese flag?",
+      "text": "Join EISAP to have your voice heard with the Portuguese and Madeiran authorities, connect with fellow owners and access members-only documents and briefings.",
+      "buttons": [
+        {
+          "label": "Apply for membership",
+          "link": {
+            "page": "/membership/#apply",
+            "url": ""
+          },
+          "style": "red"
+        },
+        {
+          "label": "Talk to the Secretary General",
+          "link": {
+            "page": "/contact/",
+            "url": ""
+          },
+          "style": "outline"
+        }
+      ],
+      "note": {
+        "text": "Members area:",
+        "linkLabel": "coming soon",
+        "link": {
+          "page": "/members/",
+          "url": ""
+        }
+      }
+    }
+  ]
 }

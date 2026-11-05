@@ -1,0 +1,170 @@
+{
+  "header": {
+    "links": [
+      {
+        "label": "About",
+        "link": {
+          "page": "/about/",
+          "url": ""
+        }
+      },
+      {
+        "label": "Events",
+        "link": {
+          "page": "/events/",
+          "url": ""
+        }
+      },
+      {
+        "label": "News",
+        "link": {
+          "page": "/news/",
+          "url": ""
+        }
+      },
+      {
+        "label": "Governance",
+        "link": {
+          "page": "/governance/",
+          "url": ""
+        }
+      },
+      {
+        "label": "Membership",
+        "link": {
+          "page": "/membership/",
+          "url": ""
+        }
+      },
+      {
+        "label": "Contact",
+        "link": {
+          "page": "/contact/",
+          "url": ""
+        }
+      }
+    ],
+    "membersLink": {
+      "show": true,
+      "label": "Members area",
+      "link": {
+        "page": "/members/",
+        "url": ""
+      }
+    },
+    "button": {
+      "show": true,
+      "label": "Become a member",
+      "link": {
+        "page": "/membership/#apply",
+        "url": ""
+      }
+    }
+  },
+  "footer": {
+    "addressTitle": "EISAP",
+    "columns": [
+      {
+        "title": "Association",
+        "links": [
+          {
+            "label": "Who we are",
+            "link": {
+              "page": "/about/",
+              "url": ""
+            }
+          },
+          {
+            "label": "Objectives",
+            "link": {
+              "page": "/about/#objectives",
+              "url": ""
+            }
+          },
+          {
+            "label": "Governance",
+            "link": {
+              "page": "/governance/",
+              "url": ""
+            }
+          },
+          {
+            "label": "Statutes (PDF)",
+            "link": {
+              "page": "statutes",
+              "url": ""
+            }
+          }
+        ]
+      },
+      {
+        "title": "Activity",
+        "links": [
+          {
+            "label": "Annual meetings",
+            "link": {
+              "page": "/events/",
+              "url": ""
+            }
+          },
+          {
+            "label": "News & press",
+            "link": {
+              "page": "/news/",
+              "url": ""
+            }
+          }
+        ]
+      },
+      {
+        "title": "Members",
+        "links": [
+          {
+            "label": "Become a member",
+            "link": {
+              "page": "/membership/",
+              "url": ""
+            }
+          },
+          {
+            "label": "Members area (coming soon)",
+            "link": {
+              "page": "/members/",
+              "url": ""
+            }
+          },
+          {
+            "label": "Contact",
+            "link": {
+              "page": "/contact/",
+              "url": ""
+            }
+          }
+        ]
+      }
+    ],
+    "legal": [
+      {
+        "label": "Privacy policy",
+        "link": {
+          "page": "/privacy/",
+          "url": ""
+        }
+      },
+      {
+        "label": "Cookie policy",
+        "link": {
+          "page": "/cookies/",
+          "url": ""
+        }
+      },
+      {
+        "label": "Legal notice",
+        "link": {
+          "page": "/legal-notice/",
+          "url": ""
+        }
+      }
+    ]
+  }
+}

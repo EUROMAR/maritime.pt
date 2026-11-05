@@ -18,8 +18,10 @@ npm run build    # output in /dist
 
 | What | Location |
 |---|---|
-| Home page texts | `src/data/home.json` |
-| Contacts, figures, member logos, analytics | `src/data/site.json` |
+| Home page sections | `src/data/home.json` → `src/components/home/` |
+| Header and footer menus | `src/data/navigation.json` |
+| Listing page headers (news, events…) | `src/data/headers.json` |
+| Contacts, member logos, small texts, analytics | `src/data/site.json` |
 | News, events, board, text pages | `src/content/` |
 | Design | `src/styles/global.css` |
 | Redirects | `public/_redirects` |
