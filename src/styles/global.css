@@ -36,7 +36,7 @@ section{padding:88px 0}
 /* Header */
 .site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:76px}
-.logo svg{height:46px;width:auto}
+.logo svg,.logo img{height:46px;width:auto;display:block}
 .menu{display:flex;gap:26px;align-items:center;font-size:.93rem;font-weight:500}
 .menu a:not(.btn){color:var(--muted)}
 .menu a:not(.btn):hover,.menu a[aria-current="page"]{color:var(--green)}

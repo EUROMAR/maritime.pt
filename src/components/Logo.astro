@@ -1,8 +1,14 @@
 ---
+import site from '../data/site.json';
 interface Props { light?: boolean }
 const { light = false } = Astro.props;
 const c = light ? '#FFFFFF' : '#0E5A2E';
+const custom = (site as { logo?: string }).logo?.trim();
+const alt = `${site.brand} – ${site.name}`;
 ---
+{custom ? (
+  <img src={custom} alt={alt} />
+) : (
 <svg viewBox="0 0 520 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Maritime Portugal – EISAP Shipping Association of Portugal">
   <rect x="0" y="10" width="12" height="130" fill={light ? '#FFFFFF' : '#0E5A2E'} />
   <rect x="20" y="10" width="24" height="130" fill="#A91B1F" />
@@ -10,3 +16,4 @@ const c = light ? '#FFFFFF' : '#0E5A2E';
   <text x="62" y="138" font-family="Arial,Helvetica,sans-serif" font-size="58" fill={c} letter-spacing="15">PORTUGAL</text>
   <text x="62" y="174" font-family="Arial,Helvetica,sans-serif" font-size="19.5" fill={c} letter-spacing="2.2">EISAP - Shipping Association of Portugal</text>
 </svg>
+)}
