@@ -590,6 +590,7 @@ content:
         path: src/data/site.json
         format: json
         fields:
+          - { name: logo, label: Logo, type: image, options: { media: images }, description: "Shown in the header. Leave empty to use the default Maritime Portugal logo. Use a wide SVG or PNG with a transparent background; it is shown 46px tall." }
           - { name: name, label: Site name, type: string, description: "Shown in the browser tab and the footer." }
           - { name: legalName, label: Legal name, type: string }
           - { name: brand, label: Brand, type: string }
