@@ -27,7 +27,7 @@ const facts = latest ? [
 ---
 
 {latest && (
-  <section class="ev-sec" id="events">
+  <section class={`ev-sec${Astro.props.alt ? ' section-alt' : ''}`} id="events">
     <div class="wrap">
       {s.eyebrow && <span class="eyebrow">{s.eyebrow}</span>}
       {s.title && <h2>{s.title}</h2>}
