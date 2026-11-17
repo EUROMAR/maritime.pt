@@ -1,9 +1,12 @@
 ---
 import Buttons from './Buttons.astro';
+import HeroMap from './HeroMap.astro';
 const { s } = Astro.props;
 const stats = (s.stats ?? []).filter((x: any) => x?.value || x?.label);
 ---
 <section class="hero">
+  <HeroMap />
+  <div class="hero-scrim" aria-hidden="true"></div>
   <div class="wrap">
     {s.eyebrow && <span class="eyebrow">{s.eyebrow}</span>}
     {s.title && <h1>{s.title}</h1>}

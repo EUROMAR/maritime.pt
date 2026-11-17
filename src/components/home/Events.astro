@@ -12,6 +12,9 @@ const others = all.filter((e) => e !== latest);
 const past = pastCount > 0 ? others.slice(0, pastCount) : others;
 const isUpcoming = latest && latest.data.startDate > new Date();
 const label = (v: unknown, d: string) => (typeof v === 'string' && v.trim() ? v : d);
+// Timeline: every edition, oldest first; the ship sails along it as the page scrolls.
+const timeline = [...all].reverse();
+const stopName = (t: string) => t.replace(/\s*\d{4}$/, '');
 ---
 {latest && (
   <section class={Astro.props.alt ? 'section-alt' : undefined}>
@@ -19,6 +22,31 @@ const label = (v: unknown, d: string) => (typeof v === 'string' && v.trim() ? v 
       {s.eyebrow && <span class="eyebrow">{s.eyebrow}</span>}
       {s.title && <h2>{s.title}</h2>}
       {s.text && <p class="lead" style="margin-bottom:32px">{s.text}</p>}
+      {timeline.length > 1 && (
+        <div class="voy" aria-label="Timeline of annual meetings">
+          <div class="voy-track">
+            {timeline.map((_, i) => <i style={`left:${(i / timeline.length) * 100}%`}></i>)}
+            <svg class="voy-ship" viewBox="0 0 48 30" aria-hidden="true">
+              <path d="M2 19h44l-4.5 8.5H7.5Z" fill="currentColor" />
+              <path d="M4 9h6v9H4zM5.5 5.5h2.5V9H5.5z" fill="currentColor" />
+              <g fill="currentColor">
+                <rect x="12" y="13.6" width="5.6" height="4.6" rx=".4" /><rect x="18.3" y="13.6" width="5.6" height="4.6" rx=".4" /><rect x="24.6" y="13.6" width="5.6" height="4.6" rx=".4" /><rect x="30.9" y="13.6" width="5.6" height="4.6" rx=".4" /><rect x="37.2" y="13.6" width="5.6" height="4.6" rx=".4" />
+                <rect x="12" y="8.4" width="5.6" height="4.6" rx=".4" opacity=".8" /><rect x="18.3" y="8.4" width="5.6" height="4.6" rx=".4" opacity=".55" /><rect x="24.6" y="8.4" width="5.6" height="4.6" rx=".4" opacity=".8" /><rect x="30.9" y="8.4" width="5.6" height="4.6" rx=".4" opacity=".55" />
+                <rect x="18.3" y="3.2" width="5.6" height="4.6" rx=".4" opacity=".55" /><rect x="24.6" y="3.2" width="5.6" height="4.6" rx=".4" opacity=".8" />
+              </g>
+              <path d="M5 8.2V3.8" stroke="currentColor" stroke-width="1" />
+            </svg>
+          </div>
+          <div class="voy-stops">
+            {timeline.map((e) => (
+              <a class={`voy-stop${e === latest ? ' hi' : ''}`} href={`/events/${e.id}/`}>
+                <span class="yr">{e.data.startDate.getUTCFullYear()}</span>
+                <span class="tx">{stopName(e.data.shortTitle)}<br />{e === latest ? `${e.data.location} · ${isUpcoming ? label(s.upcomingLabel, 'Next event') : label(s.latestLabel, 'Latest edition')}` : e.data.location}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
       <div class="event">
         <div class="event-img" style={latest.data.heroImage ? `background-image:linear-gradient(180deg,rgba(8,57,29,.1),rgba(8,57,29,.75)),url(${latest.data.heroImage})` : undefined}>
           <div class="badge">{latest.data.shortTitle}</div>
@@ -44,3 +72,24 @@ const label = (v: unknown, d: string) => (typeof v === 'string' && v.trim() ? v 
     </div>
   </section>
 )}
+
+<script>
+  // Moves the container ship along the timeline while the section scrolls into view.
+  const voys = document.querySelectorAll<HTMLElement>('.voy');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  voys.forEach((v) => v.classList.add('js'));
+  const update = () => voys.forEach((v) => {
+    const r = v.getBoundingClientRect();
+    const vh = innerHeight;
+    const p = reduce ? 1 : Math.min(1, Math.max(0, (vh * 0.9 - r.top) / (vh * 0.6)));
+    v.style.setProperty('--p', p.toFixed(4));
+    const stops = v.querySelectorAll('.voy-stop');
+    const marks = v.querySelectorAll('.voy-track i');
+    stops.forEach((s, i) => { const on = p >= i / stops.length; s.classList.toggle('reached', on); marks[i]?.classList.toggle('reached', on); });
+  });
+  let ticking = false;
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; update(); }); } };
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  update();
+</script>

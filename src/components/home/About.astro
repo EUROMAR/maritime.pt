@@ -4,17 +4,23 @@ const { s } = Astro.props;
 const objectives = (s.objectives ?? []).filter((o: any) => o?.title || o?.text);
 ---
 <section id="about" class={Astro.props.alt ? 'section-alt' : undefined}>
-  <div class="wrap grid-2">
-    <div>
-      {s.eyebrow && <span class="eyebrow">{s.eyebrow}</span>}
-      {s.title && <h2>{s.title}</h2>}
-      {s.text && <p class="lead">{s.text}</p>}
-      <Buttons buttons={s.buttons} light as="p" style="margin-top:28px" />
+  <div class="wrap">
+    <div class="who">
+      <div class="who-l">
+        {s.eyebrow && <span class="eyebrow">{s.eyebrow}</span>}
+        {s.title && <h2>{s.title}</h2>}
+      </div>
+      <div class="who-r">
+        {s.text && <p class="lead">{s.text}</p>}
+        <Buttons buttons={s.buttons} light as="p" style="margin-top:28px" />
+      </div>
     </div>
-    <div class="pillars">
-      {objectives.map(({ title: t, text: d }: any, i: number) => (
-        <div class="pillar"><i>{String(i + 1).padStart(2, '0')}</i><div><h3>{t}</h3><p>{d}</p></div></div>
-      ))}
-    </div>
+    {objectives.length > 0 && (
+      <div class="aims">
+        {objectives.map(({ title: t, text: d }: any, i: number) => (
+          <div class="aim"><span class="n">{String(i + 1).padStart(2, '0')}</span><h3>{t}</h3><p>{d}</p></div>
+        ))}
+      </div>
+    )}
   </div>
 </section>
