@@ -14,7 +14,7 @@ const components: Record<string, any> = {
   'top-banner': Hero, 'who-we-are': About, events: Events, news: News, people: People, members: Members, 'membership-banner': Cta,
 };
 // Full-width sections (banner, call to action) don't take part in the light/grey alternation.
-const ownBackground = new Set(['top-banner', 'membership-banner']);
+const ownBackground = new Set(['top-banner', 'events', 'membership-banner']);
 let n = 0;
 const sections = ((home as any).sections ?? [])
   .filter((s: any) => s && s.show !== false && components[s.section])
