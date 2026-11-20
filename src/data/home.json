@@ -3,7 +3,7 @@
     {
       "section": "top-banner",
       "show": true,
-      "eyebrow": "EISAP · Founded 2016 · Funchal & Lisbon",
+      "eyebrow": "Maritime Portugal",
       "title": "The voice of shipowners under the Portuguese flag",
       "text": "The Shipping Association of Portugal represents the majority of owners of ships registered in MAR – the International Shipping Register of Madeira – working with the Regional Government of Madeira, the IBC and industry to develop a strong Portuguese maritime cluster.",
       "buttons": [
@@ -34,10 +34,6 @@
         {
           "value": "11th",
           "label": "largest register worldwide"
-        },
-        {
-          "value": "2016",
-          "label": "association founded"
         }
       ]
     },
@@ -45,8 +41,8 @@
       "section": "who-we-are",
       "show": true,
       "eyebrow": "Who we are",
-      "title": "Representing international shipowners in MAR",
-      "text": "EISAP is a private association representing the majority of owners of ships sailing under the Portuguese flag. Headquartered in Funchal, close to the International Business Centre of Madeira, with an office in Lisbon for direct connection with our associates.",
+      "title": "Representing Portugal's shipping sector",
+      "text": "Maritime Portugal is the shipping association of Portugal. We bring together shipowners, ship managers and the wider shipping community to realise the full potential of Portuguese shipping.",
       "buttons": [
         {
           "label": "About EISAP",
@@ -56,29 +52,30 @@
           "style": "green"
         },
         {
-          "label": "Statutes (PDF)",
+          "label": "Become a member",
           "link": {
-            "page": "statutes"
+            "page": "custom",
+            "url": "www.eu-registry.com"
           },
-          "style": "outline"
+          "style": "red"
         }
       ],
       "objectives": [
         {
           "title": "Represent",
-          "text": "Defend the interests of Portuguese and international shipowners with vessels registered under MAR."
+          "text": "Defend the interests of the Portuguese shipping sector, nationally and internationally."
         },
         {
           "title": "Promote MAR",
-          "text": "Contribute to the promotion, development and harmonisation of the register with IBC and the Regional Government of Madeira."
+          "text": "Contribute to the promotion of the Portuguese flag and the development of MAR, together with the IBC and the Regional Government of Madeira."
         },
         {
           "title": "Develop talent",
-          "text": "Support job creation for young Portuguese and European seafarers and shore staff."
+          "text": "Create value and attract investment, companies and talent to Portuguese shipping. Support jobs and careers at sea and ashore for young Portuguese and European professionals."
         },
         {
           "title": "Build the cluster",
-          "text": "Foster a robust Portuguese maritime cluster with professional and academic partners."
+          "text": "Foster a strong maritime cluster linking industry, academia and research. Cooperate with like-minded associations in Portugal and abroad."
         }
       ]
     },
@@ -99,8 +96,7 @@
     {
       "section": "news",
       "show": true,
-      "eyebrow": "News & press",
-      "title": "Latest from EISAP",
+      "title": "News",
       "count": 3,
       "button": {
         "label": "All news",
@@ -138,13 +134,14 @@
       "section": "membership-banner",
       "show": true,
       "eyebrow": "Membership",
-      "title": "Own or manage ships under the Portuguese flag?",
-      "text": "Join EISAP to have your voice heard with the Portuguese and Madeiran authorities and connect with fellow owners.",
+      "title": "Want to help grow Portugal as a maritime nation?",
+      "text": "Join Maritime Portugal to have your voice heard with the Portuguese and Madeiran authorities and connect with fellow owners.",
       "buttons": [
         {
           "label": "Apply for membership",
           "link": {
-            "page": "/membership/#apply"
+            "page": "custom",
+            "url": "www.eu-registry.com"
           },
           "style": "red"
         },
@@ -155,7 +152,12 @@
           },
           "style": "outline"
         }
-      ]
+      ],
+      "note": {
+        "link": {
+          "page": "/"
+        }
+      }
     }
   ]
 }
