@@ -10,16 +10,14 @@
         {
           "label": "Become a member",
           "link": {
-            "page": "/membership/",
-            "url": ""
+            "page": "/membership/"
           },
           "style": "red"
         },
         {
           "label": "What we do",
           "link": {
-            "page": "/about/",
-            "url": ""
+            "page": "/about/"
           },
           "style": "outline"
         }
@@ -53,16 +51,14 @@
         {
           "label": "About EISAP",
           "link": {
-            "page": "/about/",
-            "url": ""
+            "page": "/about/"
           },
           "style": "green"
         },
         {
           "label": "Statutes (PDF)",
           "link": {
-            "page": "statutes",
-            "url": ""
+            "page": "statutes"
           },
           "style": "outline"
         }
@@ -89,10 +85,7 @@
     {
       "section": "events",
       "show": true,
-      "eyebrow": "Annual meetings",
-      "title": "Madeira Maritime Week & Portugal Shipping Week",
-      "text": "Our annual meetings alternate between Madeira Maritime Week (MMW) and Portugal Shipping Week (PSW) in the Lisbon area.",
-      "featured": "",
+      "featured": "src/content/events/mmw-2027.md",
       "pastCount": 0,
       "upcomingLabel": "Next event",
       "latestLabel": "Latest edition",
@@ -111,8 +104,7 @@
       "button": {
         "label": "All news",
         "link": {
-          "page": "/news/",
-          "url": ""
+          "page": "/news/"
         },
         "style": "outline"
       }
@@ -127,8 +119,7 @@
       "button": {
         "label": "Full governance",
         "link": {
-          "page": "/governance/",
-          "url": ""
+          "page": "/governance/"
         },
         "style": "outline"
       }
@@ -152,16 +143,14 @@
         {
           "label": "Apply for membership",
           "link": {
-            "page": "/membership/#apply",
-            "url": ""
+            "page": "/membership/#apply"
           },
           "style": "red"
         },
         {
           "label": "Talk to the Secretary General",
           "link": {
-            "page": "/contact/",
-            "url": ""
+            "page": "/contact/"
           },
           "style": "outline"
         }
@@ -170,8 +159,7 @@
         "text": "Members area:",
         "linkLabel": "coming soon",
         "link": {
-          "page": "/members/",
-          "url": ""
+          "page": "/members/"
         }
       }
     }
