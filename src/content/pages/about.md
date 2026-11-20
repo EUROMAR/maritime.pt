@@ -1,6 +1,5 @@
 ---
 title: Who we are
-eyebrow: About Maritime Portugal
 intro: Representing Portugal's shipping sector – creating value and growing
   Portugal as a maritime nation.
 updated: 2026-11-20
