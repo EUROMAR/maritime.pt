@@ -38,13 +38,6 @@
         }
       }
     ],
-    "membersLink": {
-      "show": false,
-      "label": "Members area",
-      "link": {
-        "page": "/members/"
-      }
-    },
     "button": {
       "show": false,
       "label": "Become a member",
@@ -109,12 +102,6 @@
             "label": "Become a member",
             "link": {
               "page": "/membership/"
-            }
-          },
-          {
-            "label": "Members area (coming soon)",
-            "link": {
-              "page": "/members/"
             }
           },
           {

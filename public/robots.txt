@@ -1,3 +1,2 @@
 User-agent: *
-Disallow: /members/
 Sitemap: https://www.maritime.pt/sitemap-index.xml

@@ -12,10 +12,6 @@ media:
     input: public/uploads/documents
     output: /uploads/documents
     extensions: [pdf, pptx, docx, xlsx, mp4]
-  - name: members
-    label: Members-only files
-    input: public/members/files
-    output: /members/files
 
 # Reusable field definitions, used below with `component: <name>`.
 components:
@@ -39,7 +35,6 @@ components:
             - { value: /membership/, label: Membership }
             - { value: /membership/#apply, label: Membership → Application form }
             - { value: /contact/, label: Contact }
-            - { value: /members/, label: Members area }
             - { value: /privacy/, label: Privacy policy }
             - { value: /cookies/, label: Cookie policy }
             - { value: /legal-notice/, label: Legal notice }
@@ -218,13 +213,6 @@ content:
                 type: object
                 list: { collapsible: { collapsed: true, summary: "{label}" } }
                 fields:
-                  - { name: label, label: Text, type: string }
-                  - { name: link, label: Link, component: link }
-              - name: membersLink
-                label: Members area link (with padlock)
-                type: object
-                fields:
-                  - { name: show, label: Show, type: boolean, default: true }
                   - { name: label, label: Text, type: string }
                   - { name: link, label: Link, component: link }
               - name: button
@@ -552,33 +540,6 @@ content:
           - { name: body, label: Text, type: rich-text }
 
   # ======================================================================
-  - name: members-area
-    label: Members area
-    type: group
-    items:
-      - name: documents
-        label: Members documents
-        description: Documents for the members area. Not shown on the website until the members area is switched on.
-        type: collection
-        path: src/content/documents
-        view:
-          fields: [title, date, category]
-          primary: title
-          search: [title, description]
-          default: { sort: date, order: desc }
-        fields:
-          - { name: title, label: Title, type: string, required: true }
-          - { name: date, label: Date, type: date, required: true }
-          - name: category
-            label: Category
-            type: select
-            required: true
-            default: Circular
-            options: { values: [Minutes, Circular, Position paper, Presentation, Report, Other] }
-          - { name: file, label: File, type: file, required: true, options: { media: members } }
-          - { name: description, label: Description, type: text }
-
-  # ======================================================================
   - name: settings
     label: Settings
     type: group
@@ -651,7 +612,6 @@ content:
               - { name: statutesNote, label: Statutes download – small text, type: string }
               - { name: affiliationsTitle, label: '"Who we are" page – affiliations heading', type: string }
               - { name: openMap, label: Contact page – map link text, type: string }
-              - { name: membersArea, label: Members area – name, type: string }
           - { name: analyticsToken, label: Cloudflare Web Analytics token (optional), type: string, description: "Technical – leave as is." }
           - name: social
             label: Social links

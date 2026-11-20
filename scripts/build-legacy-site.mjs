@@ -40,7 +40,7 @@ writeFileSync(join(OUT, '404.html'), `<!doctype html><html lang="en"><head><meta
 <title>EISAP has moved to maritime.pt</title><meta name="robots" content="noindex">
 <script>
   var p = location.pathname;
-  var known = /^\\/(about|events|news|governance|membership|contact|members|privacy|cookies|legal-notice)(\\/|$)/.test(p);
+  var known = /^\\/(about|events|news|governance|membership|contact|privacy|cookies|legal-notice)(\\/|$)/.test(p);
   location.replace(${JSON.stringify(NEW)} + (known ? p : '/'));
 </script></head>
 <body style="font-family:system-ui,sans-serif;padding:40px">EISAP has moved to <a href="${NEW}/">${NEW}</a>.</body></html>\n`);

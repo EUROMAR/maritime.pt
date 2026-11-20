@@ -22,6 +22,6 @@ export default defineConfig({
   site: 'https://www.maritime.pt',
   trailingSlash: 'always',
   redirects,
-  integrations: [sitemap({ filter: (page) => !page.includes('/members/') }), optimizeImages()],
+  integrations: [sitemap(), optimizeImages()],
   build: { format: 'directory' },
 });
