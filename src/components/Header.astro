@@ -4,7 +4,6 @@ import nav from '../data/navigation.json';
 import { href } from '../links';
 const path = Astro.url.pathname;
 const links = (nav.header?.links ?? []).filter((l) => l?.label).map((l) => ({ href: href(l.link), label: l.label }));
-const members = nav.header?.membersLink;
 const button = nav.header?.button;
 ---
 <header class="site-header">
@@ -15,12 +14,6 @@ const button = nav.header?.button;
       {links.map((l) => (
         <a href={l.href} aria-current={l.href !== '/' && path.startsWith(l.href) ? 'page' : undefined}>{l.label}</a>
       ))}
-      {members?.show !== false && members?.label && (
-        <a href={href(members.link, '/members/')} class="login" title={members.label}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-          {members.label}
-        </a>
-      )}
       {button?.show !== false && button?.label && <a href={href(button.link)} class="btn btn-primary btn-sm">{button.label}</a>}
     </nav>
   </div>

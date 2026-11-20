@@ -40,7 +40,6 @@ section{padding:88px 0}
 .menu{display:flex;gap:26px;align-items:center;font-size:.93rem;font-weight:500}
 .menu a:not(.btn){color:var(--muted)}
 .menu a:not(.btn):hover,.menu a[aria-current="page"]{color:var(--green)}
-.login{display:inline-flex;align-items:center;gap:6px}
 .burger{display:none;background:none;border:0;cursor:pointer;padding:8px}
 .burger span{display:block;width:24px;height:2px;background:var(--ink);margin:5px 0}
 
@@ -239,7 +238,6 @@ html:has(.subnav){scroll-padding-top:140px}
 @media (max-width:960px){
   .menu{max-height:calc(100vh - 76px);overflow-y:auto;gap:0;padding:8px 24px 20px}
   .menu a:not(.btn){display:block;width:100%;padding:12px 0;border-bottom:1px solid var(--line)}
-  .menu a.login{display:flex;align-items:center;gap:8px}
   .menu .btn{margin-top:16px}
   .burger{min-width:44px;min-height:44px;-webkit-tap-highlight-color:transparent;border-radius:8px}
   .burger:focus-visible{outline:2px solid var(--green)}

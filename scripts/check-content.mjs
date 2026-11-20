@@ -13,7 +13,6 @@ const ENUMS = {
   language: ['EN', 'PT'],
   series: ['Madeira Maritime Week', 'Portugal Shipping Week', 'Annual Meeting'],
   group: ['Board of Directors', 'General Assembly', 'Fiscal Council', 'Honorary'],
-  category: ['Minutes', 'Circular', 'Position paper', 'Presentation', 'Report', 'Other'],
 };
 
 const RULES = {
@@ -21,7 +20,6 @@ const RULES = {
   events: { label: 'Event', name: 'shortTitle', required: ['title', 'shortTitle', 'series', 'startDate', 'location', 'summary'], dates: ['startDate', 'endDate'], enums: { series: ENUMS.series }, files: ['heroImage', 'gallery[].image', 'presentations[].file', 'documents[].file', 'speakers[].photo', 'partners[].logo'] },
   board: { label: 'Person', name: 'name', required: ['name', 'group', 'role'], dates: [], enums: { group: ENUMS.group }, files: ['photo'] },
   pages: { label: 'Page', name: 'title', required: ['title'], dates: ['updated'], enums: {}, files: [] },
-  documents: { label: 'Members document', name: 'title', required: ['title', 'date', 'category', 'file'], dates: ['date'], enums: { category: ENUMS.category }, files: [] },
 };
 
 const empty = (v) => v === undefined || v === null || (typeof v === 'string' && v.trim() === '');

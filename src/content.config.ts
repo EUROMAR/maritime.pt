@@ -95,16 +95,4 @@ const pages = defineCollection({
   }),
 });
 
-/** Documents for the protected members area (/members/). */
-const documents = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/documents' }),
-  schema: z.object({
-    title: z.string(),
-    date: z.coerce.date(),
-    category: z.enum(['Minutes', 'Circular', 'Position paper', 'Presentation', 'Report', 'Other']),
-    file: z.string(),
-    description: z.string().optional(),
-  }),
-});
-
-export const collections = { news, events, board, pages, documents };
+export const collections = { news, events, board, pages };

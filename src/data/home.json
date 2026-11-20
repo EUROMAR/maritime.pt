@@ -139,7 +139,7 @@
       "show": true,
       "eyebrow": "Membership",
       "title": "Own or manage ships under the Portuguese flag?",
-      "text": "Join EISAP to have your voice heard with the Portuguese and Madeiran authorities, connect with fellow owners and access members-only documents and briefings.",
+      "text": "Join EISAP to have your voice heard with the Portuguese and Madeiran authorities and connect with fellow owners.",
       "buttons": [
         {
           "label": "Apply for membership",
@@ -155,14 +155,7 @@
           },
           "style": "outline"
         }
-      ],
-      "note": {
-        "text": "Members area:",
-        "linkLabel": "coming soon",
-        "link": {
-          "page": "/members/"
-        }
-      }
+      ]
     }
   ]
 }
