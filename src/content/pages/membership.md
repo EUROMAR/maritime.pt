@@ -1,21 +1,22 @@
 ---
 title: Become a member
 eyebrow: Membership
-intro: Join the shipowners and managers shaping the future of the Portuguese flag.
+intro: Join the shipping association of Portugal and help grow Portugal as a
+  maritime nation.
+updated: 2026-11-20
 ---
 ## Who can join
 
-EISAP welcomes shipowners, ship managers and other companies and individuals with an interest in ships registered in MAR – the International Shipping Register of Madeira.
+Maritime Portugal welcomes shipowners, ship managers and all companies and professionals active in the shipping sector, in Portugal and abroad, who share our goal of realising the full potential of Portuguese shipping.
 
 ## Why join
 
-- A strong, collective voice with the Portuguese and Madeiran authorities
-- Up-to-date information on the maritime sector and the Portuguese flag
-- Networking with fellow owners at Madeira Maritime Week and Portugal Shipping Week
-- Access to the members-only area with circulars, minutes and position papers
+- A strong, collective voice for the shipping sector with national, regional and European authorities
+- Up-to-date information on legal, regulatory and market developments
+- Networking with the Portuguese and international shipping community at events in Portugal and abroad
+- The opportunity to help shape the future of Portuguese shipping
 
 ## How to apply
 
-Download the membership agreement (corporate or individual), complete it and return it by email – or send us a short request using the form below.
+Fill in our online application form and the association will get in touch.
 
-<!-- TODO: membership fees and conditions (if they are to be published) -->
