@@ -47,7 +47,7 @@
     }
   },
   "footer": {
-    "addressTitle": "EISAP",
+    "addressTitle": "Maritime Portugal",
     "columns": [
       {
         "title": "Association",
@@ -82,7 +82,7 @@
         "title": "Activity",
         "links": [
           {
-            "label": "Annual meetings",
+            "label": "Events",
             "link": {
               "page": "/events/"
             }
@@ -101,7 +101,8 @@
           {
             "label": "Become a member",
             "link": {
-              "page": "/membership/"
+              "page": "custom",
+              "url": "https://forms.cloud.microsoft/e/66Lr3S4E1P"
             }
           },
           {
