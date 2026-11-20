@@ -6,6 +6,30 @@
   "description": "Maritime Portugal is the shipping association of Portugal. We bring together shipowners, ship managers and the wider shipping community to realise the full potential of Portuguese shipping.",
   "phone": "+351 291 645 066",
   "email": "eisap@portugal-shipowners.com",
+  "offices": [
+    {
+      "name": "Funchal (Headquarters)",
+      "address": "Quinta São Gonçalo, Rua Nova da Igreja 1\n9060-206 Funchal, Madeira, Portugal"
+    },
+    {
+      "name": "Lisbon office",
+      "address": "Rua Hermenegildo Pulquério, 201 (4A) - 201A (4B)\n2645-089 Alcabideche | Portugal"
+    }
+  ],
+  "contacts": [
+    {
+      "name": "Duarte Vaz Pinto",
+      "role": "Advisor to the Board of Directors",
+      "location": "Lisbon, Portugal",
+      "email": "duarte.vazpinto@portugal-shipowners.com"
+    },
+    {
+      "name": "Pedro Calado",
+      "role": "Secretary General",
+      "location": "Madeira, Portugal",
+      "email": "pedro.calado@portugal-shipowners.com"
+    }
+  ],
   "affiliations": [
     {
       "name": "AAMC",
