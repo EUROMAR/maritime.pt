@@ -1,7 +1,6 @@
 ---
 title: Emissão electrónica de documentos de registo
 date: '2019-10-28'
-type: Press release
 source: EISAP
 language: PT
 summary: MAR becomes the first Portuguese register to issue fully electronic registry documents.

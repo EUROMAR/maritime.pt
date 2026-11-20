@@ -14,7 +14,6 @@ const news = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
-    type: z.enum(['Press release', 'Media coverage', 'Opinion', 'Interview', 'Statement']),
     source: z.string().optional(),
     language: z.enum(['EN', 'PT']).default('EN'),
     summary: z.string().optional(),
@@ -75,13 +74,24 @@ const board = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/board' }),
   schema: z.object({
     name: z.string(),
-    group: z.enum(['Board of Directors', 'General Assembly', 'Fiscal Council', 'Honorary']),
+    // Governance section: CMS reference path (src/content/governance/fiscal-council.md) → slug
+    group: z.string().transform((v) => v.split('/').pop()!.replace(/\.md$/, '')),
     role: z.string(),
     company: z.string().optional(),
     city: z.string().optional(),
     photo: z.string().optional(),
     order: z.number().default(99),
     active: z.boolean().default(true),
+  }),
+});
+
+/** Governance page sections (Board of Directors, General Assembly, …). Body = note shown below the members. */
+const governance = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/governance' }),
+  schema: z.object({
+    title: z.string(),
+    order: z.number().default(99),
+    show: z.boolean().default(true),
   }),
 });
 
@@ -95,4 +105,4 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { news, events, board, pages };
+export const collections = { news, events, board, pages, governance };

@@ -1,6 +1,6 @@
 ---
 name: Laura Langh-Lagerlöf
-group: Board of Directors
+group: src/content/governance/board-of-directors.md
 role: Vice-President
 company: Langh Ship Oy Ab
 city: Piikkiö, Finland

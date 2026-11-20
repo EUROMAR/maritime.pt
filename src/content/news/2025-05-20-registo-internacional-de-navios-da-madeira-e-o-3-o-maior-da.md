@@ -1,7 +1,6 @@
 ---
 title: Registo Internacional de Navios da Madeira é o 3.º maior da Europa e o 11.º do Mundo
 date: '2025-05-20'
-type: Media coverage
 source: DN Madeira
 language: PT
 summary: MAR ranks 3rd in Europe and 11th worldwide – the goal now is to be first.

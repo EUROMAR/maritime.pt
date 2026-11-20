@@ -1,6 +1,6 @@
 ---
 name: Pedro Rebelo de Sousa
-group: General Assembly
+group: src/content/governance/general-assembly.md
 role: President
 company: SRS Legal
 city: Lisbon, Portugal

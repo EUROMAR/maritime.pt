@@ -1,6 +1,6 @@
 ---
 name: Nektaria Retsou
-group: Fiscal Council
+group: src/content/governance/fiscal-council.md
 role: President
 company: Hellas Confidence Shipmanagement
 city: Piraeus, Greece

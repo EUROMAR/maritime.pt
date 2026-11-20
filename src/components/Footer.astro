@@ -6,6 +6,11 @@ const year = new Date().getFullYear();
 const footer = nav.footer ?? ({} as any);
 const columns = (footer.columns ?? []).filter((c: any) => c?.title || c?.links?.length);
 const legal = (footer.legal ?? []).filter((l: any) => l?.label);
+const socialLinks = [
+  { key: 'linkedin', label: 'LinkedIn', path: '<path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/>' },
+  { key: 'youtube', label: 'YouTube', path: '<path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/>' },
+  { key: 'vimeo', label: 'Vimeo', path: '<path d="M23.98 6.42c-.11 2.33-1.73 5.52-4.88 9.58-3.25 4.22-6 6.33-8.25 6.33-1.39 0-2.57-1.29-3.53-3.86L5.4 11.4C4.69 8.83 3.92 7.54 3.1 7.54c-.18 0-.8.37-1.87 1.12L.1 7.2c1.18-1.03 2.34-2.07 3.48-3.1C5.15 2.75 6.33 2.04 7.12 1.97c1.86-.18 3 1.09 3.43 3.82.46 2.94.79 4.77.97 5.49.54 2.43 1.13 3.65 1.77 3.65.5 0 1.25-.79 2.25-2.36 1-1.57 1.53-2.77 1.6-3.59.14-1.36-.39-2.04-1.6-2.04-.57 0-1.15.13-1.76.39 1.17-3.82 3.4-5.68 6.7-5.57 2.44.07 3.59 1.65 3.45 4.74z"/>' },
+].map((s) => ({ ...s, url: ((site as any).social?.[s.key] ?? '').trim() })).filter((s) => s.url);
 ---
 <footer class="site-footer">
   <div class="wrap">
@@ -15,6 +20,11 @@ const legal = (footer.legal ?? []).filter((l: any) => l?.label);
         <p>{site.legalName}</p>
         {(site.offices ?? []).slice(0, 1).map((o) => <p style="margin-top:10px;white-space:pre-line">{o.address}</p>)}
         <p style="margin-top:12px"><a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a><br /><a href={`mailto:${site.email}`}>{site.email}</a></p>
+        {socialLinks.length > 0 && (
+          <div class="social">
+            {socialLinks.map((s) => <a href={s.url} target="_blank" rel="noopener" aria-label={s.label} title={s.label}><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" set:html={s.path} /></a>)}
+          </div>
+        )}
       </div>
       {columns.map((c: any) => (
         <div>

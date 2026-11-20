@@ -1,7 +1,6 @@
 ---
 title: Armadores criam associação para intervir nos assuntos do mar
 date: '2016-06-28'
-type: Media coverage
 source: Jornal de Negócios
 language: PT
 summary: Shipowners with vessels in MAR create EISAP.

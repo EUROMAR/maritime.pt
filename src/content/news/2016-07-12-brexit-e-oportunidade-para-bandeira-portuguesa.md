@@ -1,7 +1,6 @@
 ---
 title: Brexit é oportunidade para bandeira portuguesa
 date: '2016-07-12'
-type: Media coverage
 source: Jornal de Negócios
 language: PT
 summary: Portugal can become more attractive, with legislative fixes needed.

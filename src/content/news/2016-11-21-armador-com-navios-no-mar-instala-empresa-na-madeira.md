@@ -1,7 +1,6 @@
 ---
 title: Armador com navios no MAR instala empresa na Madeira
 date: '2016-11-21'
-type: Media coverage
 source: Diário de Notícias
 language: PT
 summary: AMISCO opens a company in Madeira for crew management.

@@ -9,16 +9,15 @@ const errors = [];
 const warnings = [];
 
 const ENUMS = {
-  newsType: ['Press release', 'Media coverage', 'Opinion', 'Interview', 'Statement'],
   language: ['EN', 'PT'],
   series: ['Madeira Maritime Week', 'Portugal Shipping Week', 'Annual Meeting'],
-  group: ['Board of Directors', 'General Assembly', 'Fiscal Council', 'Honorary'],
 };
 
 const RULES = {
-  news: { label: 'News', name: 'title', required: ['title', 'date', 'type'], dates: ['date'], enums: { type: ENUMS.newsType, language: ENUMS.language }, files: ['image', 'documents[].file'], refs: { event: 'events' } },
+  news: { label: 'News', name: 'title', required: ['title', 'date'], dates: ['date'], enums: { language: ENUMS.language }, files: ['image', 'documents[].file'], refs: { event: 'events' } },
   events: { label: 'Event', name: 'shortTitle', required: ['title', 'shortTitle', 'series', 'startDate', 'location', 'summary'], dates: ['startDate', 'endDate'], enums: { series: ENUMS.series }, files: ['heroImage', 'gallery[].image', 'presentations[].file', 'documents[].file', 'speakers[].photo', 'partners[].logo'] },
-  board: { label: 'Person', name: 'name', required: ['name', 'group', 'role'], dates: [], enums: { group: ENUMS.group }, files: ['photo'] },
+  board: { label: 'Person', name: 'name', required: ['name', 'group', 'role'], dates: [], enums: {}, files: ['photo'], softRefs: { group: 'governance' } },
+  governance: { label: 'Governance section', name: 'title', required: ['title'], dates: [], enums: {}, files: [] },
   pages: { label: 'Page', name: 'title', required: ['title'], dates: ['updated'], enums: {}, files: [] },
 };
 
@@ -68,7 +67,8 @@ for (const [col, rule] of Object.entries(RULES)) {
     for (const k of rule.dates) if (!empty(data[k]) && Number.isNaN(new Date(data[k]).valueOf())) errors.push(`${who}: "${k}" is not a valid date (${data[k]}).`);
     for (const [k, allowed] of Object.entries(rule.enums)) if (!empty(data[k]) && !allowed.includes(data[k])) errors.push(`${who}: "${k}" must be one of: ${allowed.join(', ')} (it is "${data[k]}").`);
     for (const p of rule.files) for (const v of valuesAt(data, p)) if (!fileExists(v)) warnings.push(`${who}: file not found – ${v}`);
-    for (const [k, target] of Object.entries(rule.refs ?? {})) if (!empty(data[k]) && !ids[target].has(slugOf(data[k]))) errors.push(`${who}: "${k}" points to an event that doesn't exist (${data[k]}).`);
+    for (const [k, target] of Object.entries(rule.softRefs ?? {})) if (!empty(data[k]) && !ids[target].has(slugOf(data[k]))) warnings.push(`${who}: its Governance section was deleted – this person is not shown until you pick another section.`);
+    for (const [k, target] of Object.entries(rule.refs ?? {})) if (!empty(data[k]) && !ids[target].has(slugOf(data[k]))) errors.push(`${who}: "${k}" points to something that no longer exists (${data[k]}).`);
   }
 }
 
@@ -87,6 +87,7 @@ readJson('src/data/headers.json');
 const order = readJson('src/data/people-order.json');
 
 for (const s of home.sections ?? []) {
+  if (s?.section === 'people' && !empty(s.group) && !ids.governance.has(slugOf(s.group))) warnings.push(`Home page → People section: the chosen Governance section no longer exists (${s.group}). Pick another one.`);
   if (!empty(s?.featured) && !ids.events.has(slugOf(s.featured))) errors.push(`Home page → Events section: the featured event no longer exists (${s.featured}). Pick another one or leave it empty.`);
 }
 for (const p of order.people ?? []) {

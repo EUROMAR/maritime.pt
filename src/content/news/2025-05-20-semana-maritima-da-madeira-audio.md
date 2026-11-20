@@ -1,7 +1,6 @@
 ---
 title: Semana Marítima da Madeira (áudio)
 date: '2025-05-20'
-type: Media coverage
 source: RTP Madeira
 language: PT
 summary: Radio coverage of Madeira Maritime Week 2025.

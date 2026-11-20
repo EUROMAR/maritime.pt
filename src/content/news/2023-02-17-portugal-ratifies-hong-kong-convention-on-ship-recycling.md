@@ -1,7 +1,6 @@
 ---
 title: Portugal ratifies Hong Kong Convention on Ship Recycling
 date: '2023-02-17'
-type: Press release
 source: EISAP
 language: EN
 summary: Portugal ratifies the Hong Kong Convention, bringing the number of contracting states to 20.

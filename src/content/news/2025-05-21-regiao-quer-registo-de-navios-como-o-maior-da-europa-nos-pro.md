@@ -1,7 +1,6 @@
 ---
 title: Região quer Registo de Navios como o maior da Europa nos próximos dez anos
 date: '2025-05-21'
-type: Media coverage
 source: JM Madeira
 language: PT
 summary: Madeira aims for MAR to become the largest register in Europe within ten years.

@@ -1,6 +1,6 @@
 ---
 name: René Menzel
-group: Board of Directors
+group: src/content/governance/board-of-directors.md
 role: Secretary
 company: HAMMONIA Reederei
 city: Hamburg, Germany

@@ -15,8 +15,8 @@ const { Content } = await render(item);
 const event = d.event ? await getEntry('events', d.event) : undefined;
 ---
 <Base title={d.title} description={d.summary} image={d.image}>
-  <PageHero eyebrow={`${d.type} · ${fmtDate(d.date, { day: 'numeric', month: 'long', year: 'numeric' })}`} title={d.title} crumbs={[{ href: '/news/', label: 'News' }]}>
-    {d.source && d.type !== 'Press release' && <p style="margin-top:6px">Source: {d.source}{d.language === 'PT' ? ' (in Portuguese)' : ''}</p>}
+  <PageHero eyebrow={fmtDate(d.date, { day: 'numeric', month: 'long', year: 'numeric' })} title={d.title} crumbs={[{ href: '/news/', label: 'News' }]}>
+    {d.source && <p style="margin-top:6px">Source: {d.source}{d.language === 'PT' ? ' (in Portuguese)' : ''}</p>}
   </PageHero>
   <section>
     <div class="wrap narrow">
@@ -26,7 +26,7 @@ const event = d.event ? await getEntry('events', d.event) : undefined;
       {d.documents.length > 0 && (<><h3 style="margin:36px 0 14px">Documents</h3><FileList files={d.documents} /></>)}
       {d.links.length > 0 && (
         <>
-          <h3 style="margin:36px 0 14px">{d.type === 'Press release' ? 'Coverage' : 'Read the article'}</h3>
+          <h3 style="margin:36px 0 14px">Read more</h3>
           <div class="files">
             {d.links.map((l) => <a class="file" href={l.url} target="_blank" rel="noopener"><span class="ext">↗</span><span><strong>{l.label}</strong><small>External link</small></span></a>)}
           </div>

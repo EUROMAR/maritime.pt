@@ -1,7 +1,6 @@
 ---
 title: Portugal adopted new tonnage tax law
 date: '2018-07-02'
-type: Press release
 source: EISAP
 language: EN
 summary: The new Portuguese tonnage tax regime and its conditions.

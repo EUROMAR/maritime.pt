@@ -1,7 +1,6 @@
 ---
 title: II Madeira Maritime Week prossegue hoje
 date: '2025-05-21'
-type: Media coverage
 source: DN Madeira
 language: PT
 summary: Coverage of the second conference day.

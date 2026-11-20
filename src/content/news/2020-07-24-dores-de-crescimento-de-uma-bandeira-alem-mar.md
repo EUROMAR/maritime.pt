@@ -1,7 +1,6 @@
 ---
 title: Dores de crescimento de uma bandeira além-mar
 date: '2020-07-24'
-type: Opinion
 source: Revista de Marinha
 language: PT
 summary: Carla Olival analyses the growing pains of the Portuguese flag.

@@ -1,7 +1,6 @@
 ---
 title: Tripulantes portugueses a bordo de "gigante" alemão
 date: '2016-10-20'
-type: Media coverage
 source: Diário de Notícias
 language: PT
 summary: Portuguese cadets begin boarding Hamburg Süd ships.

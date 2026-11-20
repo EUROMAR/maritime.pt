@@ -1,7 +1,6 @@
 ---
 title: Madeira "tem uma voz forte" na indústria marítima mundial
 date: '2025-05-20'
-type: Media coverage
 source: DN Madeira
 language: PT
 summary: EISAP President Nils Aden on Madeira's strong voice in global shipping.
