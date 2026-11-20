@@ -1,9 +1,13 @@
 ---
 title: Objectives
 eyebrow: What we do
+updated: 2026-11-20
 ---
-EISAP's objective is to represent the interests of Portuguese and international shipowners with vessels registered under MAR. Its mission is to contribute to the promotion, development, and harmonisation of MAR, in close collaboration with the International Business Centre of Madeira (IBC), the Regional Government of Madeira, and other relevant stakeholders.
+- Represent the interests of the Portuguese shipping sector, nationally and internationally
+- Promote the Portuguese flag and the development of MAR, together with the IBC and the Regional Government of Madeira
+- Create value and attract investment, companies and talent to Portuguese shipping
+- Support jobs and careers at sea and ashore for young Portuguese and European professionals
+- Foster a strong maritime cluster linking industry, academia and research
+- Keep members informed on legal, regulatory and market developments
+- Cooperate with like-minded associations in Portugal and abroad
 
-EISAP also aims to strengthen Portugal's maritime sector by supporting job creation for young Portuguese and European students in the maritime industry, both at sea and ashore. Furthermore, EISAP seeks to foster the development of a robust maritime cluster in Portugal, to collaborate with professional and academic partners, to coordinate research and business relations on legal and industry matters, to keep its members informed about the maritime sector, and to cooperate with like-minded international associations.
-
-<!-- TODO: check against the full original text of the Objectives page -->
