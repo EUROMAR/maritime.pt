@@ -1,10 +1,9 @@
 {
-  "logo": "/uploads/images/maritime portugal logo-1.png",
-  "name": "EISAP – Shipping Association of Portugal",
-  "legalName": "European International Shipowners' Association of Portugal",
+  "logo": "/uploads/images/MaritimePortugal_01_cor_fundo-branco.png",
+  "name": "Maritime Portugal",
+  "legalName": "Shipping Association of Portugal",
   "brand": "Maritime Portugal",
-  "description": "EISAP represents the majority of owners of ships sailing under the Portuguese flag, registered in MAR – the International Shipping Register of Madeira.",
-  "founded": "2016",
+  "description": "Maritime Portugal is the shipping association of Portugal. We bring together shipowners, ship managers and the wider shipping community to realise the full potential of Portuguese shipping.",
   "phone": "+351 291 645 066",
   "email": "eisap@portugal-shipowners.com",
   "offices": [
@@ -69,7 +68,6 @@
     "agreementIndividual": "https://www.portugal-shipowners.com/app/download/11206369199/EISAP-Membership-Agreement_Individual.pdf",
     "agreementCorporate": "https://www.portugal-shipowners.com/app/download/11206367499/EISAP-Membership-Agreement_Corporate.pdf"
   },
-  "statutesPdf": "https://www.portugal-shipowners.com/app/download/12442455399/Statutes-of-EISAP_en.pdf",
   "labels": {
     "shortName": "EISAP",
     "statutesTitle": "Statutes of Association",
