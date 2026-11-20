@@ -4,60 +4,52 @@
       {
         "label": "About",
         "link": {
-          "page": "/about/",
-          "url": ""
+          "page": "/about/"
         }
       },
       {
         "label": "Events",
         "link": {
-          "page": "/events/",
-          "url": ""
+          "page": "/events/"
         }
       },
       {
         "label": "News",
         "link": {
-          "page": "/news/",
-          "url": ""
+          "page": "/news/"
         }
       },
       {
         "label": "Governance",
         "link": {
-          "page": "/governance/",
-          "url": ""
+          "page": "/governance/"
         }
       },
       {
         "label": "Membership",
         "link": {
-          "page": "/membership/",
-          "url": ""
+          "page": "/membership/"
         }
       },
       {
         "label": "Contact",
         "link": {
-          "page": "/contact/",
-          "url": ""
+          "page": "/contact/"
         }
       }
     ],
     "membersLink": {
-      "show": true,
+      "show": false,
       "label": "Members area",
       "link": {
-        "page": "/members/",
-        "url": ""
+        "page": "/members/"
       }
     },
     "button": {
-      "show": true,
+      "show": false,
       "label": "Become a member",
       "link": {
-        "page": "/membership/#apply",
-        "url": ""
+        "page": "/membership/#apply"
       }
     }
   },
@@ -70,29 +62,25 @@
           {
             "label": "Who we are",
             "link": {
-              "page": "/about/",
-              "url": ""
+              "page": "/about/"
             }
           },
           {
             "label": "Objectives",
             "link": {
-              "page": "/about/#objectives",
-              "url": ""
+              "page": "/about/#objectives"
             }
           },
           {
             "label": "Governance",
             "link": {
-              "page": "/governance/",
-              "url": ""
+              "page": "/governance/"
             }
           },
           {
             "label": "Statutes (PDF)",
             "link": {
-              "page": "statutes",
-              "url": ""
+              "page": "statutes"
             }
           }
         ]
@@ -103,15 +91,13 @@
           {
             "label": "Annual meetings",
             "link": {
-              "page": "/events/",
-              "url": ""
+              "page": "/events/"
             }
           },
           {
             "label": "News & press",
             "link": {
-              "page": "/news/",
-              "url": ""
+              "page": "/news/"
             }
           }
         ]
@@ -122,22 +108,19 @@
           {
             "label": "Become a member",
             "link": {
-              "page": "/membership/",
-              "url": ""
+              "page": "/membership/"
             }
           },
           {
             "label": "Members area (coming soon)",
             "link": {
-              "page": "/members/",
-              "url": ""
+              "page": "/members/"
             }
           },
           {
             "label": "Contact",
             "link": {
-              "page": "/contact/",
-              "url": ""
+              "page": "/contact/"
             }
           }
         ]
@@ -147,22 +130,19 @@
       {
         "label": "Privacy policy",
         "link": {
-          "page": "/privacy/",
-          "url": ""
+          "page": "/privacy/"
         }
       },
       {
         "label": "Cookie policy",
         "link": {
-          "page": "/cookies/",
-          "url": ""
+          "page": "/cookies/"
         }
       },
       {
         "label": "Legal notice",
         "link": {
-          "page": "/legal-notice/",
-          "url": ""
+          "page": "/legal-notice/"
         }
       }
     ]
