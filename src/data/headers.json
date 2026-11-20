@@ -1,37 +1,32 @@
 {
   "news": {
+    "title": "News",
+    "intro": "News from the shipping sector in Portugal and beyond.",
     "seoTitle": "News & press",
-    "seoDescription": "Press releases, media coverage and opinion from EISAP – the Shipping Association of Portugal.",
-    "eyebrow": "News & press",
-    "title": "News, press releases and media coverage",
-    "intro": "EISAP's press releases and how the media has covered the Portuguese flag and MAR since 2016."
+    "seoDescription": "Press releases, media coverage and opinion from the Shipping Association of Portugal."
   },
   "events": {
-    "seoTitle": "Annual meetings",
-    "seoDescription": "EISAP annual meetings – Madeira Maritime Week and Portugal Shipping Week.",
-    "eyebrow": "Events",
-    "title": "Annual meetings",
-    "intro": "EISAP organises its Annual Meetings alternately as part of Portugal Shipping Week (PSW) in the Lisbon area or Madeira Maritime Week (MMW) in Madeira."
+    "title": "Events",
+    "intro": "Maritime Portugal takes part in events in Portugal and abroad, representing the Portuguese shipping sector.",
+    "seoTitle": "Events",
+    "seoDescription": "Maritime Portugal takes part in events in Portugal and abroad, representing the Portuguese shipping sector."
   },
   "governance": {
+    "title": "Governance",
+    "intro": "Maritime Portugal is led by shipowners and shipping professionals from Portugal and across Europe.",
     "seoTitle": "Governance",
-    "seoDescription": "Board of Directors, General Assembly and Fiscal Council of EISAP.",
-    "eyebrow": "Governance",
-    "title": "Board & governing bodies",
-    "intro": "EISAP is led by shipowners and maritime professionals from across Europe."
+    "seoDescription": "Board of Directors, General Assembly and Fiscal Council of EISAP."
   },
   "contact": {
+    "title": "Contact",
+    "intro": "Maritime Portugal welcomes shipowners, ship managers and all companies and professionals active in the shipping sector, in Portugal and abroad, who share our goal of realising the full potential of Portuguese shipping.",
     "seoTitle": "Contact",
-    "seoDescription": "Contact EISAP in Funchal and Lisbon.",
-    "eyebrow": "Contact",
-    "title": "Get in touch",
-    "intro": "Our team in Madeira and Lisbon is happy to help shipowners, partners and media."
+    "seoDescription": "Contact Maritime Portugal"
   },
   "notFound": {
-    "seoTitle": "Page not found",
-    "seoDescription": "",
     "eyebrow": "404",
     "title": "This page has sailed",
-    "intro": "The page you are looking for does not exist or has moved."
+    "intro": "This ship has sailed! The page you are looking for does not exist or has moved.",
+    "seoTitle": "Page not found"
   }
 }
