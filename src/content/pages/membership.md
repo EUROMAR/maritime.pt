@@ -1,6 +1,5 @@
 ---
-title: Become a member
-eyebrow: Membership
+title: Membership
 intro: Join the shipping association of Portugal and help grow Portugal as a
   maritime nation.
 updated: 2026-11-20
