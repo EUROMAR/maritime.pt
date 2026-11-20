@@ -1,7 +1,7 @@
 ---
 name: Pedro Calado
-group: src/content/governance/board-of-directors.md
-role: Secretary General
+group: src/content/governance/strategic-council.md
+role: Secretary
 company: Maritime Portugal
 city: Funchal, Madeira, Portugal
 photo: /uploads/images/image.jpg
