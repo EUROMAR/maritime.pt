@@ -43,7 +43,9 @@
   "membership": {
     "formUrl": "www.eu-registry.com"
   },
+  "statutesPdf": "/uploads/documents/2026-10-21_EISAP_Maritime_Portugal_Estatutos_Statutes_PT-EN-1.pdf",
   "labels": {
+    "statutesTitle": "Statutes of Association",
     "affiliationsTitle": "Memberships",
     "openMap": "Open map ↗"
   },
