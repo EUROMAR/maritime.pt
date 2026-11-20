@@ -1,8 +1,10 @@
 ---
 title: Who we are
-eyebrow: About EISAP
-intro: The voice of international shipowners under the Portuguese flag since 2016.
+eyebrow: About Maritime Portugal
+intro: Representing Portugal's shipping sector – creating value and growing
+  Portugal as a maritime nation.
+updated: 2026-11-20
 ---
-The European International Shipowners' Association of Portugal (EISAP) represents the majority of owners of ships sailing under the Portuguese flag. It is a private association, founded in 2016.
+Maritime Portugal is the shipping association of Portugal. We bring together shipowners, ship managers and the wider shipping community to realise the full potential of Portuguese shipping.
 
-EISAP is headquartered in Funchal, the capital of the Madeira region. This ensures proximity to the International Business Centre of Madeira (IBC), which includes the International Shipping Register of Madeira (MAR). EISAP also maintains an office in Lisbon, providing closer and more direct business connections with its associates.
+Formally constituted as EISAP, the association works with public authorities, industry, academia and international partners to strengthen Portugal's position as a maritime nation, including the development of the International Shipping Register of Madeira (MAR).
