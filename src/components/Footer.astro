@@ -13,7 +13,7 @@ const legal = (footer.legal ?? []).filter((l: any) => l?.label);
       <div>
         <h4>{footer.addressTitle || site.name}</h4>
         <p>{site.legalName}</p>
-        {site.offices.slice(0, 1).map((o) => <p style="margin-top:10px;white-space:pre-line">{o.address}</p>)}
+        {(site.offices ?? []).slice(0, 1).map((o) => <p style="margin-top:10px;white-space:pre-line">{o.address}</p>)}
         <p style="margin-top:12px"><a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a><br /><a href={`mailto:${site.email}`}>{site.email}</a></p>
       </div>
       {columns.map((c: any) => (
