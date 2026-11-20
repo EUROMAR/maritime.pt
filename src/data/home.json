@@ -45,7 +45,7 @@
       "text": "Maritime Portugal is the shipping association of Portugal. We bring together shipowners, ship managers and the wider shipping community to realise the full potential of Portuguese shipping.",
       "buttons": [
         {
-          "label": "About EISAP",
+          "label": "About Maritime Portugal",
           "link": {
             "page": "/about/"
           },
@@ -55,7 +55,7 @@
           "label": "Become a member",
           "link": {
             "page": "custom",
-            "url": "www.eu-registry.com"
+            "url": "https://forms.cloud.microsoft/e/66Lr3S4E1P"
           },
           "style": "red"
         }
@@ -141,7 +141,7 @@
           "label": "Apply for membership",
           "link": {
             "page": "custom",
-            "url": "www.eu-registry.com"
+            "url": "https://forms.cloud.microsoft/e/66Lr3S4E1P"
           },
           "style": "red"
         },
