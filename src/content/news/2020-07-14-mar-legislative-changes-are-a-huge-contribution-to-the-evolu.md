@@ -1,7 +1,6 @@
 ---
 title: 'MAR: legislative changes are a "huge contribution" to the evolution of Portuguese shipping'
 date: '2020-07-14'
-type: Press release
 source: EISAP
 language: EN
 summary: EISAP welcomes parliamentary approval of the amendments to Decree-Law 96/89.

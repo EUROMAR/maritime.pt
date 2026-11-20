@@ -1,7 +1,6 @@
 ---
 title: '"O Brexit é uma grande oportunidade para o MAR"'
 date: '2021-02-12'
-type: Interview
 source: Económico Madeira
 language: PT
 summary: 'Interview: how Brexit could bring UK and Gibraltar vessels to the Madeira register.'

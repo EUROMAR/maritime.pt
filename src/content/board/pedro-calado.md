@@ -1,6 +1,6 @@
 ---
 name: Pedro Calado
-group: General Assembly
+group: src/content/governance/general-assembly.md
 role: Secretary · Secretary General of EISAP
 company: EISAP
 city: Funchal, Madeira, Portugal

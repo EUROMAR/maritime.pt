@@ -1,6 +1,6 @@
 ---
 name: Nils Aden
-group: Board of Directors
+group: src/content/governance/board-of-directors.md
 role: Acting President
 company: Harren Group
 city: Hamburg, Germany

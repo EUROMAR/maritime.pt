@@ -1,7 +1,6 @@
 ---
 title: Reduction of registration and other service fees of the International Shipping Register of Madeira
 date: '2020-09-21'
-type: Press release
 source: EISAP
 language: EN
 summary: EISAP welcomes the fee reductions under Ordinance 561/2020 and congratulates the Regional Government of Madeira.

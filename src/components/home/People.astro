@@ -4,7 +4,7 @@ import Buttons from './Buttons.astro';
 import { getPeople } from '../../people';
 const { s } = Astro.props;
 const count = Number(s.count) || 0;
-const all = await getPeople(s.group || 'Board of Directors');
+const all = await getPeople(s.group || 'board-of-directors');
 const people = count > 0 ? all.slice(0, count) : all;
 ---
 {people.length > 0 && (

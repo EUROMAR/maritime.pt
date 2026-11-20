@@ -1,6 +1,6 @@
 ---
 name: Duarte Vaz Pinto
-group: Board of Directors
+group: src/content/governance/board-of-directors.md
 role: Advisor to the Board of Directors
 company: EISAP
 city: Lisbon, Portugal

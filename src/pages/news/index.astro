@@ -8,16 +8,11 @@ const h = headers.news;
 
 const items = (await getCollection('news', (n) => !n.data.draft)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const years = [...new Set(items.map((n) => n.data.date.getUTCFullYear()))];
-const types = [...new Set(items.map((n) => n.data.type))];
 ---
 <Base title={h.seoTitle} description={h.seoDescription || undefined}>
   <PageHero eyebrow={h.eyebrow} title={h.title} intro={h.intro} />
   <section>
     <div class="wrap">
-      <div class="chips" id="filters" style="margin-bottom:12px">
-        <button class="chip active" data-type="all">All</button>
-        {types.map((t) => <button class="chip" data-type={t}>{t}</button>)}
-      </div>
       <div class="chips" style="margin-bottom:32px">
         {years.map((y) => <a class="chip" href={`#y${y}`}>{y}</a>)}
       </div>
@@ -26,7 +21,7 @@ const types = [...new Set(items.map((n) => n.data.type))];
           <h2 style="font-size:1.4rem">{y}</h2>
           <div class="grid-3">
             {items.filter((n) => n.data.date.getUTCFullYear() === y).map((n) => (
-              <div data-type={n.data.type} class="news-item" style="display:contents"><NewsCard item={n} /></div>
+              <NewsCard item={n} />
             ))}
           </div>
         </div>
@@ -34,13 +29,3 @@ const types = [...new Set(items.map((n) => n.data.type))];
     </div>
   </section>
 </Base>
-<script>
-  const btns = document.querySelectorAll<HTMLButtonElement>('#filters .chip');
-  btns.forEach((b) => b.addEventListener('click', () => {
-    btns.forEach((x) => x.classList.toggle('active', x === b));
-    const t = b.dataset.type;
-    document.querySelectorAll<HTMLElement>('.news-item').forEach((el) => {
-      (el.firstElementChild as HTMLElement).style.display = t === 'all' || el.dataset.type === t ? '' : 'none';
-    });
-  }));
-</script>

@@ -1,6 +1,6 @@
 ---
 name: Carla Olival
-group: Fiscal Council
+group: src/content/governance/fiscal-council.md
 role: Member
 company: EUROMAR
 city: Piraeus, Greece

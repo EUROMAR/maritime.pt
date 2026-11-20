@@ -1,7 +1,6 @@
 ---
 title: For a stronger Portuguese maritime cluster – international and Portuguese shipowners are now closer
 date: '2020-01-24'
-type: Press release
 source: EISAP
 language: EN
 summary: EISAP becomes an associate member of the Portuguese Shipowners' Association (AAMC).

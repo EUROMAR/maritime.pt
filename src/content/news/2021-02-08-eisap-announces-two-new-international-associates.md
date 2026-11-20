@@ -1,7 +1,6 @@
 ---
 title: EISAP announces two new international associates
 date: '2021-02-08'
-type: Press release
 source: EISAP
 language: EN
 summary: Langh Ship Oy Ab and Blue Planet Shipping join EISAP as corporate members.

@@ -1,7 +1,6 @@
 ---
 title: Portugal keeps on investing in its flag
 date: '2020-09-01'
-type: Press release
 source: EISAP
 language: EN
 summary: New mortgage law and administrative changes take effect for the Madeira register.

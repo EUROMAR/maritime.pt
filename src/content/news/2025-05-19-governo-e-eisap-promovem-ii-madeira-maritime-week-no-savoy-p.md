@@ -1,7 +1,6 @@
 ---
 title: Governo e EISAP promovem II Madeira Maritime Week no Savoy Palace
 date: '2025-05-19'
-type: Media coverage
 source: JM Madeira
 language: PT
 summary: The Regional Government and EISAP host the second Madeira Maritime Week.

@@ -33,14 +33,12 @@ components:
             - { value: /news/, label: News & press }
             - { value: /governance/, label: Governance }
             - { value: /membership/, label: Membership }
-            - { value: /membership/#apply, label: Membership → Application form }
+            - { value: /membership/#apply, label: Membership → Apply button }
             - { value: /contact/, label: Contact }
             - { value: /privacy/, label: Privacy policy }
             - { value: /cookies/, label: Cookie policy }
             - { value: /legal-notice/, label: Legal notice }
             - { value: statutes, label: "Document: Statutes (PDF)" }
-            - { value: agreement-corporate, label: "Document: Membership agreement – corporate" }
-            - { value: agreement-individual, label: "Document: Membership agreement – individual" }
             - { value: custom, label: Custom link (type it below) }
       - name: url
         label: Custom link
@@ -162,10 +160,9 @@ content:
                   - { name: eyebrow, label: Small text above the title, type: string }
                   - { name: title, label: Title, type: string }
                   - name: group
-                    label: Which group
-                    type: select
-                    default: Board of Directors
-                    options: { values: [Board of Directors, General Assembly, Fiscal Council, Honorary] }
+                    label: Which Governance section
+                    type: reference
+                    options: { collection: governance, label: "{title}", search: "title" }
                   - { name: count, label: How many people, type: number, default: 0, description: "0 = everyone in the group." }
                   - { name: button, label: Button, component: button }
               - name: members
@@ -315,7 +312,7 @@ content:
         path: src/content/news
         filename: "{year}-{month}-{day}-{primary}.md"
         view:
-          fields: [title, date, type, draft]
+          fields: [title, date, draft]
           primary: title
           sort: [date, title]
           search: [title, summary, source]
@@ -323,12 +320,6 @@ content:
         fields:
           - { name: title, label: Title, type: string, required: true }
           - { name: date, label: Date, type: date, required: true, description: "Publication date. Newest items are shown first." }
-          - name: type
-            label: Type
-            type: select
-            required: true
-            default: Press release
-            options: { values: [Press release, Media coverage, Opinion, Interview, Statement] }
           - { name: source, label: Source / publication, type: string, description: "For media coverage, e.g. Jornal Económico. Not shown for press releases." }
           - name: language
             label: Language
@@ -475,27 +466,45 @@ content:
           - { name: draft, label: Draft (not visible on the website), type: boolean, default: true, description: "Untick to publish." }
           - { name: body, label: Description, type: rich-text }
 
+      # ------------------------------------------------------ GOVERNANCE
+      - name: governance
+        label: Governance sections
+        description: Sections of the Governance page (e.g. Board of Directors, Fiscal Council). Add, rename or delete sections here. A section can have people, a note, or both.
+        type: collection
+        path: src/content/governance
+        filename: "{primary}.md"
+        view:
+          fields: [title, order, show]
+          primary: title
+          search: [title]
+          default: { sort: order }
+        fields:
+          - { name: title, label: Section title, type: string, required: true }
+          - { name: order, label: Position on the page, type: number, default: 10, description: "Lower numbers come first (1, 2, 3…)." }
+          - { name: show, label: Show on website, type: boolean, default: true }
+          - { name: body, label: Note below the members, type: rich-text, description: "Optional. Shown under the people of this section. A section with only a note (no people) is also shown." }
+
       # ------------------------------------------------------------ PEOPLE
       - name: board
         label: People
-        description: Board of Directors, General Assembly, Fiscal Council and honorary members. To change the order, use "People order".
+        description: People shown on the Governance page. Each person belongs to a Governance section. To change the order, use "People order".
         type: collection
         path: src/content/board
         filename: "{primary}.md"
         view:
-          fields: [name, group, role, active]
+          fields: [name, role, active]
           primary: name
-          sort: [name, group]
+          sort: [name]
           search: [name, company, role]
-          default: { sort: group }
+          default: { sort: name }
         fields:
           - { name: name, label: Name, type: string, required: true }
           - name: group
-            label: Governing body
-            type: select
+            label: Governance section
+            type: reference
             required: true
-            default: Board of Directors
-            options: { values: [Board of Directors, General Assembly, Fiscal Council, Honorary] }
+            options: { collection: governance, label: "{title}", search: "title" }
+            description: 'The section on the Governance page. Manage sections under "Governance sections".'
           - { name: role, label: Role, type: string, required: true, description: "E.g. President, Vice-President, Member." }
           - { name: company, label: Company, type: string }
           - { name: city, label: "City and country", type: string, description: "E.g. Hamburg, Germany." }
@@ -558,7 +567,7 @@ content:
           - { name: description, label: Default Google description, type: text, description: "Used for pages that don't have their own. About 150 characters." }
           - { name: founded, label: Founded, type: string }
           - { name: phone, label: Phone, type: string, description: "Shown in the footer and on the Contact page." }
-          - { name: email, label: Email, type: string, description: "Main contact address. Membership requests are sent here." }
+          - { name: email, label: Email, type: string, description: "Main contact address. Shown in the footer and on the Contact page." }
           - name: offices
             label: Offices
             description: The first office is shown in the footer.
@@ -598,9 +607,9 @@ content:
             label: Membership
             type: object
             fields:
-              - { name: formUrl, label: Form endpoint (optional), type: string, description: "Leave empty – the membership form then opens the visitor's email program. Only for a form service like Formspree or Tally." }
-              - { name: agreementIndividual, label: Agreement – individual, type: file, options: { media: documents } }
-              - { name: agreementCorporate, label: Agreement – corporate, type: file, options: { media: documents } }
+              - { name: applyUrl, label: '"Apply for membership" button – link', type: string, description: "Where the big button on the Membership page goes, e.g. https://forms.example.com/apply. Leave empty to open an email to the main address." }
+              - { name: applyLabel, label: Button text, type: string, default: Apply for membership }
+              - { name: applyText, label: Text above the button, type: string, description: "Optional." }
           - { name: statutesPdf, label: Statutes PDF, type: file, options: { media: documents } }
           - name: labels
             label: Small texts
@@ -617,6 +626,6 @@ content:
             label: Social links
             type: object
             fields:
-              - { name: linkedin, label: LinkedIn, type: string }
+              - { name: linkedin, label: LinkedIn, type: string, description: "Full link. Shown as an icon in the footer. Leave empty to hide." }
               - { name: youtube, label: YouTube, type: string }
               - { name: vimeo, label: Vimeo, type: string }

@@ -1,7 +1,6 @@
 ---
 title: Armadores preocupados com atrasos nos certificados marítimos
 date: '2016-08-18'
-type: Media coverage
 source: Jornal de Negócios
 language: PT
 summary: About 600 pending requests and concerns over the image of the flag.

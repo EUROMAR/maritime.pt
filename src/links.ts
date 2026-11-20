@@ -5,8 +5,6 @@ export type CmsLink = { page?: string; url?: string } | string | undefined | nul
 
 const documents: Record<string, () => string | undefined> = {
   statutes: () => site.statutesPdf,
-  'agreement-corporate': () => site.membership?.agreementCorporate,
-  'agreement-individual': () => site.membership?.agreementIndividual,
 };
 
 /** Resolve a CMS link to an href. Falls back to `fallback` (default "/") when empty. */

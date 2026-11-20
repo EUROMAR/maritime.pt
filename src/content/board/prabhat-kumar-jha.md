@@ -1,6 +1,6 @@
 ---
 name: Prabhat Kumar Jha
-group: General Assembly
+group: src/content/governance/general-assembly.md
 role: Vice-President
 company: MSC Shipmanagement Ltd.
 city: Limassol, Cyprus

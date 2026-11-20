@@ -1,7 +1,6 @@
 ---
 title: EISAP vê "Green Deal" como oportunidade de transformação para o transporte marítimo
 date: '2021-02-25'
-type: Media coverage
 source: Jornal Económico
 language: PT
 summary: EISAP sees the EU Green Deal as an opportunity to transform shipping.

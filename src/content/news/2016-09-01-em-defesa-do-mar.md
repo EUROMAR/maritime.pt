@@ -1,7 +1,6 @@
 ---
 title: Em defesa do MAR
 date: '2016-09-01'
-type: Opinion
 source: Diário de Notícias
 language: PT
 summary: Robert Lorenz-Meyer defends the competitiveness of Portuguese shipping and the register.

@@ -41,7 +41,9 @@
     }
   ],
   "membership": {
-    "formUrl": "www.eu-registry.com"
+    "applyUrl": "https://www.eu-registry.com",
+    "applyLabel": "Apply for membership",
+    "applyText": "Ready to join? Click below to start your application."
   },
   "statutesPdf": "/uploads/documents/2026-10-21_EISAP_Maritime_Portugal_Estatutos_Statutes_PT-EN-1.pdf",
   "labels": {

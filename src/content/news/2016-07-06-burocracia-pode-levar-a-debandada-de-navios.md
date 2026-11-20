@@ -1,7 +1,6 @@
 ---
 title: Burocracia pode levar a debandada de navios
 date: '2016-07-06'
-type: Interview
 source: Diário de Notícias
 language: PT
 summary: Robert Lorenz-Meyer warns bureaucracy could drive ships away from the register.
