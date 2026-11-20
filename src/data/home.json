@@ -85,6 +85,7 @@
     {
       "section": "events",
       "show": true,
+      "title": "Events",
       "featured": "src/content/events/mmw-2027.md",
       "pastCount": 0,
       "upcomingLabel": "Next event",
