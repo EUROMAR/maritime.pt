@@ -41,13 +41,9 @@
     }
   ],
   "membership": {
-    "agreementIndividual": "https://www.portugal-shipowners.com/app/download/11206369199/EISAP-Membership-Agreement_Individual.pdf",
-    "agreementCorporate": "https://www.portugal-shipowners.com/app/download/11206367499/EISAP-Membership-Agreement_Corporate.pdf"
+    "formUrl": "www.eu-registry.com"
   },
   "labels": {
-    "shortName": "EISAP",
-    "statutesTitle": "Statutes of Association",
-    "statutesNote": "English",
     "affiliationsTitle": "Memberships",
     "openMap": "Open map ↗"
   },
