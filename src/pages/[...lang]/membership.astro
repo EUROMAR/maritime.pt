@@ -1,0 +1,40 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import { render } from 'astro:content';
+import site from '../../data/site.json';
+import { langPaths, localize, t, tr, type Lang } from '../../i18n';
+import { getPage } from '../../texts';
+
+export function getStaticPaths() { return langPaths(); }
+const lang: Lang = Astro.params.lang === 'pt' ? 'pt' : 'en';
+const T = t(lang);
+const page = await getPage('membership', lang);
+const { Content } = await render(page);
+const m = (site as any).membership ?? {};
+const labels = (site as any).labels ?? {};
+const raw = String(tr(m, 'applyUrl', lang) ?? '').trim();
+// Accept "www.example.com" as well as full links
+const applyUrl = !raw ? `mailto:${site.email}` : /^(https?:|mailto:|\/)/.test(raw) ? localize(raw, lang) : `https://${raw}`;
+const external = /^https?:/.test(applyUrl);
+const applyText = tr(m, 'applyText', lang);
+---
+<Base title={T.membershipTitle} description={T.membershipDescription}>
+  <PageHero eyebrow={page.data.eyebrow} title={page.data.title} intro={page.data.intro} />
+  <section>
+    <div class="wrap grid-2">
+      <div class="prose"><Content /></div>
+      {site.statutesPdf && (
+        <div class="pillars">
+          <a class="file" href={site.statutesPdf} target="_blank" rel="noopener"><span class="ext">pdf</span><span><strong>{tr(labels, 'statutesTitle', lang)}</strong><small>{tr(labels, 'statutesNote', lang)}</small></span></a>
+        </div>
+      )}
+    </div>
+  </section>
+  <section id="apply" class="section-alt">
+    <div class="wrap narrow" style="text-align:center">
+      {applyText && <p class="muted" style="margin-bottom:24px;font-size:1.1rem">{applyText}</p>}
+      <a class="btn btn-primary apply-btn" href={applyUrl} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined}>{tr(m, 'applyLabel', lang) || T.apply}</a>
+    </div>
+  </section>
+</Base>

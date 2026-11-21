@@ -1,7 +1,9 @@
 ---
 import site from '../data/site.json';
-import nav from '../data/navigation.json';
 import { href } from '../links';
+import { langOf, navData, tr } from '../i18n';
+const lang = langOf(Astro.url);
+const nav = navData(lang);
 const year = new Date().getFullYear();
 const footer = nav.footer ?? ({} as any);
 const columns = (footer.columns ?? []).filter((c: any) => c?.title || c?.links?.length);
@@ -17,8 +19,8 @@ const socialLinks = [
     <div class="foot">
       <div>
         <h4>{footer.addressTitle || site.name}</h4>
-        <p>{site.legalName}</p>
-        {(site.offices ?? []).slice(0, 1).map((o) => <p style="margin-top:10px;white-space:pre-line">{o.address}</p>)}
+        <p>{tr(site, 'legalName', lang)}</p>
+        {((site as any).offices ?? []).slice(0, 1).map((o: any) => <p style="margin-top:10px;white-space:pre-line">{o.address}</p>)}
         <p style="margin-top:12px"><a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a><br /><a href={`mailto:${site.email}`}>{site.email}</a></p>
         {socialLinks.length > 0 && (
           <div class="social">
@@ -30,14 +32,14 @@ const socialLinks = [
         <div>
           {c.title && <h4>{c.title}</h4>}
           <ul>
-            {(c.links ?? []).filter((l: any) => l?.label).map((l: any) => <li><a href={href(l.link)}>{l.label}</a></li>)}
+            {(c.links ?? []).filter((l: any) => l?.label).map((l: any) => <li><a href={href(l.link, '/', lang)}>{l.label}</a></li>)}
           </ul>
         </div>
       ))}
     </div>
     <div class="legal">
       <span>© {year} {site.name}</span>
-      <div>{legal.map((l: any) => <a href={href(l.link)}>{l.label}</a>)}</div>
+      <div>{legal.map((l: any) => <a href={href(l.link, '/', lang)}>{l.label}</a>)}</div>
     </div>
   </div>
 </footer>

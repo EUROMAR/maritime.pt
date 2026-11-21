@@ -1,0 +1,51 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHero from '../../../components/PageHero.astro';
+import { getCollection } from 'astro:content';
+import { dateRange } from '../../../lib';
+import { headersData, langPaths, localize, t, tr, type Lang } from '../../../i18n';
+
+export function getStaticPaths() { return langPaths(); }
+const lang: Lang = Astro.params.lang === 'pt' ? 'pt' : 'en';
+const T = t(lang);
+const h = headersData(lang).events ?? {};
+
+const events = (await getCollection('events', (e) => !e.data.draft)).sort((a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf());
+const now = new Date();
+const upcoming = events.filter((e) => e.data.startDate > now).reverse();
+const past = events.filter((e) => e.data.startDate <= now);
+const url = (id: string) => localize(`/events/${id}/`, lang);
+---
+<Base title={h.seoTitle} description={h.seoDescription || undefined}>
+  <PageHero eyebrow={h.eyebrow} title={h.title} intro={h.intro} />
+  <section>
+    <div class="wrap">
+      <h2>{T.upcoming}</h2>
+      {upcoming.length ? (
+        <div class="grid-3" style="margin-top:20px">{upcoming.map((e) => <a class="card" href={url(e.id)}><div class="body"><div class="meta"><span class="tag">{e.data.series}</span></div><h3>{tr(e.data, 'title', lang)}</h3><p>{dateRange(e.data.startDate, e.data.endDate, lang)} · {tr(e.data, 'location', lang)}</p><span class="more">{T.details}</span></div></a>)}</div>
+      ) : (
+        <div class="empty" style="margin-top:20px">{T.noUpcoming} <a href={localize('/contact/', lang)} style="color:var(--green)">{T.contactUs}</a> {T.keptInformed}</div>
+      )}
+    </div>
+  </section>
+  <section class="section-alt">
+    <div class="wrap">
+      <h2>{T.pastEditions}</h2>
+      <div class="grid-3" style="margin-top:20px">
+        {past.map((e) => (
+          <a class="card" href={url(e.id)}>
+            <div class="thumb" style={e.data.heroImage ? '' : 'background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;font-size:1.6rem;font-weight:700;letter-spacing:0;text-transform:none'}>
+              {e.data.heroImage ? <img src={e.data.heroImage} alt="" loading="lazy" /> : tr(e.data, 'shortTitle', lang)}
+            </div>
+            <div class="body">
+              <div class="meta"><span class="tag">{e.data.series}</span><span>{dateRange(e.data.startDate, e.data.endDate, lang)}</span></div>
+              <h3>{tr(e.data, 'title', lang)}</h3>
+              <p>{tr(e.data, 'location', lang)}</p>
+              <span class="more">{T.viewEdition}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

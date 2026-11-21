@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import PersonCard from '../../components/PersonCard.astro';
+import { getCollection, render } from 'astro:content';
+import { getPeople } from '../../people';
+import { headersData, langPaths, richText, tr, type Lang } from '../../i18n';
+
+export function getStaticPaths() { return langPaths(); }
+const lang: Lang = Astro.params.lang === 'pt' ? 'pt' : 'en';
+const h = headersData(lang).governance ?? {};
+
+const all = await getPeople();
+// Biography: Portuguese field (bio_pt) when filled in, otherwise the English text.
+const rendered = await Promise.all(all.map(async (p) => {
+  const bioPt = lang === 'pt' ? richText(p.data.bio_pt) : '';
+  return { p, bioPt, Content: bioPt ? null : (await render(p)).Content };
+}));
+const sections = await Promise.all(
+  (await getCollection('governance', (s) => s.data.show))
+    .sort((a, b) => a.data.order - b.data.order || a.data.title.localeCompare(b.data.title))
+    .map(async (s) => {
+      const notePt = lang === 'pt' ? richText(s.data.note_pt) : '';
+      return {
+        s,
+        title: tr(s.data, 'title', lang),
+        people: rendered.filter((r) => r.p.data.group === s.id),
+        notePt,
+        Note: !notePt && (s.body ?? '').trim() ? (await render(s)).Content : null,
+      };
+    }),
+);
+const visible = sections.filter((x) => x.people.length > 0 || x.Note || x.notePt);
+---
+<Base title={h.seoTitle} description={h.seoDescription || undefined}>
+  <PageHero eyebrow={h.eyebrow} title={h.title} intro={h.intro} />
+  {visible.map(({ s, title, people, Note, notePt }, i) => (
+    <section class={i % 2 ? 'section-alt' : ''} id={s.id}>
+      <div class="wrap">
+        <h2>{title}</h2>
+        {people.length > 0 && (
+          <div class="grid-4" style="margin-top:24px">
+            {people.map(({ p, Content, bioPt }) => (
+              <PersonCard name={p.data.name} role={tr(p.data, 'role', lang)} meta={[p.data.company, tr(p.data, 'city', lang)].filter(Boolean).join(' · ')} photo={p.data.photo} bio>
+                {bioPt ? <Fragment set:html={bioPt} /> : Content && <Content />}
+              </PersonCard>
+            ))}
+          </div>
+        )}
+        {notePt ? <div class="prose" style="margin-top:24px" set:html={notePt} /> : Note && <div class="prose" style="margin-top:24px"><Note /></div>}
+      </div>
+    </section>
+  ))}
+</Base>

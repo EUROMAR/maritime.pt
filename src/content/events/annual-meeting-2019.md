@@ -27,5 +27,9 @@ programme:
 documents:
 - title: Programme
   file: https://www.portugal-shipowners.com/app/download/12450297599/Program+-+EISAP+Annual+Meeting+2019.pdf
+title_pt: "3.ª Reunião Anual da EISAP – \"Portugal makes the difference\""
+edition_pt: "3.ª Reunião Anual"
+location_pt: "Cascais e Lisboa"
+summary_pt: "Três dias em Cascais que juntaram o WISTA Atlantic Forum sobre as mulheres no setor marítimo, a assembleia-geral da EISAP com painéis sobre o futuro do shipping português, uma conferência sobre shipping verde e o Dia Marítimo Europeu em Lisboa."
 ---
 <!-- Optional longer description of the event. Photos go in "gallery", videos in "videos". -->

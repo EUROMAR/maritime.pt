@@ -1,0 +1,32 @@
+{
+  "news": {
+    "title": "Notícias",
+    "intro": "Notícias do setor do shipping em Portugal e no mundo.",
+    "seoTitle": "Notícias e imprensa",
+    "seoDescription": "Comunicados de imprensa, notícias e artigos de opinião da Maritime Portugal – Associação Europeia e Internacional de Shipping de Portugal."
+  },
+  "events": {
+    "title": "Eventos",
+    "intro": "A Maritime Portugal participa em eventos em Portugal e no estrangeiro, em representação do setor do shipping português.",
+    "seoTitle": "Eventos",
+    "seoDescription": "A Maritime Portugal participa em eventos em Portugal e no estrangeiro, em representação do setor do shipping português."
+  },
+  "governance": {
+    "title": "Órgãos sociais",
+    "intro": "A Maritime Portugal é dirigida por armadores e profissionais do shipping de Portugal e de toda a Europa.",
+    "seoTitle": "Órgãos sociais",
+    "seoDescription": "Direção, Assembleia-Geral, Conselho Fiscal e restantes órgãos da EISAP."
+  },
+  "contact": {
+    "title": "Contactos",
+    "intro": "Para questões sobre a associação, adesão ou pedidos da comunicação social, entre em contacto connosco.",
+    "seoTitle": "Contactos",
+    "seoDescription": "Contacte a Maritime Portugal"
+  },
+  "notFound": {
+    "eyebrow": "404",
+    "title": "Esta página já zarpou",
+    "intro": "A página que procura não existe ou foi movida.",
+    "seoTitle": "Página não encontrada"
+  }
+}

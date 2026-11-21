@@ -1,20 +1,28 @@
 ---
 import Logo from './Logo.astro';
-import nav from '../data/navigation.json';
 import { href } from '../links';
+import { langOf, localize, navData, switchPath, t } from '../i18n';
+const lang = langOf(Astro.url);
+const T = t(lang);
+const nav = navData(lang);
 const path = Astro.url.pathname;
-const links = (nav.header?.links ?? []).filter((l) => l?.label).map((l) => ({ href: href(l.link), label: l.label }));
+const home = localize('/', lang);
+const links = (nav.header?.links ?? []).filter((l: any) => l?.label).map((l: any) => ({ href: href(l.link, '/', lang), label: l.label }));
 const button = nav.header?.button;
 ---
 <header class="site-header">
   <div class="wrap nav">
-    <a href="/" class="logo" aria-label="Home"><Logo /></a>
-    <button class="burger" aria-label="Open menu" aria-expanded="false" id="burger"><span></span><span></span><span></span></button>
-    <nav class="menu" id="menu" aria-label="Main">
+    <a href={home} class="logo" aria-label={T.home}><Logo /></a>
+    <button class="burger" aria-label={T.openMenu} data-open={T.openMenu} data-close={T.closeMenu} aria-expanded="false" id="burger"><span></span><span></span><span></span></button>
+    <nav class="menu" id="menu" aria-label={T.mainMenu}>
       {links.map((l) => (
-        <a href={l.href} aria-current={l.href !== '/' && path.startsWith(l.href) ? 'page' : undefined}>{l.label}</a>
+        <a href={l.href} aria-current={l.href !== home && path.startsWith(l.href.split('#')[0]) ? 'page' : undefined}>{l.label}</a>
       ))}
-      {button?.show !== false && button?.label && <a href={href(button.link)} class="btn btn-primary btn-sm">{button.label}</a>}
+      {button?.show !== false && button?.label && <a href={href(button.link, '/', lang)} class="btn btn-primary btn-sm">{button.label}</a>}
+      <span class="lang" role="group" aria-label={T.langLabel}>
+        <a href={switchPath(Astro.url, 'en')} hreflang="en" lang="en" aria-current={lang === 'en' ? 'true' : undefined}>EN</a>
+        <a href={switchPath(Astro.url, 'pt')} hreflang="pt-PT" lang="pt-PT" aria-current={lang === 'pt' ? 'true' : undefined}>PT</a>
+      </span>
     </nav>
   </div>
 </header>
@@ -25,7 +33,7 @@ const button = nav.header?.button;
     m?.classList.toggle('open', open);
     document.body.classList.toggle('menu-open', open);
     b?.setAttribute('aria-expanded', String(open));
-    b?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    b?.setAttribute('aria-label', (open ? b.dataset.close : b.dataset.open) ?? '');
   };
   b?.addEventListener('click', () => setOpen(!m?.classList.contains('open')));
   // Close after choosing a link (also for links to a section on the same page)

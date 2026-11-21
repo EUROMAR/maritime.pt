@@ -33,5 +33,9 @@ conference:
   - title: Session 2 – Portugal flag heading to Europe's top 3
   - title: Session 3 – No shipping cluster without ship finance
   - title: Session 4 – Digitalisation and transformation in shipping (WISTA Atlantic Forum & WISTA MED)
+title_pt: "4.ª Reunião Anual da EISAP"
+edition_pt: "4.ª Reunião Anual"
+location_pt: "Lisboa e Estoril"
+summary_pt: "Uma conferência de um dia na Gare Marítima de Alcântara, com programa social no Estoril e em Lisboa, dedicada ao pacote Fit for 55, ao caminho da bandeira portuguesa para o top 3 europeu, ao financiamento de navios e à digitalização."
 ---
 <!-- Optional longer description of the event. Photos go in "gallery", videos in "videos". -->

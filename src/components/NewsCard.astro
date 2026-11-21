@@ -1,16 +1,18 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { fmtDate } from '../lib';
+import { langOf, localize, t } from '../i18n';
+const lang = langOf(Astro.url);
 interface Props { item: CollectionEntry<'news'> }
 const { item } = Astro.props;
 const d = item.data;
 ---
-<a class="card" href={`/news/${item.id}/`}>
+<a class="card" href={localize(`/news/${item.id}/`, lang)}>
   {d.image && <div class="thumb"><img src={d.image} alt={d.imageAlt ?? ''} loading="lazy" /></div>}
   <div class="body">
-    <div class="meta"><span>{fmtDate(d.date)}</span>{d.source && <span>{d.source}</span>}{d.language === 'PT' && <span>PT</span>}</div>
+    <div class="meta"><span>{fmtDate(d.date, undefined, lang)}</span>{d.source && <span>{d.source}</span>}{d.language !== (lang === 'pt' ? 'PT' : 'EN') && <span>{d.language}</span>}</div>
     <h3>{d.title}</h3>
     {d.summary && <p>{d.summary}</p>}
-    <span class="more">Read more →</span>
+    <span class="more">{t(lang).readMore}</span>
   </div>
 </a>

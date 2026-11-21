@@ -1,0 +1,29 @@
+---
+/** Home page: sections come from src/data/home.json (PT: src/data/pt/home.json), in that order. */
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/home/Hero.astro';
+import About from '../../components/home/About.astro';
+import Events from '../../components/home/Events.astro';
+import News from '../../components/home/News.astro';
+import People from '../../components/home/People.astro';
+import Members from '../../components/home/Members.astro';
+import Cta from '../../components/home/Cta.astro';
+import { homeData, langPaths, type Lang } from '../../i18n';
+
+export function getStaticPaths() { return langPaths(); }
+const lang: Lang = Astro.params.lang === 'pt' ? 'pt' : 'en';
+const home = homeData(lang);
+
+const components: Record<string, any> = {
+  'top-banner': Hero, 'who-we-are': About, events: Events, news: News, people: People, members: Members, 'membership-banner': Cta,
+};
+// Full-width sections (banner, call to action) don't take part in the light/grey alternation.
+const ownBackground = new Set(['top-banner', 'membership-banner']);
+let n = 0;
+const sections = (home.sections ?? [])
+  .filter((s: any) => s && s.show !== false && components[s.section])
+  .map((s: any) => ({ s, Component: components[s.section], alt: ownBackground.has(s.section) ? false : n++ % 2 === 1 }));
+---
+<Base>
+  {sections.map(({ s, Component, alt }: any) => <Component s={s} alt={alt} />)}
+</Base>

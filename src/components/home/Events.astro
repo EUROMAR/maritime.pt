@@ -1,6 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import { dateRange } from '../../lib';
+import { langOf, locale, localize, t, tr } from '../../i18n';
+const lang = langOf(Astro.url);
+const T = t(lang);
+const url = (id: string) => localize(`/events/${id}/`, lang);
 const { s } = Astro.props;
 
 const all = (await getCollection('events', (e) => !e.data.draft)).sort((a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf());
@@ -20,8 +24,8 @@ const keep = (e: any, i: number) => i === 0 || i === timeline.length - 1 || e ==
 const hidden = timeline.filter((e, i) => !keep(e, i)).length;
 const d = latest?.data;
 const facts = latest ? [
-  d.conference.length > 0 && `${label(s.programmeLabel, 'Conference programme')}${d.speakers.length ? ` & ${d.speakers.length} ${label(s.speakersLabel, 'speakers')}` : ''}`,
-  d.presentations.length > 0 && label(s.presentationsLabel, 'Presentations available for download'),
+  d.conference.length > 0 && `${label(s.programmeLabel, T.conferenceProgramme)}${d.speakers.length ? ` & ${d.speakers.length} ${label(s.speakersLabel, T.speakersWord)}` : ''}`,
+  d.presentations.length > 0 && label(s.presentationsLabel, T.presentationsAvailable),
   label(s.galleryLabel, ''),
 ].filter(Boolean) : [];
 ---
@@ -33,7 +37,7 @@ const facts = latest ? [
       {s.title && <h2>{s.title}</h2>}
       {s.text && <p class="lead">{s.text}</p>}
       {timeline.length > 1 && (
-        <div class="voy" aria-label="Timeline of annual meetings">
+        <div class="voy" aria-label={T.timeline}>
           <div class="voy-track">
             {timeline.map((e, i) => <i class={keep(e, i) ? undefined : 'mid'} style={`left:${(i / timeline.length) * 100}%`}></i>)}
             <svg class="voy-ship" viewBox="0 0 48 30" aria-hidden="true">
@@ -50,11 +54,11 @@ const facts = latest ? [
           <div class="voy-stops">
             {timeline.map((e, i) => (
               <>
-                {i === timeline.length - 1 && hidden > 0 && <a class="voy-more" href="/events/">+{hidden} more</a>}
-                <a class={`voy-stop${e === latest ? ' hi' : ''}${keep(e, i) ? '' : ' mid'}`} href={`/events/${e.id}/`}>
+                {i === timeline.length - 1 && hidden > 0 && <a class="voy-more" href={localize('/events/', lang)}>+{hidden} {T.more}</a>}
+                <a class={`voy-stop${e === latest ? ' hi' : ''}${keep(e, i) ? '' : ' mid'}`} href={url(e.id)}>
                   <span class="yr">{e.data.startDate.getUTCFullYear()}</span>
-                  <span class="tx">{stopName(e.data.shortTitle)}<br />{e.data.location}</span>
-                  {e === latest && <span class="pill">{isUpcoming ? label(s.upcomingLabel, 'Next event') : label(s.latestLabel, 'Latest edition')}</span>}
+                  <span class="tx">{stopName(tr(e.data, 'shortTitle', lang))}<br />{tr(e.data, 'location', lang)}</span>
+                  {e === latest && <span class="pill">{isUpcoming ? label(s.upcomingLabel, T.nextEvent) : label(s.latestLabel, T.latestEdition)}</span>}
                 </a>
               </>
             ))}
@@ -63,26 +67,26 @@ const facts = latest ? [
       )}
 
       <article class="ev">
-        <a class="ev-media" href={`/events/${latest.id}/`} tabindex="-1" aria-hidden="true">
+        <a class="ev-media" href={url(latest.id)} tabindex="-1" aria-hidden="true">
           {d.heroImage ? (
             <>
               <img class="ev-bg" src={d.heroImage} alt="" loading="lazy" />
               <img class="ev-img" src={d.heroImage} alt={d.heroImageAlt ?? ''} loading="lazy" />
             </>
-          ) : <span class="ev-mark">{latest.data.shortTitle}</span>}
-          <span class="ev-date"><b>{d.startDate.getUTCDate()}{d.endDate && d.endDate.getUTCMonth() === d.startDate.getUTCMonth() && d.endDate.getUTCDate() !== d.startDate.getUTCDate() ? `–${d.endDate.getUTCDate()}` : ''}</b>{d.startDate.toLocaleDateString('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' })}</span>
+          ) : <span class="ev-mark">{tr(latest.data, 'shortTitle', lang)}</span>}
+          <span class="ev-date"><b>{d.startDate.getUTCDate()}{d.endDate && d.endDate.getUTCMonth() === d.startDate.getUTCMonth() && d.endDate.getUTCDate() !== d.startDate.getUTCDate() ? `–${d.endDate.getUTCDate()}` : ''}</b>{`${d.startDate.toLocaleDateString(locale(lang), { month: 'short', timeZone: 'UTC' }).replace('.', '')} ${d.startDate.getUTCFullYear()}`}</span>
         </a>
         <div class="ev-body">
-          <span class="pill">{isUpcoming ? label(s.upcomingLabel, 'Next event') : label(s.latestLabel, 'Latest edition')}</span>
-          <h3><a href={`/events/${latest.id}/`}>{d.title}</a></h3>
-          <p class="when">{dateRange(d.startDate, d.endDate)} · {d.location}</p>
-          {d.edition && <p class="edition">{d.edition}</p>}
-          <p class="sum">{d.summary}</p>
+          <span class="pill">{isUpcoming ? label(s.upcomingLabel, T.nextEvent) : label(s.latestLabel, T.latestEdition)}</span>
+          <h3><a href={url(latest.id)}>{tr(d, 'title', lang)}</a></h3>
+          <p class="when">{dateRange(d.startDate, d.endDate, lang)} · {tr(d, 'location', lang)}</p>
+          {tr(d, 'edition', lang) && <p class="edition">{tr(d, 'edition', lang)}</p>}
+          <p class="sum">{tr(d, 'summary', lang)}</p>
           {facts.length > 0 && <ul>{facts.map((f) => <li>{f}</li>)}</ul>}
           <div class="ctas">
-            <a href={`/events/${latest.id}/`} class="btn btn-primary">{label(s.buttonLabel, 'Explore')} {d.shortTitle}</a>
-            {isUpcoming && d.registrationUrl && <a href={d.registrationUrl} class="btn btn-ghost">Register</a>}
-            <a href="/events/" class="btn btn-ghost">All events</a>
+            <a href={url(latest.id)} class="btn btn-primary">{label(s.buttonLabel, T.explore)} {tr(d, 'shortTitle', lang)}</a>
+            {isUpcoming && d.registrationUrl && <a href={d.registrationUrl} class="btn btn-ghost">{T.register}</a>}
+            <a href={localize('/events/', lang)} class="btn btn-ghost">{T.allEvents}</a>
           </div>
         </div>
       </article>

@@ -19,6 +19,7 @@ const RULES = {
   board: { label: 'Person', name: 'name', required: ['name', 'group', 'role'], dates: [], enums: {}, files: ['photo'], softRefs: { group: 'governance' } },
   governance: { label: 'Governance section', name: 'title', required: ['title'], dates: [], enums: {}, files: [] },
   pages: { label: 'Page', name: 'title', required: ['title'], dates: ['updated'], enums: {}, files: [] },
+  'pages-pt': { label: 'Page (PT)', name: 'title', required: ['title'], dates: ['updated'], enums: {}, files: [] },
 };
 
 const empty = (v) => v === undefined || v === null || (typeof v === 'string' && v.trim() === '');
@@ -80,15 +81,13 @@ const readJson = (p) => {
     return {};
   }
 };
-const home = readJson('src/data/home.json');
-readJson('src/data/site.json');
-readJson('src/data/navigation.json');
-readJson('src/data/headers.json');
+const homes = [['Home page', readJson('src/data/home.json')], ['Página inicial (PT)', readJson('src/data/pt/home.json')]];
+for (const p of ['src/data/site.json', 'src/data/navigation.json', 'src/data/headers.json', 'src/data/pt/navigation.json', 'src/data/pt/headers.json']) readJson(p);
 const order = readJson('src/data/people-order.json');
 
-for (const s of home.sections ?? []) {
-  if (s?.section === 'people' && !empty(s.group) && !ids.governance.has(slugOf(s.group))) warnings.push(`Home page → People section: the chosen Governance section no longer exists (${s.group}). Pick another one.`);
-  if (!empty(s?.featured) && !ids.events.has(slugOf(s.featured))) errors.push(`Home page → Events section: the featured event no longer exists (${s.featured}). Pick another one or leave it empty.`);
+for (const [name, home] of homes) for (const s of home.sections ?? []) {
+  if (s?.section === 'people' && !empty(s.group) && !ids.governance.has(slugOf(s.group))) warnings.push(`${name} → People section: the chosen Governance section no longer exists (${s.group}). Pick another one.`);
+  if (!empty(s?.featured) && !ids.events.has(slugOf(s.featured))) errors.push(`${name} → Events section: the featured event no longer exists (${s.featured}). Pick another one or leave it empty.`);
 }
 for (const p of order.people ?? []) {
   if (!empty(p) && !ids.board.has(slugOf(p))) warnings.push(`People order: "${p}" no longer exists – it is skipped.`);

@@ -1,13 +1,18 @@
 /** Small helpers shared by pages. */
-export const fmtDate = (d: Date, opts: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' }) =>
-  d.toLocaleDateString('en-GB', { ...opts, timeZone: 'UTC' });
+import { locale, type Lang } from './i18n';
 
-export const dateRange = (start: Date, end?: Date) => {
-  if (!end) return fmtDate(start, { day: 'numeric', month: 'long', year: 'numeric' });
-  const sameMonth = start.getUTCMonth() === end.getUTCMonth();
+export const fmtDate = (d: Date, opts: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' }, lang: Lang = 'en') =>
+  d.toLocaleDateString(locale(lang), { ...opts, timeZone: 'UTC' });
+
+const LONG: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+export const fmtLong = (d: Date, lang: Lang = 'en') => fmtDate(d, LONG, lang);
+
+export const dateRange = (start: Date, end?: Date, lang: Lang = 'en') => {
+  if (!end) return fmtDate(start, LONG, lang);
+  const sameMonth = start.getUTCMonth() === end.getUTCMonth() && start.getUTCFullYear() === end.getUTCFullYear();
   return sameMonth
-    ? `${start.getUTCDate()}–${fmtDate(end, { day: 'numeric', month: 'long', year: 'numeric' })}`
-    : `${fmtDate(start, { day: 'numeric', month: 'long' })} – ${fmtDate(end, { day: 'numeric', month: 'long', year: 'numeric' })}`;
+    ? `${start.getUTCDate()}–${fmtDate(end, LONG, lang)}`
+    : `${fmtDate(start, { day: 'numeric', month: 'long' }, lang)} – ${fmtDate(end, LONG, lang)}`;
 };
 
 export const initials = (name: string) => {

@@ -2,20 +2,24 @@
   "logo": "/uploads/images/MaritimePortugal_01_cor_fundo-branco.png",
   "name": "Maritime Portugal",
   "legalName": "Shipping Association of Portugal",
+  "legalName_pt": "Associação Europeia e Internacional de Shipping de Portugal",
   "brand": "Maritime Portugal",
   "description": "Maritime Portugal is the shipping association of Portugal. We bring together shipowners, ship managers and the wider shipping community to realise the full potential of Portuguese shipping.",
+  "description_pt": "A Maritime Portugal é a associação de shipping de Portugal. Reunimos armadores, gestores de navios e toda a comunidade do shipping para concretizar todo o potencial do shipping português.",
   "phone": "+351 291 645 066",
   "email": "info@maritime.pt",
   "affiliations": [
     {
       "name": "AAMC",
       "description": "Portuguese National Shipowners' Association",
-      "url": "https://www.aamc.pt/"
+      "url": "https://www.aamc.pt/",
+      "description_pt": "Associação de Armadores da Marinha de Comércio"
     },
     {
       "name": "Fórum Oceano",
       "description": "Association of Maritime Economy",
-      "url": "https://forumoceano.pt/en"
+      "url": "https://forumoceano.pt/en",
+      "description_pt": "Associação da Economia do Mar"
     }
   ],
   "memberLogos": [
@@ -43,13 +47,18 @@
   "membership": {
     "applyUrl": "https://forms.cloud.microsoft/e/66Lr3S4E1P",
     "applyLabel": "Apply for membership",
-    "applyText": "Ready to join? Click below to start your application."
+    "applyText": "Ready to join? Click below to start your application.",
+    "applyLabel_pt": "Candidatar-se a associado",
+    "applyText_pt": "Pronto para aderir? Clique abaixo para iniciar a sua candidatura."
   },
   "statutesPdf": "/uploads/documents/2026-10-21_EISAP_Maritime_Portugal_Estatutos_Statutes_PT-EN-1.pdf",
   "labels": {
     "statutesTitle": "Statutes of Association",
     "affiliationsTitle": "Memberships",
-    "openMap": "Open map ↗"
+    "openMap": "Open map ↗",
+    "statutesTitle_pt": "Estatutos da Associação",
+    "affiliationsTitle_pt": "Filiações",
+    "openMap_pt": "Abrir mapa ↗"
   },
   "social": {
     "linkedin": "https://www.linkedin.com/company/eisap-european-international-shipowners-association-of-portugal/posts/"
