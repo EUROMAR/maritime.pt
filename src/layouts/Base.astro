@@ -10,7 +10,7 @@ interface Props { title?: string; description?: string; image?: string; noindex?
 const lang = langOf(Astro.url);
 const { title, description = tr(site, 'description', lang), image = '/logo-maritime-portugal.png', noindex = false } = Astro.props;
 const fullName = tr(site, 'name', lang);
-const fullTitle = title ? `${title} – ${site.brand} | EISAP` : `${site.brand} – ${fullName}`;
+const fullTitle = title ? `${title} – ${site.brand} | EISAP` : site.brand === fullName ? site.brand : `${site.brand} – ${fullName}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
 ---
