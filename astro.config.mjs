@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { readFileSync } from 'node:fs';
 import optimizeImages from './integrations/optimize-images.mjs';
+import brandNoTranslate from './integrations/brand-notranslate.mjs';
 
 /**
  * Old-URL redirects are kept in ONE place: public/_redirects.
@@ -22,6 +23,6 @@ export default defineConfig({
   site: 'https://www.maritime.pt',
   trailingSlash: 'always',
   redirects,
-  integrations: [sitemap(), optimizeImages()],
+  integrations: [sitemap(), optimizeImages(), brandNoTranslate()],
   build: { format: 'directory' },
 });
