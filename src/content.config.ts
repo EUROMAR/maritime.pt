@@ -2,6 +2,9 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
+/** Optional Portuguese text (empty = the English text is shown). */
+const pt = z.string().nullish().transform((v) => v ?? undefined);
+
 /** File/link reference used for PDFs, presentations and documents. */
 const fileRef = z.object({
   title: z.string(),
@@ -35,6 +38,11 @@ const events = defineCollection({
     shortTitle: z.string(),             // "MMW 2025"
     series: z.enum(['Madeira Maritime Week', 'Portugal Shipping Week', 'Annual Meeting']),
     edition: z.string().optional(),     // "2nd edition · EISAP 6th Annual Meeting"
+    title_pt: pt,
+    edition_pt: pt,
+    location_pt: pt,
+    summary_pt: pt,
+    body_pt: pt,                        // Portuguese description (rich text)
     startDate: z.coerce.date(),
     endDate: z.coerce.date().optional(),
     location: z.string(),
@@ -77,6 +85,9 @@ const board = defineCollection({
     // Governance section: CMS reference path (src/content/governance/fiscal-council.md) → slug
     group: z.string().transform((v) => v.split('/').pop()!.replace(/\.md$/, '')),
     role: z.string(),
+    role_pt: pt,
+    city_pt: pt,
+    bio_pt: pt,                         // Portuguese biography (rich text)
     company: z.string().optional(),
     city: z.string().optional(),
     photo: z.string().optional(),
@@ -90,19 +101,29 @@ const governance = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/governance' }),
   schema: z.object({
     title: z.string(),
+    title_pt: pt,
+    note_pt: pt,                        // Portuguese note (rich text); the English note is the body
     order: z.number().default(99),
     show: z.boolean().default(true),
   }),
 });
 
-const pages = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/pages' }),
-  schema: z.object({
-    title: z.string(),
-    eyebrow: z.string().optional(),
-    intro: z.string().optional(),
-    updated: z.coerce.date().optional(),
-  }),
+const pageSchema = z.object({
+  title: z.string(),
+  eyebrow: z.string().optional(),
+  intro: z.string().optional(),
+  updated: z.coerce.date().optional(),
 });
 
-export const collections = { news, events, board, pages, governance };
+const pages = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/pages' }),
+  schema: pageSchema,
+});
+
+/** Portuguese versions of the text pages (same file names as src/content/pages). */
+const pagesPt = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/pages-pt' }),
+  schema: pageSchema,
+});
+
+export const collections = { news, events, board, pages, pagesPt, governance };

@@ -1,0 +1,138 @@
+{
+  "header": {
+    "links": [
+      {
+        "label": "Quem somos",
+        "link": {
+          "page": "/about/"
+        }
+      },
+      {
+        "label": "Eventos",
+        "link": {
+          "page": "/events/"
+        }
+      },
+      {
+        "label": "Notícias",
+        "link": {
+          "page": "/news/"
+        }
+      },
+      {
+        "label": "Órgãos sociais",
+        "link": {
+          "page": "/governance/"
+        }
+      },
+      {
+        "label": "Associados",
+        "link": {
+          "page": "/membership/"
+        }
+      },
+      {
+        "label": "Contactos",
+        "link": {
+          "page": "/contact/"
+        }
+      }
+    ],
+    "button": {
+      "show": false,
+      "label": "Tornar-se associado",
+      "link": {
+        "page": "/membership/#apply"
+      }
+    }
+  },
+  "footer": {
+    "addressTitle": "Maritime Portugal",
+    "columns": [
+      {
+        "title": "Associação",
+        "links": [
+          {
+            "label": "Quem somos",
+            "link": {
+              "page": "/about/"
+            }
+          },
+          {
+            "label": "Objetivos",
+            "link": {
+              "page": "/about/#objectives"
+            }
+          },
+          {
+            "label": "Órgãos sociais",
+            "link": {
+              "page": "/governance/"
+            }
+          },
+          {
+            "label": "Estatutos (PDF)",
+            "link": {
+              "page": "statutes"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Atividade",
+        "links": [
+          {
+            "label": "Eventos",
+            "link": {
+              "page": "/events/"
+            }
+          },
+          {
+            "label": "Notícias e imprensa",
+            "link": {
+              "page": "/news/"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Associados",
+        "links": [
+          {
+            "label": "Tornar-se associado",
+            "link": {
+              "page": "custom",
+              "url": "https://forms.cloud.microsoft/e/66Lr3S4E1P"
+            }
+          },
+          {
+            "label": "Contactos",
+            "link": {
+              "page": "/contact/"
+            }
+          }
+        ]
+      }
+    ],
+    "legal": [
+      {
+        "label": "Política de privacidade",
+        "link": {
+          "page": "/privacy/"
+        }
+      },
+      {
+        "label": "Política de cookies",
+        "link": {
+          "page": "/cookies/"
+        }
+      },
+      {
+        "label": "Aviso legal",
+        "link": {
+          "page": "/legal-notice/"
+        }
+      }
+    ]
+  }
+}

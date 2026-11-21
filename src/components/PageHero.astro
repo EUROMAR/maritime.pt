@@ -1,11 +1,13 @@
 ---
 interface Props { eyebrow?: string; title: string; intro?: string; crumbs?: { href: string; label: string }[] }
+import { langOf, localize, t } from '../i18n';
 const { eyebrow, title, intro, crumbs = [] } = Astro.props;
+const lang = langOf(Astro.url);
 ---
 <section class="page-hero">
   <div class="wrap">
     {crumbs.length > 0 && (
-      <div class="crumbs"><a href="/">Home</a>{crumbs.map((c) => <> / <a href={c.href}>{c.label}</a></>)}</div>
+      <div class="crumbs"><a href={localize('/', lang)}>{t(lang).home}</a>{crumbs.map((c) => <> / <a href={c.href}>{c.label}</a></>)}</div>
     )}
     {eyebrow && <span class="eyebrow">{eyebrow}</span>}
     <h1>{title}</h1>

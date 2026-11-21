@@ -1,10 +1,22 @@
 ---
+/** One 404 page for both languages (the host serves it for every missing address). Portuguese is shown for /pt/… addresses. */
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import headers from '../data/headers.json';
-const h = headers.notFound;
+import { headersData, t } from '../i18n';
+const v = (['en', 'pt'] as const).map((lang) => ({ lang, h: headersData(lang).notFound ?? {}, T: t(lang), pre: lang === 'pt' ? '/pt' : '' }));
 ---
-<Base title={h.seoTitle} noindex>
-  <PageHero eyebrow={h.eyebrow} title={h.title} intro={h.intro} />
-  <section><div class="wrap ctas"><a class="btn btn-green" href="/">Back to home</a><a class="btn btn-ghost" style="color:var(--green)" href="/news/">Latest news</a></div></section>
+<Base title={v[0].h.seoTitle} noindex>
+  {v.map(({ lang, h, T, pre }) => (
+    <div data-nf={lang} hidden={lang === 'pt'}>
+      <PageHero eyebrow={h.eyebrow} title={h.title} intro={h.intro} />
+      <section><div class="wrap ctas"><a class="btn btn-green" href={`${pre}/`}>{T.backHome}</a><a class="btn btn-ghost" style="color:var(--green)" href={`${pre}/news/`}>{T.latestNews}</a></div></section>
+    </div>
+  ))}
 </Base>
+<script is:inline>
+  if (/^\/pt(\/|$)/.test(location.pathname)) {
+    document.querySelector('[data-nf="en"]').hidden = true;
+    document.querySelector('[data-nf="pt"]').hidden = false;
+    document.documentElement.lang = 'pt-PT';
+  }
+</script>

@@ -1,0 +1,42 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import { render } from 'astro:content';
+import site from '../../data/site.json';
+import { langPaths, t, tr, type Lang } from '../../i18n';
+import { getPage } from '../../texts';
+
+export function getStaticPaths() { return langPaths(); }
+const lang: Lang = Astro.params.lang === 'pt' ? 'pt' : 'en';
+const T = t(lang);
+const about = await getPage('about', lang);
+const objectives = await getPage('objectives', lang);
+const { Content: AboutContent } = await render(about);
+const { Content: ObjContent } = await render(objectives);
+const labels = (site as any).labels ?? {};
+---
+<Base title={T.aboutTitle} description={T.aboutDescription}>
+  <PageHero eyebrow={about.data.eyebrow} title={about.data.title} intro={about.data.intro} />
+  <section>
+    <div class="wrap grid-2">
+      <div class="prose"><AboutContent /></div>
+      <div class="pillars">
+        {((site as any).offices ?? []).map((o: any) => (
+          <div class="pillar"><i>⌂</i><div><h3>{tr(o, 'name', lang)}</h3><p style="white-space:pre-line">{o.address}</p></div></div>
+        ))}
+        {site.statutesPdf && <a class="file" href={site.statutesPdf} target="_blank" rel="noopener"><span class="ext">pdf</span><span><strong>{tr(labels, 'statutesTitle', lang)}</strong><small>{tr(labels, 'statutesNote', lang)}</small></span></a>}
+      </div>
+    </div>
+  </section>
+  <section id="objectives" class="section-alt">
+    <div class="wrap narrow">
+      {objectives.data.eyebrow && <span class="eyebrow">{objectives.data.eyebrow}</span>}
+      <h2>{objectives.data.title}</h2>
+      <div class="prose"><ObjContent /></div>
+      <h3 style="margin-top:40px">{tr(labels, 'affiliationsTitle', lang)}</h3>
+      <div class="affil" style="margin-top:16px">
+        {site.affiliations.map((a) => <div><b>{a.name}</b><span>{tr(a, 'description', lang)}</span></div>)}
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,163 @@
+{
+  "sections": [
+    {
+      "section": "top-banner",
+      "show": true,
+      "eyebrow": "Maritime Portugal",
+      "title": "A voz dos armadores sob bandeira portuguesa",
+      "text": "A Maritime Portugal representa a maioria dos armadores com navios registados no MAR – o Registo Internacional de Navios da Madeira – e trabalha com o Governo Regional da Madeira, o CINM e a indústria para desenvolver um forte cluster marítimo português.",
+      "buttons": [
+        {
+          "label": "Tornar-se associado",
+          "link": {
+            "page": "/membership/"
+          },
+          "style": "red"
+        },
+        {
+          "label": "O que fazemos",
+          "link": {
+            "page": "/about/"
+          },
+          "style": "outline"
+        }
+      ],
+      "stats": [
+        {
+          "value": "1200+",
+          "label": "navios registados no MAR"
+        },
+        {
+          "value": "3.º",
+          "label": "maior registo da Europa"
+        },
+        {
+          "value": "11.º",
+          "label": "maior registo do mundo"
+        }
+      ]
+    },
+    {
+      "section": "who-we-are",
+      "show": true,
+      "eyebrow": "Quem somos",
+      "title": "Representamos o setor do shipping português",
+      "text": "A Maritime Portugal é a associação de shipping de Portugal. Reunimos armadores, gestores de navios e toda a comunidade do transporte marítimo para concretizar todo o potencial do shipping português.",
+      "buttons": [
+        {
+          "label": "Sobre a Maritime Portugal",
+          "link": {
+            "page": "/about/"
+          },
+          "style": "green"
+        },
+        {
+          "label": "Tornar-se associado",
+          "link": {
+            "page": "custom",
+            "url": "https://forms.cloud.microsoft/e/66Lr3S4E1P"
+          },
+          "style": "red"
+        }
+      ],
+      "objectives": [
+        {
+          "title": "Representar",
+          "text": "Defender os interesses do setor do shipping português, a nível nacional e internacional."
+        },
+        {
+          "title": "Promover o MAR",
+          "text": "Contribuir para a promoção da bandeira portuguesa e o desenvolvimento do MAR, em conjunto com o CINM e o Governo Regional da Madeira."
+        },
+        {
+          "title": "Desenvolver talento",
+          "text": "Criar valor e atrair investimento, empresas e talento para o shipping português. Apoiar o emprego e as carreiras no mar e em terra de jovens profissionais portugueses e europeus."
+        },
+        {
+          "title": "Construir o cluster",
+          "text": "Promover um forte cluster marítimo que ligue a indústria, a academia e a investigação. Cooperar com associações congéneres em Portugal e no estrangeiro."
+        }
+      ]
+    },
+    {
+      "section": "events",
+      "show": true,
+      "title": "Eventos",
+      "featured": "src/content/events/mmw-2027.md",
+      "pastCount": 0,
+      "upcomingLabel": "Próximo evento",
+      "latestLabel": "Última edição",
+      "buttonLabel": "Explorar",
+      "programmeLabel": "Programa da conferência",
+      "speakersLabel": "oradores",
+      "presentationsLabel": "Apresentações disponíveis para download",
+      "galleryLabel": "Galeria de fotografias e vídeo do evento"
+    },
+    {
+      "section": "news",
+      "show": true,
+      "title": "Notícias",
+      "count": 3,
+      "button": {
+        "label": "Todas as notícias",
+        "link": {
+          "page": "/news/"
+        },
+        "style": "outline"
+      }
+    },
+    {
+      "section": "people",
+      "show": true,
+      "eyebrow": "Órgãos sociais",
+      "title": "Direção",
+      "group": "src/content/governance/board-of-directors.md",
+      "count": 0,
+      "button": {
+        "label": "Todos os órgãos sociais",
+        "link": {
+          "page": "/governance/"
+        },
+        "style": "outline"
+      }
+    },
+    {
+      "section": "members",
+      "show": true,
+      "eyebrow": "Os nossos associados",
+      "title": "Armadores e gestores de navios de toda a Europa",
+      "showLogos": true,
+      "showAffiliations": true,
+      "affiliationPrefix": ""
+    },
+    {
+      "section": "membership-banner",
+      "show": true,
+      "eyebrow": "Associação",
+      "title": "Quer ajudar Portugal a crescer como nação marítima?",
+      "text": "Junte-se à Maritime Portugal para fazer ouvir a sua voz junto das autoridades portuguesas e madeirenses e estabelecer contacto com outros armadores.",
+      "buttons": [
+        {
+          "label": "Candidatar-se a associado",
+          "link": {
+            "page": "custom",
+            "url": "https://forms.cloud.microsoft/e/66Lr3S4E1P"
+          },
+          "style": "red"
+        },
+        {
+          "label": "Falar com o Secretário-Geral",
+          "link": {
+            "page": "/contact/"
+          },
+          "style": "outline"
+        }
+      ],
+      "note": {
+        "link": {
+          "page": "/"
+        }
+      }
+    }
+  ]
+}

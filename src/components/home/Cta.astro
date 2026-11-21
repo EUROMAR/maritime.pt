@@ -1,6 +1,7 @@
 ---
 import Buttons from './Buttons.astro';
 import { href } from '../../links';
+import { langOf } from '../../i18n';
 const { s } = Astro.props;
 const note = s.note ?? {};
 ---
@@ -15,7 +16,7 @@ const note = s.note ?? {};
       <div class="cta-actions">
         <Buttons buttons={s.buttons} as="fragment" />
         {(note.text || note.linkLabel) && (
-          <div class="cta-note">{note.text}{note.text && note.linkLabel ? ' ' : ''}{note.linkLabel && <a href={href(note.link)}>{note.linkLabel}</a>}</div>
+          <div class="cta-note">{note.text}{note.text && note.linkLabel ? ' ' : ''}{note.linkLabel && <a href={href(note.link, '/', langOf(Astro.url))}>{note.linkLabel}</a>}</div>
         )}
       </div>
     </div>

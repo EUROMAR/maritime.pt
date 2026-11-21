@@ -1,5 +1,6 @@
 ---
 import { initials } from '../lib';
+import { langOf, t } from '../i18n';
 interface Props { name: string; role?: string; meta?: string; photo?: string; bio?: boolean }
 const { name, role, meta, photo, bio = false } = Astro.props;
 ---
@@ -9,6 +10,6 @@ const { name, role, meta, photo, bio = false } = Astro.props;
   {role && <div class="role">{role}</div>}
   {meta && <p>{meta}</p>}
   {bio && (
-    <details><summary>Biography</summary><slot /></details>
+    <details><summary>{t(langOf(Astro.url)).biography}</summary><slot /></details>
   )}
 </div>

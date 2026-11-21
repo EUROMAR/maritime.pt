@@ -69,7 +69,7 @@ components:
 content:
   # ======================================================================
   - name: website
-    label: Home page & menus
+    label: Home page & menus (EN)
     type: group
     items:
       # ------------------------------------------------------------- HOME PAGE
@@ -379,6 +379,10 @@ content:
           - { name: endDate, label: End date, type: date, description: "Leave empty for a one-day event." }
           - { name: location, label: Location, type: string, required: true, description: "E.g. Funchal, Madeira." }
           - { name: summary, label: Summary, type: text, required: true, description: "1–2 sentences, shown on the home page and in Google results." }
+          - { name: title_pt, label: Full title (PT), type: string, description: "Portuguese version. Leave empty to show the English text." }
+          - { name: edition_pt, label: Edition (PT), type: string }
+          - { name: location_pt, label: Location (PT), type: string }
+          - { name: summary_pt, label: Summary (PT), type: text }
           - { name: heroImage, label: Main photo, type: image, options: { media: images }, description: "Wide landscape photo. Resized automatically." }
           - { name: heroImageAlt, label: Main photo description, type: string, description: "A few words describing the photo, for blind visitors." }
           - { name: registrationUrl, label: Registration link, type: string, pattern: { regex: "^$|^(https?://|/)\\S*$", message: "Start with https://" } }
@@ -465,6 +469,7 @@ content:
               - { name: url, label: Website, type: string, pattern: { regex: "^$|^https?://\\S*$", message: "Start with https://" } }
           - { name: draft, label: Draft (not visible on the website), type: boolean, default: true, description: "Untick to publish." }
           - { name: body, label: Description, type: rich-text }
+          - { name: body_pt, label: Description (PT), type: rich-text, description: "Portuguese version. Leave empty to show the English description." }
 
       # ------------------------------------------------------ GOVERNANCE
       - name: governance
@@ -480,9 +485,11 @@ content:
           default: { sort: order }
         fields:
           - { name: title, label: Section title, type: string, required: true }
+          - { name: title_pt, label: Section title (PT), type: string, description: "Portuguese version. Leave empty to show the English text." }
           - { name: order, label: Position on the page, type: number, default: 10, description: "Lower numbers come first (1, 2, 3…)." }
           - { name: show, label: Show on website, type: boolean, default: true }
           - { name: body, label: Note below the members, type: rich-text, description: "Optional. Shown under the people of this section. A section with only a note (no people) is also shown." }
+          - { name: note_pt, label: Note below the members (PT), type: rich-text, description: "Portuguese version. Leave empty to show the English note." }
 
       # ------------------------------------------------------------ PEOPLE
       - name: board
@@ -506,12 +513,15 @@ content:
             options: { collection: governance, label: "{title}", search: "title" }
             description: 'The section on the Governance page. Manage sections under "Governance sections".'
           - { name: role, label: Role, type: string, required: true, description: "E.g. President, Vice-President, Member." }
+          - { name: role_pt, label: Role (PT), type: string, description: "E.g. Presidente, Vice-Presidente, Vogal. Leave empty to show the English role." }
           - { name: company, label: Company, type: string }
           - { name: city, label: "City and country", type: string, description: "E.g. Hamburg, Germany." }
+          - { name: city_pt, label: "City and country (PT)", type: string, description: "E.g. Hamburgo, Alemanha. Leave empty to show the English one." }
           - { name: photo, label: Photo, type: image, options: { media: images }, description: "Square portrait works best. Initials are shown if empty." }
           - { name: active, label: Show on website, type: boolean, default: true, description: "Untick for former members, instead of deleting them." }
           - { name: order, label: Order, type: number, hidden: true }
           - { name: body, label: Biography, type: rich-text }
+          - { name: bio_pt, label: Biography (PT), type: rich-text, description: "Portuguese version. Leave empty to show the English biography." }
 
       - name: people-order
         label: People order
@@ -528,7 +538,7 @@ content:
 
   # ======================================================================
   - name: texts
-    label: Page texts
+    label: Page texts (EN)
     type: group
     items:
       - name: pages
@@ -536,6 +546,257 @@ content:
         description: Texts of the fixed pages (Who we are, Objectives, Membership, Privacy, Cookies, Legal notice). New pages can't be added here – ask the developer.
         type: collection
         path: src/content/pages
+        operations: { create: false, delete: false, rename: false }
+        view:
+          fields: [title, updated]
+          primary: title
+          search: [title]
+        fields:
+          - { name: title, label: Title, type: string, required: true }
+          - { name: eyebrow, label: Small text above the title, type: string }
+          - { name: intro, label: Intro, type: text, description: "Short paragraph under the title." }
+          - { name: updated, label: Last updated, type: date, description: "Shown on the privacy, cookie and legal pages." }
+          - { name: body, label: Text, type: rich-text }
+
+  # ======================================================================
+  # Portuguese (/pt/). Keep these entries in sync with the English ones above
+  # when fields are added (developer note).
+  - name: portugues
+    label: Português (PT)
+    type: group
+    items:
+      # ------------------------------------------------------------- HOME PAGE
+      - name: home-pt
+        label: Página inicial (PT)
+        description: Portuguese home page (/pt/). Same sections as the English one; links to pages automatically go to the Portuguese version. The home page is built from the sections below, top to bottom. Drag to reorder, untick "Show" to hide one, or add a new section.
+        type: file
+        path: src/data/pt/home.json
+        format: json
+        fields:
+          - name: sections
+            label: Sections
+            type: block
+            blockKey: section
+            list:
+              collapsible: { collapsed: true, summary: "{section} · {title}" }
+            blocks:
+              - name: top-banner
+                label: Top banner
+                fields:
+                  - { name: show, label: Show this section, type: boolean, default: true }
+                  - { name: eyebrow, label: Small text above the title, type: string }
+                  - { name: title, label: Title, type: string, description: "The big headline. Keep it under about 60 characters." }
+                  - { name: text, label: Intro text, type: text, description: "2–3 sentences." }
+                  - name: buttons
+                    label: Buttons
+                    component: button
+                    list: { max: 3, collapsible: { collapsed: true, summary: "{label}" } }
+                  - name: stats
+                    label: Figures
+                    type: object
+                    description: The big numbers under the buttons, e.g. "1,000+" / "Ships registered".
+                    list: { max: 6, collapsible: { collapsed: true, summary: "{value} {label}" } }
+                    fields:
+                      - { name: value, label: Number, type: string }
+                      - { name: label, label: Label, type: string }
+              - name: who-we-are
+                label: Who we are
+                fields:
+                  - { name: show, label: Show this section, type: boolean, default: true }
+                  - { name: eyebrow, label: Small text above the title, type: string }
+                  - { name: title, label: Title, type: string }
+                  - { name: text, label: Text, type: text }
+                  - name: buttons
+                    label: Buttons
+                    component: button
+                    list: { max: 3, collapsible: { collapsed: true, summary: "{label}" } }
+                  - name: objectives
+                    label: Objective boxes
+                    type: object
+                    description: Numbered automatically (01, 02 …) in the order shown here.
+                    list: { max: 6, collapsible: { collapsed: true, summary: "{title}" } }
+                    fields:
+                      - { name: title, label: Title, type: string }
+                      - { name: text, label: Text, type: text }
+              - name: events
+                label: Events
+                fields:
+                  - { name: show, label: Show this section, type: boolean, default: true }
+                  - { name: eyebrow, label: Small text above the title, type: string }
+                  - { name: title, label: Title, type: string }
+                  - { name: text, label: Text, type: text }
+                  - name: featured
+                    label: Featured event
+                    type: reference
+                    description: Leave empty to always feature the most recent event.
+                    options: { collection: events, label: "{shortTitle} – {location}", search: "shortTitle,title" }
+                  - { name: pastCount, label: How many other events to list, type: number, default: 0, description: "0 = all of them." }
+                  - { name: upcomingLabel, label: Label when the event is in the future, type: string, default: Next event }
+                  - { name: latestLabel, label: Label when the event is over, type: string, default: Latest edition }
+                  - { name: buttonLabel, label: Button text (the event name is added after it), type: string, default: Explore }
+                  - { name: programmeLabel, label: "Bullet: conference programme", type: string, description: "Shown only if the event has a conference agenda." }
+                  - { name: speakersLabel, label: "Bullet: word after the number of speakers", type: string }
+                  - { name: presentationsLabel, label: "Bullet: presentations", type: string, description: "Shown only if the event has presentations." }
+                  - { name: galleryLabel, label: "Bullet: photos and video", type: string, description: "Leave empty to hide this bullet." }
+              - name: news
+                label: News
+                fields:
+                  - { name: show, label: Show this section, type: boolean, default: true }
+                  - { name: eyebrow, label: Small text above the title, type: string }
+                  - { name: title, label: Title, type: string }
+                  - { name: count, label: How many news items, type: number, default: 3, description: "Items marked \"Feature on home page\" come first, then the newest." }
+                  - { name: button, label: Button, component: button }
+              - name: people
+                label: People
+                fields:
+                  - { name: show, label: Show this section, type: boolean, default: true }
+                  - { name: eyebrow, label: Small text above the title, type: string }
+                  - { name: title, label: Title, type: string }
+                  - name: group
+                    label: Which Governance section
+                    type: reference
+                    options: { collection: governance, label: "{title}", search: "title" }
+                  - { name: count, label: How many people, type: number, default: 0, description: "0 = everyone in the group." }
+                  - { name: button, label: Button, component: button }
+              - name: members
+                label: Members
+                fields:
+                  - { name: show, label: Show this section, type: boolean, default: true }
+                  - { name: eyebrow, label: Small text above the title, type: string }
+                  - { name: title, label: Title, type: string }
+                  - { name: showLogos, label: Show member logos, type: boolean, default: true, description: "Logos are managed in Site settings → Member logos." }
+                  - { name: showAffiliations, label: Show affiliations, type: boolean, default: true, description: "Affiliations are managed in Site settings → Affiliations." }
+                  - { name: affiliationPrefix, label: Text before each affiliation name, type: string, default: Member of }
+              - name: membership-banner
+                label: Membership banner
+                fields:
+                  - { name: show, label: Show this section, type: boolean, default: true }
+                  - { name: eyebrow, label: Small text above the title, type: string }
+                  - { name: title, label: Title, type: string }
+                  - { name: text, label: Text, type: text }
+                  - name: buttons
+                    label: Buttons
+                    component: button
+                    list: { max: 3, collapsible: { collapsed: true, summary: "{label}" } }
+                  - name: note
+                    label: Small note under the buttons
+                    type: object
+                    fields:
+                      - { name: text, label: Text, type: string, description: "Leave text and link text empty to hide the note." }
+                      - { name: linkLabel, label: Link text, type: string }
+                      - { name: link, label: Link, component: link }
+
+      # ----------------------------------------------------------------- MENUS
+      - name: navigation-pt
+        label: Menus (PT)
+        description: Portuguese top menu and footer (/pt/…). Links to pages automatically go to the Portuguese version.
+        type: file
+        path: src/data/pt/navigation.json
+        format: json
+        fields:
+          - name: header
+            label: Top menu
+            type: object
+            fields:
+              - name: links
+                label: Menu items
+                type: object
+                list: { collapsible: { collapsed: true, summary: "{label}" } }
+                fields:
+                  - { name: label, label: Text, type: string }
+                  - { name: link, label: Link, component: link }
+              - name: button
+                label: Red button
+                type: object
+                fields:
+                  - { name: show, label: Show, type: boolean, default: true }
+                  - { name: label, label: Text, type: string }
+                  - { name: link, label: Link, component: link }
+          - name: footer
+            label: Footer
+            type: object
+            fields:
+              - { name: addressTitle, label: Title above the address, type: string }
+              - name: columns
+                label: Link columns
+                type: object
+                list: { max: 5, collapsible: { collapsed: true, summary: "{title}" } }
+                fields:
+                  - { name: title, label: Column title, type: string }
+                  - name: links
+                    label: Links
+                    type: object
+                    list: { collapsible: { collapsed: true, summary: "{label}" } }
+                    fields:
+                      - { name: label, label: Text, type: string }
+                      - { name: link, label: Link, component: link }
+              - name: legal
+                label: Bottom links (privacy, cookies …)
+                type: object
+                list: { collapsible: { collapsed: true, summary: "{label}" } }
+                fields:
+                  - { name: label, label: Text, type: string }
+                  - { name: link, label: Link, component: link }
+
+      # ---------------------------------------------------------- PAGE HEADERS
+      - name: headers-pt
+        label: Cabeçalhos das páginas (PT)
+        description: Portuguese titles and intros at the top of the listing pages, plus the text Google shows in search results.
+        type: file
+        path: src/data/pt/headers.json
+        format: json
+        fields:
+          - name: news
+            label: News page
+            type: object
+            fields:
+              - { name: eyebrow, label: Small text above the title, type: string }
+              - { name: title, label: Title, type: string }
+              - { name: intro, label: Intro, type: text }
+              - { name: seoTitle, label: Browser tab title, type: string }
+              - { name: seoDescription, label: Google description, type: text, description: "About 150 characters. Shown under the page title in search results." }
+          - name: events
+            label: Events page
+            type: object
+            fields:
+              - { name: eyebrow, label: Small text above the title, type: string }
+              - { name: title, label: Title, type: string }
+              - { name: intro, label: Intro, type: text }
+              - { name: seoTitle, label: Browser tab title, type: string }
+              - { name: seoDescription, label: Google description, type: text, description: "About 150 characters. Shown under the page title in search results." }
+          - name: governance
+            label: Governance page
+            type: object
+            fields:
+              - { name: eyebrow, label: Small text above the title, type: string }
+              - { name: title, label: Title, type: string }
+              - { name: intro, label: Intro, type: text }
+              - { name: seoTitle, label: Browser tab title, type: string }
+              - { name: seoDescription, label: Google description, type: text, description: "About 150 characters. Shown under the page title in search results." }
+          - name: contact
+            label: Contact page
+            type: object
+            fields:
+              - { name: eyebrow, label: Small text above the title, type: string }
+              - { name: title, label: Title, type: string }
+              - { name: intro, label: Intro, type: text }
+              - { name: seoTitle, label: Browser tab title, type: string }
+              - { name: seoDescription, label: Google description, type: text, description: "About 150 characters. Shown under the page title in search results." }
+          - name: notFound
+            label: Page not found (404)
+            type: object
+            fields:
+              - { name: eyebrow, label: Small text above the title, type: string }
+              - { name: title, label: Title, type: string }
+              - { name: intro, label: Intro, type: text }
+              - { name: seoTitle, label: Browser tab title, type: string }
+              - { name: seoDescription, label: Google description, type: text, description: "About 150 characters. Shown under the page title in search results." }
+
+      - name: pages-pt
+        label: Textos das páginas (PT)
+        description: Portuguese texts of the fixed pages (Who we are, Objectives, Membership, Privacy, Cookies, Legal notice). New pages can't be added here – ask the developer.
+        type: collection
+        path: src/content/pages-pt
         operations: { create: false, delete: false, rename: false }
         view:
           fields: [title, updated]
@@ -563,8 +824,10 @@ content:
           - { name: logo, label: Logo, type: image, options: { media: images }, description: "Shown in the header. Leave empty to use the default Maritime Portugal logo. Use a wide SVG or PNG with a transparent background; it is shown 46px tall." }
           - { name: name, label: Site name, type: string, description: "Shown in the browser tab and the footer." }
           - { name: legalName, label: Legal name, type: string }
+          - { name: legalName_pt, label: Legal name (PT), type: string }
           - { name: brand, label: Brand, type: string }
           - { name: description, label: Default Google description, type: text, description: "Used for pages that don't have their own. About 150 characters." }
+          - { name: description_pt, label: Default Google description (PT), type: text }
           - { name: founded, label: Founded, type: string }
           - { name: phone, label: Phone, type: string, description: "Shown in the footer and on the Contact page." }
           - { name: email, label: Email, type: string, description: "Main contact address. Shown in the footer and on the Contact page." }
@@ -575,6 +838,7 @@ content:
             list: { collapsible: { collapsed: true, summary: "{name}" } }
             fields:
               - { name: name, label: Name, type: string }
+              - { name: name_pt, label: Name (PT), type: string }
               - { name: address, label: Address, type: text }
           - name: contacts
             label: Contact persons
@@ -584,6 +848,7 @@ content:
             fields:
               - { name: name, label: Name, type: string }
               - { name: role, label: Role, type: string }
+              - { name: role_pt, label: Role (PT), type: string }
               - { name: location, label: Location, type: string }
               - { name: email, label: Email, type: string }
           - name: affiliations
@@ -594,6 +859,7 @@ content:
             fields:
               - { name: name, label: Name, type: string }
               - { name: description, label: Description, type: string }
+              - { name: description_pt, label: Description (PT), type: string }
               - { name: url, label: Website, type: string }
           - name: memberLogos
             label: Member logos (home page)
@@ -610,6 +876,9 @@ content:
               - { name: applyUrl, label: '"Apply for membership" button – link', type: string, description: "Where the big button on the Membership page goes, e.g. https://forms.example.com/apply. Leave empty to open an email to the main address." }
               - { name: applyLabel, label: Button text, type: string, default: Apply for membership }
               - { name: applyText, label: Text above the button, type: string, description: "Optional." }
+              - { name: applyUrl_pt, label: Button link (PT), type: string, description: "Optional – only if Portuguese visitors should go to a different form." }
+              - { name: applyLabel_pt, label: Button text (PT), type: string, default: Candidatar-se a associado }
+              - { name: applyText_pt, label: Text above the button (PT), type: string }
           - { name: statutesPdf, label: Statutes PDF, type: file, options: { media: documents } }
           - name: labels
             label: Small texts
@@ -621,6 +890,11 @@ content:
               - { name: statutesNote, label: Statutes download – small text, type: string }
               - { name: affiliationsTitle, label: '"Who we are" page – affiliations heading', type: string }
               - { name: openMap, label: Contact page – map link text, type: string }
+              - { name: shortName_pt, label: Short name (PT), type: string }
+              - { name: statutesTitle_pt, label: Statutes download – title (PT), type: string }
+              - { name: statutesNote_pt, label: Statutes download – small text (PT), type: string }
+              - { name: affiliationsTitle_pt, label: Affiliations heading (PT), type: string }
+              - { name: openMap_pt, label: Map link text (PT), type: string }
           - { name: analyticsToken, label: Cloudflare Web Analytics token (optional), type: string, description: "Technical – leave as is." }
           - name: social
             label: Social links

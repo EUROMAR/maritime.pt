@@ -40,6 +40,9 @@ section{padding:88px 0}
 .menu{display:flex;gap:26px;align-items:center;font-size:.93rem;font-weight:500}
 .menu a:not(.btn){color:var(--muted)}
 .menu a:not(.btn):hover,.menu a[aria-current="page"]{color:var(--green)}
+.lang{display:inline-flex;align-items:center;gap:2px;padding-left:18px;border-left:1px solid var(--line);font-size:.8rem;font-weight:600;letter-spacing:.06em}
+.menu .lang a{padding:4px 7px;border-radius:6px}
+.menu .lang a[aria-current="true"]{color:#fff;background:var(--green)}
 .burger{display:none;background:none;border:0;cursor:pointer;padding:8px}
 .burger span{display:block;width:24px;height:2px;background:var(--ink);margin:5px 0}
 
@@ -243,6 +246,9 @@ html:has(.subnav){scroll-padding-top:140px}
   .menu{max-height:calc(100vh - 76px);overflow-y:auto;gap:0;padding:8px 24px 20px}
   .menu a:not(.btn){display:block;width:100%;padding:12px 0;border-bottom:1px solid var(--line)}
   .menu .btn{margin-top:16px}
+  .lang{border-left:0;padding:16px 0 0;gap:8px}
+  .menu .lang a:not(.btn){display:inline-block;width:auto;border:1px solid var(--line);padding:6px 12px}
+  .menu .lang a[aria-current="true"]{border-color:var(--green)}
   .burger{min-width:44px;min-height:44px;-webkit-tap-highlight-color:transparent;border-radius:8px}
   .burger:focus-visible{outline:2px solid var(--green)}
   body.menu-open{overflow:hidden}

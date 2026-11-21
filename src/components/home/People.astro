@@ -2,6 +2,8 @@
 import PersonCard from '../PersonCard.astro';
 import Buttons from './Buttons.astro';
 import { getPeople } from '../../people';
+import { langOf, tr } from '../../i18n';
+const lang = langOf(Astro.url);
 const { s } = Astro.props;
 const count = Number(s.count) || 0;
 const all = await getPeople(s.group || 'board-of-directors');
@@ -15,7 +17,7 @@ const people = count > 0 ? all.slice(0, count) : all;
         <Buttons buttons={s.button ? [s.button] : []} light as="fragment" />
       </div>
       <div class="grid-4">
-        {people.map((p) => <PersonCard name={p.data.name} role={p.data.role} meta={[p.data.company, p.data.city?.split(',')[0]].filter(Boolean).join(', ')} photo={p.data.photo} />)}
+        {people.map((p) => <PersonCard name={p.data.name} role={tr(p.data, 'role', lang)} meta={[p.data.company, tr(p.data, 'city', lang)?.split(',')[0]].filter(Boolean).join(', ')} photo={p.data.photo} />)}
       </div>
     </div>
   </section>

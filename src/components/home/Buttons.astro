@@ -1,17 +1,19 @@
 ---
 /** Buttons edited in the CMS. `light` = section has a light background (outline buttons turn green). */
 import { href, type CmsLink } from '../../links';
+import { langOf } from '../../i18n';
 type Btn = { label?: string; link?: CmsLink; style?: string };
 interface Props { buttons?: Btn[]; light?: boolean; as?: 'div' | 'p' | 'fragment'; class?: string; style?: string }
 const { buttons = [], light = false, as = 'div', class: cls = 'ctas', style } = Astro.props;
 const Tag = as === 'fragment' ? Fragment : as;
 const classes: Record<string, string> = { red: 'btn btn-primary', green: 'btn btn-green', outline: 'btn btn-ghost' };
 const list = buttons.filter((b) => b?.label);
+const lang = langOf(Astro.url);
 ---
 {list.length > 0 && (
   <Tag {...(as === 'fragment' ? {} : { class: cls, style })}>
     {list.map((b) => (
-      <a href={href(b.link)} class={classes[b.style ?? 'outline'] ?? classes.outline} style={light && (b.style ?? 'outline') === 'outline' ? 'color:var(--green)' : undefined}>{b.label}</a>
+      <a href={href(b.link, '/', lang)} class={classes[b.style ?? 'outline'] ?? classes.outline} style={light && (b.style ?? 'outline') === 'outline' ? 'color:var(--green)' : undefined}>{b.label}</a>
     ))}
   </Tag>
 )}
