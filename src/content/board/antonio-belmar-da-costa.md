@@ -6,7 +6,7 @@ role_pt: Secretário Geral
 company: Maritime Portugal
 city: Lisbon, Portugal
 city_pt: Lisboa, Portugal
-photo: /uploads/images/images (2).jpeg
+photo: /uploads/images/155FD057-AA14-4D7A-ADAA-5F9EF39272F8.jpg
 active: true
 bio_pt: Dirigente do setor das agências de navegação, com várias décadas de
   experiência nas áreas financeira, administrativa e comercial, tanto nas cargas
