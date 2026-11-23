@@ -12,14 +12,14 @@
     {
       "name": "AAMC",
       "description": "Portuguese National Shipowners' Association",
-      "url": "https://www.aamc.pt/",
-      "description_pt": "Associação de Armadores da Marinha de Comércio"
+      "description_pt": "Associação de Armadores da Marinha de Comércio",
+      "url": "https://www.aamc.pt/"
     },
     {
       "name": "Fórum Oceano",
       "description": "Association of Maritime Economy",
-      "url": "https://forumoceano.pt/en",
-      "description_pt": "Associação da Economia do Mar"
+      "description_pt": "Associação da Economia do Mar",
+      "url": "https://forumoceano.pt/en"
     }
   ],
   "memberLogos": [
@@ -42,6 +42,10 @@
     {
       "name": "Hammonia Reederei",
       "logo": "/uploads/images/images2.png"
+    },
+    {
+      "name": "Peter Döhle Schiffahrts-KG",
+      "logo": "/uploads/images/Captura de ecrã 2026-11-23, às 11.34.10.png"
     }
   ],
   "membership": {
