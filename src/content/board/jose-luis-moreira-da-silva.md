@@ -2,7 +2,7 @@
 name: José Luís Moreira da Silva
 group: src/content/governance/board-of-directors.md
 role: Board Member
-role_pt: Membro da Direção
+role_pt: Vogal da Direção
 company: SRS Advogados
 city: Lisbon, Portugal
 city_pt: Lisboa, Portugal
