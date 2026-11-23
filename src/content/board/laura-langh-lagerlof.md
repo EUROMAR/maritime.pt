@@ -6,7 +6,7 @@ role_pt: Vice-Presidente
 company: Langh Ship Oy Ab
 city: Piikkiö, Finland
 city_pt: Piikkiö, Finlândia
-photo: https://image.jimcdn.com/app/cms/image/transf/dimension=189x1024:format=jpg/path/s9f7df5342fcad539/image/iba174662e055234a/version/1750154889/image.jpg
+photo: /uploads/images/Captura de ecrã 2026-11-23, às 21.47.15.png
 active: true
 order: 2
 bio_pt: Managing Director e coproprietário do Langh Group, empresa de cariz
