@@ -2,7 +2,7 @@
 name: Jörg Molzahn
 group: src/content/governance/board-of-directors.md
 role: Board Member
-role_pt: Membro da Direção
+role_pt: Vogal da Direção
 company: Euromar | OceanScore
 city: Hamburg, Germany
 city_pt: Hamburgo, Alemanha
