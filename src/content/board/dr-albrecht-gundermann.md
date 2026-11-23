@@ -2,7 +2,7 @@
 name: Dr Albrecht Gundermann
 group: src/content/governance/strategic-council.md
 role: Member
-role_pt: Membro
+role_pt: Vogal
 company: Euromar | OceanScore
 city: Hamburg, Germany
 city_pt: Hamburgo, Alemanha
