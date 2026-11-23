@@ -6,7 +6,7 @@ role_pt: Vogal
 company: Euromar | OceanScore
 city: Hamburg, Germany
 city_pt: Hamburgo, Alemanha
-photo: /uploads/images/Albrecht_Gundermann.jpg
+photo: /uploads/images/Captura de ecrã 2026-11-23, às 11.29.33.png
 active: true
 bio_pt: Advogado e empresário marítimo com mais de 25 anos de experiência em
   financiamento de navios, registo de bandeira e conformidade em matéria de
