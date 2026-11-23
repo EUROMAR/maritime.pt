@@ -2,7 +2,7 @@
 name: Pedro Calado
 group: src/content/governance/strategic-council.md
 role: Member
-role_pt: Membro
+role_pt: Vogal
 company: Maritime Portugal
 city: Funchal, Madeira, Portugal
 photo: /uploads/images/image.jpg
