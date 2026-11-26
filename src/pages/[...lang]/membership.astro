@@ -18,6 +18,18 @@ const raw = String(tr(m, 'applyUrl', lang) ?? '').trim();
 const applyUrl = !raw ? `mailto:${site.email}` : /^(https?:|mailto:|\/)/.test(raw) ? localize(raw, lang) : `https://${raw}`;
 const external = /^https?:/.test(applyUrl);
 const applyText = tr(m, 'applyText', lang);
+
+// Embedded form (e.g. Microsoft Forms → Share → Embed). The CMS accepts either the
+// whole <iframe …> code or just its link. Empty = show the button instead.
+const embedRaw = String(tr(m, 'embed', lang) ?? '').trim();
+const embedSrc = (() => {
+  const src = (embedRaw.match(/src\s*=\s*["']([^"']+)["']/i)?.[1] ?? embedRaw).replace(/&amp;/g, '&').trim();
+  if (!/^https:\/\//.test(src)) return '';
+  const u = new URL(src);
+  if (/(^|\.)forms\.(office|cloud\.microsoft|microsoft)\.com$|^forms\.cloud\.microsoft$/.test(u.hostname) && !u.searchParams.has('embed')) u.searchParams.set('embed', 'true');
+  return u.toString();
+})();
+const embedHeight = Number(embedRaw.match(/height\s*=\s*["']?(\d+)/i)?.[1]) || Number(m.embedHeight) || 1200;
 ---
 <Base title={T.membershipTitle} description={T.membershipDescription}>
   <PageHero eyebrow={page.data.eyebrow} title={page.data.title} intro={page.data.intro} />
@@ -34,7 +46,14 @@ const applyText = tr(m, 'applyText', lang);
   <section id="apply" class="section-alt">
     <div class="wrap narrow" style="text-align:center">
       {applyText && <p class="muted" style="margin-bottom:24px;font-size:1.1rem">{applyText}</p>}
-      <a class="btn btn-primary apply-btn" href={applyUrl} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined}>{tr(m, 'applyLabel', lang) || T.apply}</a>
+      {embedSrc ? (
+        <>
+          <iframe class="apply-form" src={embedSrc} title={tr(m, 'applyLabel', lang) || T.apply} style={`height:${embedHeight}px`} loading="lazy" allowfullscreen></iframe>
+          {external && <p class="muted" style="margin-top:14px;font-size:.88rem">{T.formTrouble} <a href={applyUrl} target="_blank" rel="noopener" style="color:var(--green)">{T.formOpen}</a></p>}
+        </>
+      ) : (
+        <a class="btn btn-primary apply-btn" href={applyUrl} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined}>{tr(m, 'applyLabel', lang) || T.apply}</a>
+      )}
     </div>
   </section>
 </Base>
