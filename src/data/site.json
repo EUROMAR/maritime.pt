@@ -54,7 +54,8 @@
     "applyText": "Ready to join? Fill in the application form below.",
     "applyLabel_pt": "Candidatar-se a associado",
     "applyText_pt": "Pronto para aderir? Preencha o formulário de candidatura abaixo.",
-    "embed": "https://forms.cloud.microsoft/pages/responsepage.aspx?id=SPbBqOORgEi89KpyaTuhrD4ksYvEPBRMk6UyBe3cdJFURUg0NENFRk42VUVNV1hZU0RHVVEwQTBFTC4u&embed=true"
+    "embed": "https://forms.cloud.microsoft/pages/responsepage.aspx?id=SPbBqOORgEi89KpyaTuhrD4ksYvEPBRMk6UyBe3cdJFURUg0NENFRk42VUVNV1hZU0RHVVEwQTBFTC4u&embed=true",
+    "embedHeight": 2400
   },
   "statutesPdf": "/uploads/documents/2026-10-21_EISAP_Maritime_Portugal_Estatutos_Statutes_PT-EN-1.pdf",
   "labels": {
