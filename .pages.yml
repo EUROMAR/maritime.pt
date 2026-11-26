@@ -879,6 +879,9 @@ content:
               - { name: applyUrl_pt, label: Button link (PT), type: string, description: "Optional – only if Portuguese visitors should go to a different form." }
               - { name: applyLabel_pt, label: Button text (PT), type: string, default: Candidatar-se a associado }
               - { name: applyText_pt, label: Text above the button (PT), type: string }
+              - { name: embed, label: Embedded form, type: text, description: "To show the form directly on the Membership page: in Microsoft Forms click Collect responses → Embed (</>) and paste the code here. Leave empty to show the button instead. The button link above is still offered as a backup link under the form." }
+              - { name: embed_pt, label: Embedded form (PT), type: text, description: "Optional – only if Portuguese visitors should see a different (Portuguese) form." }
+              - { name: embedHeight, label: Embedded form height (pixels), type: number, default: 1200, description: "Make it taller if the form shows its own scroll bar. Only used when the pasted code has no height." }
           - { name: statutesPdf, label: Statutes PDF, type: file, options: { media: documents } }
           - name: labels
             label: Small texts

@@ -128,6 +128,8 @@ const en = {
   membershipTitle: 'Become a member',
   membershipDescription: 'Join EISAP – the Shipping Association of Portugal.',
   apply: 'Apply for membership',
+  formTrouble: 'Form not showing?',
+  formOpen: 'Open it in a new window ↗',
   partnerRoles: {} as Record<string, string>,
 };
 
@@ -200,6 +202,8 @@ const pt: typeof en = {
   membershipTitle: 'Tornar-se associado',
   membershipDescription: 'Junte-se à EISAP – Associação Europeia e Internacional de Shipping de Portugal.',
   apply: 'Candidatar-se a associado',
+  formTrouble: 'O formulário não aparece?',
+  formOpen: 'Abra-o numa nova janela ↗',
   partnerRoles: {
     'Hosted by': 'Anfitrião',
     'Organised by': 'Organização',
